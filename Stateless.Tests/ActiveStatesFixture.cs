@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 
-using NUnit;
 using NUnit.Framework;
 
 namespace Stateless.Tests
@@ -29,9 +28,6 @@ namespace Stateless.Tests
             sm.Activate();
 
             Assert.That(actualOrdering, Is.EqualTo(expectedOrdering));
-            Assert.That(actualOrdering, Has.Count.EqualTo(expectedOrdering));
-            for (int i = 0; i < expectedOrdering.Count; i++)
-                Assert.That(actualOrdering[i], Is.EqualTo(expectedOrdering[i]));
         }
 
         [Test]
@@ -50,7 +46,7 @@ namespace Stateless.Tests
 
             sm.Activate();
 
-            Assert.Equal(2, actualOrdering.Count);
+            Assert.That(actualOrdering, Has.Count.EqualTo(2));
         }
 
         [Test]
@@ -75,9 +71,7 @@ namespace Stateless.Tests
             sm.Activate();
             sm.Deactivate();
 
-            Assert.Equal(expectedOrdering.Count, actualOrdering.Count);
-            for (int i = 0; i < expectedOrdering.Count; i++)
-                Assert.Equal(expectedOrdering[i], actualOrdering[i]);
+            Assert.That(actualOrdering, Is.EqualTo(expectedOrdering));
         }
 
         [Test]
@@ -100,7 +94,7 @@ namespace Stateless.Tests
             actualOrdering.Clear();
             sm.Activate();
 
-            Assert.Equal(0, actualOrdering.Count);
+            Assert.That(actualOrdering, Is.Empty);
         }
 
         [Test]
@@ -146,9 +140,7 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
             sm.Fire(Trigger.Y);
 
-            Assert.Equal(expectedOrdering.Count, actualOrdering.Count);
-            for (int i = 0; i < expectedOrdering.Count; i++)
-                Assert.Equal(expectedOrdering[i], actualOrdering[i]);
+            Assert.That(actualOrdering, Is.EqualTo(expectedOrdering));
         }
 
         [Test]
@@ -184,9 +176,7 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
             sm.Fire(Trigger.Y);
 
-            Assert.Equal(expectedOrdering.Count, actualOrdering.Count);
-            for (int i = 0; i < expectedOrdering.Count; i++)
-                Assert.Equal(expectedOrdering[i], actualOrdering[i]);
+            Assert.That(actualOrdering, Is.EqualTo(expectedOrdering));
         }
     }
 }

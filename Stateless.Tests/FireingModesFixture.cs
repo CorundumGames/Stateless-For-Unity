@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Xunit;
+using NUnit.Framework;
 
 
 namespace Stateless.Tests
@@ -12,7 +12,7 @@ namespace Stateless.Tests
         /// <summary>
         /// Check that the immediate fireing modes executes entry/exit out of order.
         /// </summary>
-        [Fact]
+        [Test]
         public void ImmediateEntryAProcessedBeforeEnterB()
         {
             var record = new List<string>();
@@ -36,16 +36,16 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
 
             // Expected sequence of events: Exit A -> Exit B -> Enter A -> Enter B
-            Assert.Equal("ExitA", record[0]);
-            Assert.Equal("ExitB", record[1]);
-            Assert.Equal("EnterA", record[2]);
-            Assert.Equal("EnterB", record[3]);
+            Assert.AreEqual("ExitA", record[0]);
+            Assert.AreEqual("ExitB", record[1]);
+            Assert.AreEqual("EnterA", record[2]);
+            Assert.AreEqual("EnterB", record[3]);
         }
 
         /// <summary>
         /// Checks that queued fireing mode executes triggers in order
         /// </summary>
-        [Fact]
+        [Test]
         public void ImmediateEntryAProcessedBeforeEterB()
         {
             var record = new List<string>();
@@ -69,16 +69,16 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
 
             // Expected sequence of events: Exit A -> Enter B -> Exit B -> Enter A
-            Assert.Equal("ExitA", record[0]);
-            Assert.Equal("EnterB", record[1]);
-            Assert.Equal("ExitB", record[2]);
-            Assert.Equal("EnterA", record[3]);
+            Assert.AreEqual("ExitA", record[0]);
+            Assert.AreEqual("EnterB", record[1]);
+            Assert.AreEqual("ExitB", record[2]);
+            Assert.AreEqual("EnterA", record[3]);
         }
 
         /// <summary>
         /// Check that the immediate fireing modes executes entry/exit out of order.
         /// </summary>
-        [Fact]
+        [Test]
         public void ImmediateFireingOnEntryEndsUpInCorrectState()
         {
             var record = new List<string>();
@@ -107,12 +107,12 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
 
             // Expected sequence of events: Exit A -> Exit B -> Enter A -> Enter B
-            Assert.Equal("ExitA", record[0]);
-            Assert.Equal("EnterB", record[1]);
-            Assert.Equal("ExitB", record[2]);
-            Assert.Equal("EnterC", record[3]);
+            Assert.AreEqual("ExitA", record[0]);
+            Assert.AreEqual("EnterB", record[1]);
+            Assert.AreEqual("ExitB", record[2]);
+            Assert.AreEqual("EnterC", record[3]);
 
-            Assert.Equal(State.C, sm.State);
+            Assert.AreEqual(State.C, sm.State);
         }
     }
 }

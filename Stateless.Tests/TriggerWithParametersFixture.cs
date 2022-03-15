@@ -1,46 +1,46 @@
 ﻿using System;
-using Xunit;
+using NUnit.Framework;
 
 namespace Stateless.Tests
 {
     public class TriggerWithParametersFixture
     {
-        [Fact]
+        [Test]
         public void DescribesUnderlyingTrigger()
         {
             var twp = new StateMachine<State, Trigger>.TriggerWithParameters<string>(Trigger.X);
-            Assert.Equal(Trigger.X, twp.Trigger);
+            Assert.AreEqual(Trigger.X, twp.Trigger);
         }
 
-        [Fact]
+        [Test]
         public void ParametersOfCorrectTypeAreAccepted()
         {
             var twp = new StateMachine<State, Trigger>.TriggerWithParameters<string>(Trigger.X);
             twp.ValidateParameters(new[] { "arg" });
         }
 
-        [Fact]
+        [Test]
         public void ParametersArePolymorphic()
         {
             var twp = new StateMachine<State, Trigger>.TriggerWithParameters<object>(Trigger.X);
             twp.ValidateParameters(new[] { "arg" });
         }
 
-        [Fact]
+        [Test]
         public void IncompatibleParametersAreNotValid()
         {
             var twp = new StateMachine<State, Trigger>.TriggerWithParameters<string>(Trigger.X);
             Assert.Throws<ArgumentException>(() => twp.ValidateParameters(new object[] { 123 }));
         }
 
-        [Fact]
+        [Test]
         public void TooFewParametersDetected()
         {
             var twp = new StateMachine<State, Trigger>.TriggerWithParameters<string, string>(Trigger.X);
             Assert.Throws<ArgumentException>(() => twp.ValidateParameters(new[] { "a" }));
         }
 
-        [Fact]
+        [Test]
         public void TooManyParametersDetected()
         {
             var twp = new StateMachine<State, Trigger>.TriggerWithParameters<string, string>(Trigger.X);
@@ -50,7 +50,7 @@ namespace Stateless.Tests
         /// <summary>
         /// issue #380 - default params on PermitIfDynamic lead to ambiguity at compile time... explicits work properly.
         /// </summary>
-        [Fact]
+        [Test]
         public void StateParameterIsNotAmbiguous()
         {
             var fsm = new StateMachine<State, Trigger>(State.A);
@@ -60,14 +60,14 @@ namespace Stateless.Tests
                 .PermitDynamicIf(pressTrigger, state => state);
         }
 
-        [Fact]
+        [Test]
         public void IncompatibleParameterListIsNotValid()
         {
             var twp = new StateMachine<State, Trigger>.TriggerWithParameters(Trigger.X, new Type[] { typeof(int), typeof(string) });
             Assert.Throws<ArgumentException>(() => twp.ValidateParameters(new object[] { 123 }));
         }
 
-        [Fact]
+        [Test]
         public void ParameterListOfCorrectTypeAreAccepted()
         {
             var twp = new StateMachine<State, Trigger>.TriggerWithParameters(Trigger.X, new Type[] { typeof(int), typeof(string) });

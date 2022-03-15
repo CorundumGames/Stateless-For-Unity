@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
+using Cysharp.Threading.Tasks;
+using NUnit.Framework;
+using UnityEngine.TestTools;
 
 namespace Stateless.Tests
 {
     public class InitialTransitionFixture
     {
-        [Fact]
+        [Test]
         public void EntersSubState()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -21,10 +23,10 @@ namespace Stateless.Tests
                 .SubstateOf(State.B);
 
             sm.Fire(Trigger.X);
-            Assert.Equal(State.C, sm.State);
+            Assert.AreEqual(State.C, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void EntersSubStateofSubstate()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -42,10 +44,10 @@ namespace Stateless.Tests
                 .SubstateOf(State.C);
 
             sm.Fire(Trigger.X);
-            Assert.Equal(State.D, sm.State);
+            Assert.AreEqual(State.D, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void DoesNotEnterSubStateofSubstate()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -62,11 +64,11 @@ namespace Stateless.Tests
                 .SubstateOf(State.C);
 
             sm.Fire(Trigger.X);
-            Assert.Equal(State.B, sm.State);
+            Assert.AreEqual(State.B, sm.State);
         }
 
-        [Fact]
-        public async void EntersSubStateAsync()
+        [UnityTest]
+        public IEnumerator EntersSubStateAsync() => UniTask.ToCoroutine(async () =>
         {
             var sm = new StateMachine<State, Trigger>(State.A);
 
@@ -79,11 +81,11 @@ namespace Stateless.Tests
                 .SubstateOf(State.B);
 
             await sm.FireAsync(Trigger.X);
-            Assert.Equal(State.C, sm.State);
-        }
+            Assert.AreEqual(State.C, sm.State);
+        });
 
-        [Fact]
-        public async void EntersSubStateofSubstateAsync()
+        [UnityTest]
+        public IEnumerator EntersSubStateofSubstateAsync() => UniTask.ToCoroutine(async () =>
         {
             var sm = new StateMachine<State, Trigger>(State.A);
 
@@ -100,11 +102,11 @@ namespace Stateless.Tests
                 .SubstateOf(State.C);
 
             await sm.FireAsync(Trigger.X);
-            Assert.Equal(State.D, sm.State);
-        }
+            Assert.AreEqual(State.D, sm.State);
+        });
 
-        [Fact]
-        public async void DoesNotEnterSubStateofSubstateAsync()
+        [UnityTest]
+        public IEnumerator DoesNotEnterSubStateofSubstateAsync() => UniTask.ToCoroutine(async () =>
         {
             var sm = new StateMachine<State, Trigger>(State.A);
 
@@ -120,10 +122,10 @@ namespace Stateless.Tests
                 .SubstateOf(State.C);
 
             await sm.FireAsync(Trigger.X);
-            Assert.Equal(State.B, sm.State);
-        }
+            Assert.AreEqual(State.B, sm.State);
+        });
 
-        [Fact]
+        [Test]
         public void DoNotAllowTransitionToSelf()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -134,7 +136,7 @@ namespace Stateless.Tests
                     .InitialTransition(State.A));
         }
 
-        [Fact]
+        [Test]
         public void DoNotAllowTransitionToAnotherSuperstate()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -148,8 +150,8 @@ namespace Stateless.Tests
                 sm.Fire(Trigger.X));
         }
 
-        [Fact]
-        public async void DoNotAllowTransitionToAnotherSuperstateAsync()
+        [UnityTest]
+        public IEnumerator DoNotAllowTransitionToAnotherSuperstateAsync() => UniTask.ToCoroutine(async () =>
         {
             var sm = new StateMachine<State, Trigger>(State.A);
 
@@ -158,11 +160,23 @@ namespace Stateless.Tests
             sm.Configure(State.B)
                 .InitialTransition(State.A);
 
-            await Assert.ThrowsAsync(typeof(InvalidOperationException), async () =>
-               await sm.FireAsync(Trigger.X));
-        }
+            try
+            {
+                await sm.FireAsync(Trigger.X);
+            }
+            catch (InvalidOperationException e)
+            {
+                Assert.Pass();
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
 
-        [Fact]
+            Assert.Fail("No exception thrown");
+        });
+
+        [Test]
         public void DoNotAllowMoreThanOneInitialTransition()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -177,7 +191,7 @@ namespace Stateless.Tests
                 .InitialTransition(State.A));
         }
 
-        [Fact]
+        [Test]
         public void Transition_with_reentry_Test()
         {
             //   -------------------------
@@ -212,14 +226,14 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(State.B, sm.State);
-            Assert.Equal(0, onExitStateBfired);
-            Assert.Equal(1, onExitStateAfired);
-            Assert.Equal(2, onEntryStateAfired);
-            Assert.Equal(3, onEntryStateBfired);
+            Assert.AreEqual(State.B, sm.State);
+            Assert.AreEqual(0, onExitStateBfired);
+            Assert.AreEqual(1, onExitStateAfired);
+            Assert.AreEqual(2, onEntryStateAfired);
+            Assert.AreEqual(3, onEntryStateBfired);
         }
 
-        [Fact]
+        [Test]
         public void VerifyNotEnterSuperstateWhenDoingInitialTransition()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -238,10 +252,10 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(State.D, sm.State);
+            Assert.AreEqual(State.D, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void SubStateOfSubstateOnEntryCountAndOrder()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -266,10 +280,10 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal("BCD", onEntryCount);
+            Assert.AreEqual("BCD", onEntryCount);
         }
 
-        [Fact]
+        [Test]
         public void TransitionEvents_OrderingWithInitialTransition()
         {
             var expectedOrdering = new List<string> { "OnExitA", "OnTransitionedAB", "OnEntryB", "OnTransitionedBC", "OnEntryC", "OnTransitionCompletedAC" };
@@ -293,17 +307,17 @@ namespace Stateless.Tests
             sm.OnTransitionCompleted(t => actualOrdering.Add($"OnTransitionCompleted{t.Source}{t.Destination}"));
 
             sm.Fire(Trigger.X);
-            Assert.Equal(State.C, sm.State);
+            Assert.AreEqual(State.C, sm.State);
 
-            Assert.Equal(expectedOrdering.Count, actualOrdering.Count);
+            Assert.AreEqual(expectedOrdering.Count, actualOrdering.Count);
             for (int i = 0; i < expectedOrdering.Count; i++)
             {
-                Assert.Equal(expectedOrdering[i], actualOrdering[i]);
+                Assert.AreEqual(expectedOrdering[i], actualOrdering[i]);
             }
         }
 
-        [Fact]
-        public async void AsyncTransitionEvents_OrderingWithInitialTransition()
+        [UnityTest]
+        public IEnumerator AsyncTransitionEvents_OrderingWithInitialTransition() => UniTask.ToCoroutine(async () =>
         {
             var expectedOrdering = new List<string> { "OnExitA", "OnTransitionedAB", "OnEntryB", "OnTransitionedBC", "OnEntryC", "OnTransitionCompletedAC" };
             var actualOrdering = new List<string>();
@@ -322,18 +336,18 @@ namespace Stateless.Tests
                 .SubstateOf(State.B)
                 .OnEntry(() => actualOrdering.Add("OnEntryC"));
 
-            sm.OnTransitionedAsync(t => Task.Run(() => actualOrdering.Add($"OnTransitioned{t.Source}{t.Destination}")));
-            sm.OnTransitionCompletedAsync(t => Task.Run(() => actualOrdering.Add($"OnTransitionCompleted{t.Source}{t.Destination}")));
+            sm.OnTransitionedAsync(t => UniTask.Run(() => actualOrdering.Add($"OnTransitioned{t.Source}{t.Destination}")));
+            sm.OnTransitionCompletedAsync(t => UniTask.Run(() => actualOrdering.Add($"OnTransitionCompleted{t.Source}{t.Destination}")));
 
             // await so that the async call completes before asserting anything
             await sm.FireAsync(Trigger.X);
-            Assert.Equal(State.C, sm.State);
+            Assert.AreEqual(State.C, sm.State);
 
-            Assert.Equal(expectedOrdering.Count, actualOrdering.Count);
+            Assert.AreEqual(expectedOrdering.Count, actualOrdering.Count);
             for (int i = 0; i < expectedOrdering.Count; i++)
             {
-                Assert.Equal(expectedOrdering[i], actualOrdering[i]);
+                Assert.AreEqual(expectedOrdering[i], actualOrdering[i]);
             }
-        }
+        });
     }
 }

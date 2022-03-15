@@ -1,7 +1,9 @@
 ﻿#if TASKS
+using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
+using Cysharp.Threading.Tasks;
+using NUnit.Framework;
+using UnityEngine.TestTools;
 
 
 namespace Stateless.Tests
@@ -14,7 +16,7 @@ namespace Stateless.Tests
         /// <summary>
         /// Check that the immediate fireing modes executes entry/exit out of order.
         /// </summary>
-        [Fact]
+        [Test]
         public void ImmediateEntryAProcessedBeforeEnterB()
         {
             var record = new List<string>();
@@ -38,17 +40,17 @@ namespace Stateless.Tests
             sm.FireAsync(Trigger.X);
 
             // Expected sequence of events: Exit A -> Exit B -> Enter A -> Enter B
-            Assert.Equal("ExitA", record[0]);
-            Assert.Equal("EnterB", record[1]);
-            Assert.Equal("ExitB", record[2]);
-            Assert.Equal("EnterA", record[3]);
+            Assert.AreEqual("ExitA", record[0]);
+            Assert.AreEqual("EnterB", record[1]);
+            Assert.AreEqual("ExitB", record[2]);
+            Assert.AreEqual("EnterA", record[3]);
 
         }
 
         /// <summary>
         /// Checks that queued fireing mode executes triggers in order
         /// </summary>
-        [Fact]
+        [Test]
         public void ImmediateEntryAProcessedBeforeEterB()
         {
             var record = new List<string>();
@@ -72,16 +74,16 @@ namespace Stateless.Tests
             sm.FireAsync(Trigger.X);
 
             // Expected sequence of events: Exit A -> Enter B -> Exit B -> Enter A
-            Assert.Equal("ExitA", record[0]);
-            Assert.Equal("EnterB", record[1]);
-            Assert.Equal("ExitB", record[2]);
-            Assert.Equal("EnterA", record[3]);
+            Assert.AreEqual("ExitA", record[0]);
+            Assert.AreEqual("EnterB", record[1]);
+            Assert.AreEqual("ExitB", record[2]);
+            Assert.AreEqual("EnterA", record[3]);
         }
 
         /// <summary>
         /// Check that the immediate fireing modes executes entry/exit out of order.
         /// </summary>
-        [Fact]
+        [Test]
         public void ImmediateFireingOnEntryEndsUpInCorrectState()
         {
             var record = new List<string>();
@@ -110,19 +112,19 @@ namespace Stateless.Tests
             sm.FireAsync(Trigger.X);
 
             // Expected sequence of events: Exit A -> Exit B -> Enter A -> Enter B
-            Assert.Equal("ExitA", record[0]);
-            Assert.Equal("EnterB", record[1]);
-            Assert.Equal("ExitB", record[2]);
-            Assert.Equal("EnterC", record[3]);
+            Assert.AreEqual("ExitA", record[0]);
+            Assert.AreEqual("EnterB", record[1]);
+            Assert.AreEqual("ExitB", record[2]);
+            Assert.AreEqual("EnterC", record[3]);
 
-            Assert.Equal(State.C, sm.State);
+            Assert.AreEqual(State.C, sm.State);
         }
 
         /// <summary>
         /// Check that the immediate fireing modes executes entry/exit out of order.
         /// </summary>
-        [Fact]
-        public async Task ImmediateModeTransitionsAreInCorrectOrderWithAsyncDriving()
+        [UnityTest]
+        public IEnumerator ImmediateModeTransitionsAreInCorrectOrderWithAsyncDriving() => UniTask.ToCoroutine(async () =>
         {
             var record = new List<State>();
             var sm = new StateMachine<State, Trigger>(State.A, FiringMode.Immediate);
@@ -138,28 +140,29 @@ namespace Stateless.Tests
             sm.Configure(State.B)
                 .OnEntryAsync(async () =>
                 {
-                    await sm.FireAsync(Trigger.Y).ConfigureAwait(false);
+                    await sm.FireAsync(Trigger.Y);
                 })
                 .Permit(Trigger.Y, State.C);
 
             sm.Configure(State.C)
                 .OnEntryAsync(async () =>
                 {
-                    await sm.FireAsync(Trigger.Z).ConfigureAwait(false);
+                    await sm.FireAsync(Trigger.Z);
                 })
                 .Permit(Trigger.Z, State.A);
 
             await sm.FireAsync(Trigger.X);
 
-            Assert.Equal(new List<State>() { 
+            Assert.AreEqual(new List<State>()
+            {
                 State.B,
                 State.C,
                 State.A
             }, record);
-        }
+        });
 
-        [Fact]
-        public async void EntersSubStateofSubstateAsyncOnEntryCountAndOrder()
+        [UnityTest]
+        public IEnumerator EntersSubStateofSubstateAsyncOnEntryCountAndOrder() => UniTask.ToCoroutine(async () =>
         {
             var sm = new StateMachine<State, Trigger>(State.A);
 
@@ -169,7 +172,7 @@ namespace Stateless.Tests
                 .OnEntryAsync(async () =>
                 {
                     onEntryCount += "A";
-                    await Task.Delay(10);
+                    await UniTask.Delay(10);
                 })
                 .Permit(Trigger.X, State.B);
 
@@ -177,7 +180,7 @@ namespace Stateless.Tests
                 .OnEntryAsync(async () =>
                 {
                     onEntryCount += "B";
-                    await Task.Delay(10);
+                    await UniTask.Delay(10);
                 })
                 .InitialTransition(State.C);
 
@@ -185,7 +188,7 @@ namespace Stateless.Tests
                 .OnEntryAsync(async () =>
                 {
                     onEntryCount += "C";
-                    await Task.Delay(10);
+                    await UniTask.Delay(10);
                 })
                 .InitialTransition(State.D)
                 .SubstateOf(State.B);
@@ -194,14 +197,14 @@ namespace Stateless.Tests
                 .OnEntryAsync(async () =>
                 {
                     onEntryCount += "D";
-                    await Task.Delay(10);
+                    await UniTask.Delay(10);
                 })
                 .SubstateOf(State.C);
 
             await sm.FireAsync(Trigger.X);
 
-            Assert.Equal("BCD", onEntryCount);
-        }
+            Assert.AreEqual("BCD", onEntryCount);
+        });
     }
 }
 #endif

@@ -1,24 +1,24 @@
 ﻿using System;
-using Xunit;
+using NUnit.Framework;
 
 namespace Stateless.Tests
 {
     public class IgnoredTriggerBehaviourFixture
     {
-        [Fact]
+        [Test]
         public void StateRemainsUnchanged()
         {
             var ignored = new StateMachine<State, Trigger>.IgnoredTriggerBehaviour(Trigger.X, null);
-            Assert.False(ignored.ResultsInTransitionFrom(State.B, new object[0], out _));
+            Assert.False(ignored.ResultsInTransitionFrom(State.B, Array.Empty<object>(), out _));
         }
 
-        [Fact]
+        [Test]
         public void ExposesCorrectUnderlyingTrigger()
         {
             var ignored = new StateMachine<State, Trigger>.IgnoredTriggerBehaviour(
                 Trigger.X, null);
 
-            Assert.Equal(Trigger.X, ignored.Trigger);
+            Assert.AreEqual(Trigger.X, ignored.Trigger);
         }
 
         protected bool False(params object[] args)
@@ -26,7 +26,7 @@ namespace Stateless.Tests
             return false;
         }
 
-        [Fact]
+        [Test]
         public void WhenGuardConditionFalse_IsGuardConditionMetIsFalse()
         {
             var ignored = new StateMachine<State, Trigger>.IgnoredTriggerBehaviour(
@@ -40,7 +40,7 @@ namespace Stateless.Tests
             return true;
         }
 
-        [Fact]
+        [Test]
         public void WhenGuardConditionTrue_IsGuardConditionMetIsTrue()
         {
             var ignored = new StateMachine<State, Trigger>.IgnoredTriggerBehaviour(
@@ -48,7 +48,7 @@ namespace Stateless.Tests
 
             Assert.True(ignored.GuardConditionsMet());
         }
-        [Fact]
+        [Test]
         public void IgnoredTriggerMustBeIgnoredSync()
         {
             bool internalActionExecuted = false;
@@ -73,7 +73,7 @@ namespace Stateless.Tests
             Assert.False(internalActionExecuted);
         }
 
-        [Fact]
+        [Test]
         public void IgnoreIfTrueTriggerMustBeIgnored()
         {
             var stateMachine = new StateMachine<State, Trigger>(State.B);
@@ -86,9 +86,9 @@ namespace Stateless.Tests
 
                 stateMachine.Fire(Trigger.X);
 
-            Assert.Equal(State.B, stateMachine.State);
+            Assert.AreEqual(State.B, stateMachine.State);
         }
-        [Fact]
+        [Test]
         public void IgnoreIfFalseTriggerMustNotBeIgnored()
         {
             var stateMachine = new StateMachine<State, Trigger>(State.B);
@@ -101,7 +101,7 @@ namespace Stateless.Tests
 
             stateMachine.Fire(Trigger.X);
 
-            Assert.Equal(State.C, stateMachine.State);
+            Assert.AreEqual(State.C, stateMachine.State);
         }
     }
 }

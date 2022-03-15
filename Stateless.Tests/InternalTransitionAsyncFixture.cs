@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
-using Xunit;
+﻿using System.Collections;
+using Cysharp.Threading.Tasks;
+using NUnit.Framework;
+using UnityEngine.TestTools;
 
 namespace Stateless.Tests
 {
@@ -8,8 +10,8 @@ namespace Stateless.Tests
         /// <summary>
         /// This unit test demonstrated bug report #417
         /// </summary>
-        [Fact]
-        public async Task InternalTransitionAsyncIf_GuardExecutedOnlyOnce()
+        [UnityTest]
+        public IEnumerator InternalTransitionAsyncIf_GuardExecutedOnlyOnce() => UniTask.ToCoroutine(async () =>
         {
             var guardCalls = 0;
             var order = new Order
@@ -19,14 +21,14 @@ namespace Stateless.Tests
             };
             var stateMachine = new StateMachine<OrderStatus, OrderStateTrigger>(order.Status);
             stateMachine.Configure(OrderStatus.OrderPlaced)
-                 .InternalTransitionAsyncIf(OrderStateTrigger.PaymentCompleted,
-                       () => PreCondition(ref guardCalls),
-                       () => ChangePaymentState(order, PaymentStatus.Completed));
+                .InternalTransitionAsyncIf(OrderStateTrigger.PaymentCompleted,
+                    () => PreCondition(ref guardCalls),
+                    () => ChangePaymentState(order, PaymentStatus.Completed));
 
             await stateMachine.FireAsync(OrderStateTrigger.PaymentCompleted);
 
-            Assert.Equal(1, guardCalls);
-        }
+            Assert.AreEqual(1, guardCalls);
+        });
 
         private bool PreCondition(ref int calls)
         {
@@ -34,9 +36,9 @@ namespace Stateless.Tests
             return true;
         }
 
-        private async Task ChangePaymentState(Order order, PaymentStatus paymentStatus)
+        private async UniTask ChangePaymentState(Order order, PaymentStatus paymentStatus)
         {
-            await Task.FromResult(order.PaymentStatus = paymentStatus);
+            await UniTask.FromResult(order.PaymentStatus = paymentStatus);
         }
 
         private enum OrderStatus { OrderPlaced }

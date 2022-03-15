@@ -3,7 +3,8 @@
     "rootNamespace": "Stateless.Tests",
     "references": [
         "GUID:2b1db003e5143ec41b7772130ea09359",
-        "GUID:27619889b8ba8c24980f49ee34dbb44a"
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -16,6 +17,12 @@
     "defineConstraints": [
         "UNITY_INCLUDE_TESTS || UNITY_EDITOR"
     ],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "0",
+            "define": "TASKS"
+        }
+    ],
     "noEngineReferences": false
 }

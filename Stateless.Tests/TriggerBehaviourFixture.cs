@@ -1,17 +1,17 @@
 ﻿using System;
-using Xunit;
+using NUnit.Framework;
 
 namespace Stateless.Tests
 {
     public class TriggerBehaviourFixture
     {
-        [Fact]
+        [Test]
         public void ExposesCorrectUnderlyingTrigger()
         {
             var transitioning = new StateMachine<State, Trigger>.TransitioningTriggerBehaviour(
                 Trigger.X, State.C, null);
 
-            Assert.Equal(Trigger.X, transitioning.Trigger);
+            Assert.AreEqual(Trigger.X, transitioning.Trigger);
         }
 
         protected bool False(params object[] args)
@@ -19,7 +19,7 @@ namespace Stateless.Tests
             return false;
         }
 
-        [Fact]
+        [Test]
         public void WhenGuardConditionFalse_GuardConditionsMetIsFalse()
         {
             var transitioning = new StateMachine<State, Trigger>.TransitioningTriggerBehaviour(
@@ -33,7 +33,7 @@ namespace Stateless.Tests
             return true;
         }
 
-        [Fact]
+        [Test]
         public void WhenGuardConditionTrue_GuardConditionsMetIsTrue()
         {
             var transitioning = new StateMachine<State, Trigger>.TransitioningTriggerBehaviour(
@@ -42,7 +42,7 @@ namespace Stateless.Tests
             Assert.True(transitioning.GuardConditionsMet());
         }
 
-        [Fact]
+        [Test]
         public void WhenOneOfMultipleGuardConditionsFalse_GuardConditionsMetIsFalse()
         {
             var falseGuard = new[] {
@@ -56,7 +56,7 @@ namespace Stateless.Tests
             Assert.True(transitioning.GuardConditionsMet());
         }
 
-        [Fact]
+        [Test]
         public void WhenAllMultipleGuardConditionsFalse_IsGuardConditionsMetIsFalse()
         {
             var falseGuard = new[] {
@@ -70,7 +70,7 @@ namespace Stateless.Tests
             Assert.False(transitioning.GuardConditionsMet());
         }
 
-        [Fact]
+        [Test]
         public void WhenAllGuardConditionsTrue_GuardConditionsMetIsTrue()
         {
             var trueGuard = new[] {

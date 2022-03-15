@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
+using NUnit.Framework;
 
 namespace Stateless.Tests
 {
@@ -18,7 +18,7 @@ namespace Stateless.Tests
             _numCalls++;
         }
 
-        [Fact]
+        [Test]
         public void CanUseReferenceTypeMarkers()
         {
             RunSimpleTest(
@@ -26,7 +26,7 @@ namespace Stateless.Tests
                 new[] { TriggerX, TriggerY });
         }
 
-        [Fact]
+        [Test]
         public void CanUseValueTypeMarkers()
         {
             RunSimpleTest(
@@ -47,31 +47,31 @@ namespace Stateless.Tests
 
             sm.Fire(x);
 
-            Assert.Equal(b, sm.State);
+            Assert.AreEqual(b, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void InitialStateIsCurrent()
         {
             var initial = State.B;
             var sm = new StateMachine<State, Trigger>(initial);
-            Assert.Equal(initial, sm.State);
+            Assert.AreEqual(initial, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void StateCanBeStoredExternally()
         {
             var state = State.B;
             var sm = new StateMachine<State, Trigger>(() => state, s => state = s);
             sm.Configure(State.B).Permit(Trigger.X, State.C);
-            Assert.Equal(State.B, sm.State);
-            Assert.Equal(State.B, state);
+            Assert.AreEqual(State.B, sm.State);
+            Assert.AreEqual(State.B, state);
             sm.Fire(Trigger.X);
-            Assert.Equal(State.C, sm.State);
-            Assert.Equal(State.C, state);
+            Assert.AreEqual(State.C, sm.State);
+            Assert.AreEqual(State.C, state);
         }
 
-        [Fact]
+        [Test]
         public void StateMutatorShouldBeCalledOnlyOnce()
         {
             var state = State.B;
@@ -79,20 +79,20 @@ namespace Stateless.Tests
             var sm = new StateMachine<State, Trigger>(() => state, (s) => { state = s; count++; });
             sm.Configure(State.B).Permit(Trigger.X, State.C);
             sm.Fire(Trigger.X);
-            Assert.Equal(1, count);
+            Assert.AreEqual(1, count);
         }
 
-        [Fact]
+        [Test]
         public void SubstateIsIncludedInCurrentState()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
             sm.Configure(State.B).SubstateOf(State.C);
 
-            Assert.Equal(State.B, sm.State);
+            Assert.AreEqual(State.B, sm.State);
             Assert.True(sm.IsInState(State.C));
         }
 
-        [Fact]
+        [Test]
         public void WhenInSubstate_TriggerIgnoredInSuperstate_RemainsInSubstate()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -105,10 +105,10 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(State.B, sm.State);
+            Assert.AreEqual(State.B, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void PermittedTriggersIncludeSuperstatePermittedTriggers()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -130,7 +130,7 @@ namespace Stateless.Tests
             Assert.False(permitted.Contains(Trigger.Z));
         }
 
-        [Fact]
+        [Test]
         public void PermittedTriggersAreDistinctValues()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -143,11 +143,11 @@ namespace Stateless.Tests
                 .Permit(Trigger.X, State.B);
 
             var permitted = sm.GetPermittedTriggers();
-            Assert.Equal(1, permitted.Count());
-            Assert.Equal(Trigger.X, permitted.First());
+            Assert.AreEqual(1, permitted.Count());
+            Assert.AreEqual(Trigger.X, permitted.First());
         }
 
-        [Fact]
+        [Test]
         public void AcceptedTriggersRespectGuards()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -155,10 +155,10 @@ namespace Stateless.Tests
             sm.Configure(State.B)
                 .PermitIf(Trigger.X, State.A, () => false);
 
-            Assert.Equal(0, sm.GetPermittedTriggers().Count());
+            Assert.AreEqual(0, sm.GetPermittedTriggers().Count());
         }
 
-        [Fact]
+        [Test]
         public void AcceptedTriggersRespectMultipleGuards()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -168,10 +168,10 @@ namespace Stateless.Tests
                     new Tuple<Func<bool>, string>(() => true, "1"),
                     new Tuple<Func<bool>, string>(() => false, "2"));
 
-            Assert.Equal(0, sm.GetPermittedTriggers().Count());
+            Assert.AreEqual(0, sm.GetPermittedTriggers().Count());
         }
 
-        [Fact]
+        [Test]
         public void WhenDiscriminatedByGuard_ChoosesPermitedTransition()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -182,10 +182,10 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(State.C, sm.State);
+            Assert.AreEqual(State.C, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void WhenDiscriminatedByMultiConditionGuard_ChoosesPermitedTransition()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -200,10 +200,10 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(State.C, sm.State);
+            Assert.AreEqual(State.C, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void WhenTriggerIsIgnored_ActionsNotExecuted()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -219,7 +219,7 @@ namespace Stateless.Tests
             Assert.False(fired);
         }
 
-        [Fact]
+        [Test]
         public void IfSelfTransitionPermited_ActionsFire()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -235,7 +235,7 @@ namespace Stateless.Tests
             Assert.True(fired);
         }
 
-        [Fact]
+        [Test]
         public void ImplicitReentryIsDisallowed()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -244,7 +244,7 @@ namespace Stateless.Tests
                .Permit(Trigger.X, State.B));
         }
 
-        [Fact]
+        [Test]
         public void TriggerParametersAreImmutableOnceSet()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -252,15 +252,15 @@ namespace Stateless.Tests
             Assert.Throws<InvalidOperationException>(() => sm.SetTriggerParameters<string>(Trigger.X));
         }
 
-        [Fact]
+        [Test]
         public void ExceptionThrownForInvalidTransition()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
             var exception = Assert.Throws<InvalidOperationException>(() => sm.Fire(Trigger.X));
-            Assert.Equal(exception.Message, "No valid leaving transitions are permitted from state 'A' for trigger 'X'. Consider ignoring the trigger.");
+            Assert.AreEqual(exception.Message, "No valid leaving transitions are permitted from state 'A' for trigger 'X'. Consider ignoring the trigger.");
         }
 
-        [Fact]
+        [Test]
         public void ExceptionThrownForInvalidTransitionMentionsGuardDescriptionIfPresent()
         {
             // If guard description is empty then method name of guard is used
@@ -270,10 +270,10 @@ namespace Stateless.Tests
             var sm = new StateMachine<State, Trigger>(State.A);
             sm.Configure(State.A).PermitIf(Trigger.X, State.B, () => false, guardDescription);
             var exception = Assert.Throws<InvalidOperationException>(() => sm.Fire(Trigger.X));
-            Assert.Equal(typeof(InvalidOperationException), exception.GetType());
+            Assert.AreEqual(typeof(InvalidOperationException), exception.GetType());
         }
 
-        [Fact]
+        [Test]
         public void ExceptionThrownForInvalidTransitionMentionsMultiGuardGuardDescriptionIfPresent()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -282,10 +282,10 @@ namespace Stateless.Tests
                 new Tuple<Func<bool>, string>(() => false, "test2"));
 
             var exception = Assert.Throws<InvalidOperationException>(() => sm.Fire(Trigger.X));
-            Assert.Equal(typeof(InvalidOperationException), exception.GetType());
+            Assert.AreEqual(typeof(InvalidOperationException), exception.GetType());
         }
 
-        [Fact]
+        [Test]
         public void ParametersSuppliedToFireArePassedToEntryAction()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -310,11 +310,11 @@ namespace Stateless.Tests
 
             sm.Fire(x, suppliedArgS, suppliedArgI);
 
-            Assert.Equal(suppliedArgS, entryArgS);
-            Assert.Equal(suppliedArgI, entryArgI);
+            Assert.AreEqual(suppliedArgS, entryArgS);
+            Assert.AreEqual(suppliedArgI, entryArgI);
         }
 
-        [Fact]
+        [Test]
         public void WhenAnUnhandledTriggerIsFired_TheProvidedHandlerIsCalledWithStateAndTrigger()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -329,11 +329,11 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.Z);
 
-            Assert.Equal(State.B, state);
-            Assert.Equal(Trigger.Z, trigger);
+            Assert.AreEqual(State.B, state);
+            Assert.AreEqual(Trigger.Z, trigger);
         }
 
-        [Fact]
+        [Test]
         public void WhenATransitionOccurs_TheOnTransitionedEventFires()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -347,13 +347,13 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
 
             Assert.NotNull(transition);
-            Assert.Equal(Trigger.X, transition.Trigger);
-            Assert.Equal(State.B, transition.Source);
-            Assert.Equal(State.A, transition.Destination);
-            Assert.Equal(new object[0], transition.Parameters);
+            Assert.AreEqual(Trigger.X, transition.Trigger);
+            Assert.AreEqual(State.B, transition.Source);
+            Assert.AreEqual(State.A, transition.Destination);
+            Assert.AreEqual(new object[0], transition.Parameters);
         }
 
-        [Fact]
+        [Test]
         public void WhenATransitionOccurs_TheOnTransitionCompletedEventFires()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -367,16 +367,16 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
 
             Assert.NotNull(transition);
-            Assert.Equal(Trigger.X, transition.Trigger);
-            Assert.Equal(State.B, transition.Source);
-            Assert.Equal(State.A, transition.Destination);
-            Assert.Equal(new object[0], transition.Parameters);
+            Assert.AreEqual(Trigger.X, transition.Trigger);
+            Assert.AreEqual(State.B, transition.Source);
+            Assert.AreEqual(State.A, transition.Destination);
+            Assert.AreEqual(new object[0], transition.Parameters);
         }
 
         /// <summary>
         /// The expected ordering is OnExit, OnTransitioned, OnEntry, OnTransitionCompleted
         /// </summary>
-        [Fact]
+        [Test]
         public void TheOnTransitionedEventFiresBeforeTheOnEntryEventAndOnTransitionCompletedFiresAfterwards()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -395,14 +395,14 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(expectedOrdering.Count, actualOrdering.Count);
+            Assert.AreEqual(expectedOrdering.Count, actualOrdering.Count);
             for (int i = 0; i < expectedOrdering.Count; i++)
             {
-                Assert.Equal(expectedOrdering[i], actualOrdering[i]);
+                Assert.AreEqual(expectedOrdering[i], actualOrdering[i]);
             }
         }
 
-        [Fact]
+        [Test]
         public void WhenATransitionOccurs_WithAParameterizedTrigger_TheOnTransitionedEventFires()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -418,14 +418,14 @@ namespace Stateless.Tests
             sm.Fire(triggerX, parameter);
 
             Assert.NotNull(transition);
-            Assert.Equal(Trigger.X, transition.Trigger);
-            Assert.Equal(State.B, transition.Source);
-            Assert.Equal(State.A, transition.Destination);
-            Assert.Equal(1, transition.Parameters.Count());
-            Assert.Equal(parameter, transition.Parameters[0]);
+            Assert.AreEqual(Trigger.X, transition.Trigger);
+            Assert.AreEqual(State.B, transition.Source);
+            Assert.AreEqual(State.A, transition.Destination);
+            Assert.AreEqual(1, transition.Parameters.Count());
+            Assert.AreEqual(parameter, transition.Parameters[0]);
         }
 
-        [Fact]
+        [Test]
         public void WhenATransitionOccurs_WithAParameterizedTrigger_TheOnTransitionCompletedEventFires()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -441,14 +441,14 @@ namespace Stateless.Tests
             sm.Fire(triggerX, parameter);
 
             Assert.NotNull(transition);
-            Assert.Equal(Trigger.X, transition.Trigger);
-            Assert.Equal(State.B, transition.Source);
-            Assert.Equal(State.A, transition.Destination);
-            Assert.Equal(1, transition.Parameters.Count());
-            Assert.Equal(parameter, transition.Parameters[0]);
+            Assert.AreEqual(Trigger.X, transition.Trigger);
+            Assert.AreEqual(State.B, transition.Source);
+            Assert.AreEqual(State.A, transition.Destination);
+            Assert.AreEqual(1, transition.Parameters.Count());
+            Assert.AreEqual(parameter, transition.Parameters[0]);
         }
 
-        [Fact]
+        [Test]
         public void WhenATransitionOccurs_WithAParameterizedTrigger_WithMultipleParameters_TheOnTransitionedEventFires()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -466,16 +466,16 @@ namespace Stateless.Tests
             sm.Fire(triggerX, firstParameter, secondParameter, thirdParameter);
 
             Assert.NotNull(transition);
-            Assert.Equal(Trigger.X, transition.Trigger);
-            Assert.Equal(State.B, transition.Source);
-            Assert.Equal(State.A, transition.Destination);
-            Assert.Equal(3, transition.Parameters.Count());
-            Assert.Equal(firstParameter, transition.Parameters[0]);
-            Assert.Equal(secondParameter, transition.Parameters[1]);
-            Assert.Equal(thirdParameter, transition.Parameters[2]);
+            Assert.AreEqual(Trigger.X, transition.Trigger);
+            Assert.AreEqual(State.B, transition.Source);
+            Assert.AreEqual(State.A, transition.Destination);
+            Assert.AreEqual(3, transition.Parameters.Count());
+            Assert.AreEqual(firstParameter, transition.Parameters[0]);
+            Assert.AreEqual(secondParameter, transition.Parameters[1]);
+            Assert.AreEqual(thirdParameter, transition.Parameters[2]);
         }
 
-        [Fact]
+        [Test]
         public void WhenATransitionOccurs_WithAParameterizedTrigger_WithMultipleParameters_TheOnTransitionCompletedEventFires()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -493,16 +493,16 @@ namespace Stateless.Tests
             sm.Fire(triggerX, firstParameter, secondParameter, thirdParameter);
 
             Assert.NotNull(transition);
-            Assert.Equal(Trigger.X, transition.Trigger);
-            Assert.Equal(State.B, transition.Source);
-            Assert.Equal(State.A, transition.Destination);
-            Assert.Equal(3, transition.Parameters.Count());
-            Assert.Equal(firstParameter, transition.Parameters[0]);
-            Assert.Equal(secondParameter, transition.Parameters[1]);
-            Assert.Equal(thirdParameter, transition.Parameters[2]);
+            Assert.AreEqual(Trigger.X, transition.Trigger);
+            Assert.AreEqual(State.B, transition.Source);
+            Assert.AreEqual(State.A, transition.Destination);
+            Assert.AreEqual(3, transition.Parameters.Count());
+            Assert.AreEqual(firstParameter, transition.Parameters[0]);
+            Assert.AreEqual(secondParameter, transition.Parameters[1]);
+            Assert.AreEqual(thirdParameter, transition.Parameters[2]);
         }
 
-        [Fact]
+        [Test]
         public void DirectCyclicConfigurationDetected()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -510,7 +510,7 @@ namespace Stateless.Tests
             Assert.Throws(typeof(ArgumentException), () => { sm.Configure(State.A).SubstateOf(State.A); });
         }
 
-        [Fact]
+        [Test]
         public void NestedCyclicConfigurationDetected()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -519,7 +519,7 @@ namespace Stateless.Tests
             Assert.Throws(typeof(ArgumentException), () => { sm.Configure(State.A).SubstateOf(State.B); });
         }
 
-        [Fact]
+        [Test]
         public void NestedTwoLevelsCyclicConfigurationDetected()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -529,7 +529,7 @@ namespace Stateless.Tests
             Assert.Throws(typeof(ArgumentException), () => { sm.Configure(State.A).SubstateOf(State.C); });
         }
 
-        [Fact]
+        [Test]
         public void DelayedNestedCyclicConfigurationDetected()
         {
             // Set up two states and substates, then join them
@@ -542,7 +542,7 @@ namespace Stateless.Tests
             Assert.Throws(typeof(ArgumentException), () => { sm.Configure(State.C).SubstateOf(State.B); });
         }
 
-        [Fact]
+        [Test]
         public void IgnoreVsPermitReentry()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -557,10 +557,10 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
             sm.Fire(Trigger.Y);
 
-            Assert.Equal(1, _numCalls);
+            Assert.AreEqual(1, _numCalls);
         }
 
-        [Fact]
+        [Test]
         public void IgnoreVsPermitReentryFrom()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -576,10 +576,10 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
             sm.Fire(Trigger.Y);
 
-            Assert.Equal(1, _numCalls);
+            Assert.AreEqual(1, _numCalls);
         }
 
-        [Fact]
+        [Test]
         public void IfSelfTransitionPermited_ActionsFire_InSubstate()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -599,13 +599,13 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(State.B, sm.State);
+            Assert.AreEqual(State.B, sm.State);
             Assert.True(onEntryStateBfired);
             Assert.True(onExitStateBfired);
             Assert.True(onExitStateAfired);
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenParameterizedGuardTrue()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -613,10 +613,10 @@ namespace Stateless.Tests
             sm.Configure(State.A).PermitIf(x, State.B, i => i == 2);
             sm.Fire(x, 2);
 
-            Assert.Equal(sm.State, State.B);
+            Assert.AreEqual(sm.State, State.B);
         }
 
-        [Fact]
+        [Test]
         public void ExceptionWhenParameterizedGuardFalse()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -626,7 +626,7 @@ namespace Stateless.Tests
             Assert.Throws<InvalidOperationException>(() => sm.Fire(x, 2));
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenBothParameterizedGuardClausesTrue()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -636,10 +636,10 @@ namespace Stateless.Tests
             sm.Configure(State.A).PermitIf(x, State.B, positiveGuard, negativeGuard);
             sm.Fire(x, 2);
 
-            Assert.Equal(sm.State, State.B);
+            Assert.AreEqual(sm.State, State.B);
         }
 
-        [Fact]
+        [Test]
         public void ExceptionWhenBothParameterizedGuardClausesFalse()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -652,30 +652,30 @@ namespace Stateless.Tests
             Assert.Throws<InvalidOperationException>(() => sm.Fire(x, 3));
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenGuardReturnsTrueOnTriggerWithMultipleParameters()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
             var x = sm.SetTriggerParameters<string, int>(Trigger.X);
             sm.Configure(State.A).PermitIf(x, State.B, (s, i) => s == "3" && i == 3);
             sm.Fire(x, "3", 3);
-            Assert.Equal(sm.State, State.B);
+            Assert.AreEqual(sm.State, State.B);
         }
 
-        [Fact]
+        [Test]
         public void ExceptionWhenGuardFalseOnTriggerWithMultipleParameters()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
             var x = sm.SetTriggerParameters<string, int>(Trigger.X);
             sm.Configure(State.A).PermitIf(x, State.B, (s, i) => s == "3" && i == 3);
-            Assert.Equal(sm.State, State.A);
+            Assert.AreEqual(sm.State, State.A);
 
             Assert.Throws<InvalidOperationException>(() => sm.Fire(x, "2", 2));
             Assert.Throws<InvalidOperationException>(() => sm.Fire(x, "3", 2));
             Assert.Throws<InvalidOperationException>(() => sm.Fire(x, "2", 3));
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenPermitIfHasMultipleExclusiveGuards()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -684,10 +684,10 @@ namespace Stateless.Tests
                 .PermitIf(x, State.B, i => i == 3)
                 .PermitIf(x, State.C, i => i == 2);
             sm.Fire(x, 3);
-            Assert.Equal(sm.State, State.B);
+            Assert.AreEqual(sm.State, State.B);
         }
 
-        [Fact]
+        [Test]
         public void ExceptionWhenPermitIfHasMultipleNonExclusiveGuards()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -698,7 +698,7 @@ namespace Stateless.Tests
             Assert.Throws<InvalidOperationException>(() => sm.Fire(x, 2));
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenPermitDyanmicIfHasMultipleExclusiveGuards()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -707,10 +707,10 @@ namespace Stateless.Tests
                 .PermitDynamicIf(x, i => i == 3 ? State.B : State.C, i => i == 3 || i == 5)
                 .PermitDynamicIf(x, i => i == 2 ? State.C : State.D, i => i == 2 || i == 4);
             sm.Fire(x, 3);
-            Assert.Equal(sm.State, State.B);
+            Assert.AreEqual(sm.State, State.B);
         }
 
-        [Fact]
+        [Test]
         public void ExceptionWhenPermitDyanmicIfHasMultipleNonExclusiveGuards()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -721,7 +721,7 @@ namespace Stateless.Tests
             Assert.Throws<InvalidOperationException>(() => sm.Fire(x, 2));
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenPermitIfHasMultipleExclusiveGuardsWithSuperStateTrue()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -731,10 +731,10 @@ namespace Stateless.Tests
                 sm.Configure(State.B).SubstateOf(State.A).PermitIf(x, State.C, i => i == 2);
             }
             sm.Fire(x, 3);
-            Assert.Equal(sm.State, State.D);
+            Assert.AreEqual(sm.State, State.D);
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenPermitIfHasMultipleExclusiveGuardsWithSuperStateFalse()
         {
             var sm = new StateMachine<State, Trigger>(State.B);
@@ -744,10 +744,10 @@ namespace Stateless.Tests
                 sm.Configure(State.B).SubstateOf(State.A).PermitIf(x, State.C, i => i == 2);
             }
             sm.Fire(x, 2);
-            Assert.Equal(sm.State, State.C);
+            Assert.AreEqual(sm.State, State.C);
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenPermitReentryIfParameterizedGuardTrue()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -755,10 +755,10 @@ namespace Stateless.Tests
             sm.Configure(State.A)
                 .PermitReentryIf(x, i => i == 3);
             sm.Fire(x, 3);
-            Assert.Equal(sm.State, State.A);
+            Assert.AreEqual(sm.State, State.A);
         }
 
-        [Fact]
+        [Test]
         public void TransitionWhenPermitReentryIfParameterizedGuardFalse()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -769,7 +769,7 @@ namespace Stateless.Tests
             Assert.Throws<InvalidOperationException>(() => sm.Fire(x, 2));
         }
 
-        [Fact]
+        [Test]
         public void NoTransitionWhenIgnoreIfParameterizedGuardTrue()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -777,10 +777,10 @@ namespace Stateless.Tests
             sm.Configure(State.A).IgnoreIf(x, i => i == 3);
             sm.Fire(x, 3);
 
-            Assert.Equal(sm.State, State.A);
+            Assert.AreEqual(sm.State, State.A);
         }
 
-        [Fact]
+        [Test]
         public void ExceptionWhenIgnoreIfParameterizedGuardFalse()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -793,7 +793,7 @@ namespace Stateless.Tests
         /// <summary>
         /// Verifies guard clauses are only called one time during a transition evaluation.
         /// </summary>
-        [Fact]
+        [Test]
         public void GuardClauseCalledOnlyOnce()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -807,9 +807,9 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(1, i);
+            Assert.AreEqual(1, i);
         }
-        [Fact]
+        [Test]
         public void NoExceptionWhenPermitIfHasMultipleExclusiveGuardsBothFalse()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -823,10 +823,10 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);  // THROWS EXCEPTION
 
             Assert.True(onUnhandledTriggerWasCalled, "OnUnhandledTrigger was called");
-            Assert.Equal(sm.State, State.A);
+            Assert.AreEqual(sm.State, State.A);
         }
 
-        [Fact]
+        [Test]
         public void TransitionToSuperstateDoesNotExitSuperstate()
         {
             StateMachine<State, Trigger> sm = new StateMachine<State, Trigger>(State.B);
@@ -851,7 +851,7 @@ namespace Stateless.Tests
             Assert.False(superExit);
         }
 
-        [Fact]
+        [Test]
         public void OnExitFiresOnlyOnceReentrySubstate()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -873,13 +873,13 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(0, exitB);
-            Assert.Equal(0, entryB);
-            Assert.Equal(1, exitA);
-            Assert.Equal(1, entryA);
+            Assert.AreEqual(0, exitB);
+            Assert.AreEqual(0, entryB);
+            Assert.AreEqual(1, exitA);
+            Assert.AreEqual(1, entryA);
         }
 
-        [Fact]
+        [Test]
         public void WhenConfigurePermittedTransitionOnTriggerWithoutParameters_ThenStateMachineCanFireTrigger()
         {
             var trigger = Trigger.X;
@@ -887,17 +887,17 @@ namespace Stateless.Tests
             sm.Configure(State.A).Permit(trigger, State.B);
             Assert.True(sm.CanFire(trigger));
         }
-        [Fact]
+        [Test]
         public void WhenConfigurePermittedTransitionOnTriggerWithoutParameters_ThenStateMachineCanEnumeratePermittedTriggers()
         {
             var trigger = Trigger.X;
             var sm = new StateMachine<State, Trigger>(State.A);
             sm.Configure(State.A).Permit(trigger, State.B);
-            Assert.Single(sm.PermittedTriggers, trigger);
+            Assert.That(sm.PermittedTriggers, Is.EquivalentTo(new [] {trigger}));
         }
 
 
-        [Fact]
+        [Test]
         public void WhenConfigurePermittedTransitionOnTriggerWithParameters_ThenStateMachineCanFireTrigger()
         {
             var trigger = Trigger.X;
@@ -906,17 +906,17 @@ namespace Stateless.Tests
             sm.SetTriggerParameters<string>(trigger);
             Assert.True(sm.CanFire(trigger));
         }
-        [Fact]
+        [Test]
         public void WhenConfigurePermittedTransitionOnTriggerWithParameters_ThenStateMachineCanEnumeratePermittedTriggers()
         {
             var trigger = Trigger.X;
             var sm = new StateMachine<State, Trigger>(State.A);
             sm.Configure(State.A).Permit(trigger, State.B);
             sm.SetTriggerParameters<string>(trigger);
-            Assert.Single(sm.PermittedTriggers, trigger);
+            Assert.That(sm.PermittedTriggers, Is.EquivalentTo(new [] {trigger}));
         }
 
-        [Fact]
+        [Test]
         public void WhenConfigureInternalTransitionOnTriggerWithoutParameters_ThenStateMachineCanFireTrigger()
         {
             var trigger = Trigger.X;
@@ -925,16 +925,16 @@ namespace Stateless.Tests
             Assert.True(sm.CanFire(trigger));
         }
 
-        [Fact]
+        [Test]
         public void WhenConfigureInternalTransitionOnTriggerWithoutParameters_ThenStateMachineCanEnumeratePermittedTriggers()
         {
             var trigger = Trigger.X;
             var sm = new StateMachine<State, Trigger>(State.A);
             sm.Configure(State.A).InternalTransition(trigger, (_) => { });
-            Assert.Single(sm.PermittedTriggers, trigger);
+            Assert.That(sm.PermittedTriggers, Is.EquivalentTo(new [] {trigger}));
         }
 
-        [Fact]
+        [Test]
         public void WhenConfigureInternalTransitionOnTriggerWithParameters_ThenStateMachineCanFireTrigger()
         {
             var trigger = Trigger.X;
@@ -943,16 +943,16 @@ namespace Stateless.Tests
             Assert.True(sm.CanFire(trigger));
         }
 
-        [Fact]
+        [Test]
         public void WhenConfigureInternalTransitionOnTriggerWithParameters_ThenStateMachineCanEnumeratePermittedTriggers()
         {
             var trigger = Trigger.X;
             var sm = new StateMachine<State, Trigger>(State.A);
             sm.Configure(State.A).InternalTransition(sm.SetTriggerParameters<string>(trigger), (arg, _) => { });
-            Assert.Single(sm.PermittedTriggers, trigger);
+            Assert.That(sm.PermittedTriggers, Is.EquivalentTo(new [] {trigger}));
         }
 
-        [Fact]
+        [Test]
         public void WhenConfigureConditionallyPermittedTransitionOnTriggerWithParameters_ThenStateMachineCanFireTrigger()
         {
             var trigger = Trigger.X;
@@ -961,16 +961,16 @@ namespace Stateless.Tests
             Assert.True(sm.CanFire(trigger));
         }
 
-        [Fact]
+        [Test]
         public void WhenConfigureConditionallyPermittedTransitionOnTriggerWithParameters_ThenStateMachineCanEnumeratePermittedTriggers()
         {
             var trigger = Trigger.X;
             var sm = new StateMachine<State, Trigger>(State.A);
             sm.Configure(State.A).PermitIf(sm.SetTriggerParameters<string>(trigger), State.B, _ => true);
-            Assert.Single(sm.PermittedTriggers, trigger);
+            Assert.That(sm.PermittedTriggers, Is.EquivalentTo(new [] {trigger}));
         }
 
-        [Fact]
+        [Test]
         public void PermittedTriggersIncludeAllDefinedTriggers()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -978,19 +978,19 @@ namespace Stateless.Tests
                 .Permit(Trigger.X, State.B)
                 .InternalTransition(Trigger.Y, _ => { })
                 .Ignore(Trigger.Z);
-            Assert.All(new[] { Trigger.X, Trigger.Y, Trigger.Z }, trigger => Assert.Contains(trigger, sm.PermittedTriggers));
+            Assert.That(sm.PermittedTriggers, Is.SupersetOf(new[] { Trigger.X, Trigger.Y, Trigger.Z }));
         }
 
-        [Fact]
+        [Test]
         public void PermittedTriggersExcludeAllUndefinedTriggers()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
             sm.Configure(State.A)
                 .Permit(Trigger.X, State.B);
-            Assert.All(new[] { Trigger.Y, Trigger.Z }, trigger => Assert.DoesNotContain(trigger, sm.PermittedTriggers));
+            Assert.That(sm.PermittedTriggers, Does.Not.Contains(Trigger.Y).And.Not.Contains(Trigger.Z));
         }
 
-        [Fact]
+        [Test]
         public void PermittedTriggersIncludeAllInheritedTriggers()
         {
             State superState = State.A,
@@ -1012,14 +1012,14 @@ namespace Stateless.Tests
             var hsmInSuperstate = hsm(superState);
             var hsmInSubstate = hsm(subState);
 
-            Assert.All(hsmInSuperstate.PermittedTriggers, trigger => Assert.Contains(trigger, hsmInSubstate.PermittedTriggers));
-            Assert.Contains(superStateTrigger, hsmInSubstate.PermittedTriggers);
-            Assert.Contains(superStateTrigger, hsmInSuperstate.PermittedTriggers);
-            Assert.Contains(subStateTrigger, hsmInSubstate.PermittedTriggers);
-            Assert.DoesNotContain(subStateTrigger, hsmInSuperstate.PermittedTriggers);
+            Assert.That(hsmInSubstate.PermittedTriggers, Is.SupersetOf(hsmInSuperstate.PermittedTriggers));
+            Assert.That(hsmInSubstate.PermittedTriggers, Contains.Item(superStateTrigger));
+            Assert.That(hsmInSuperstate.PermittedTriggers, Contains.Item(superStateTrigger));
+            Assert.That(hsmInSubstate.PermittedTriggers, Contains.Item(subStateTrigger));
+            Assert.That(hsmInSuperstate.PermittedTriggers, Does.Not.Contains(subStateTrigger));
         }
 
-        [Fact]
+        [Test]
         public void CanFire_GetUnmetGuardDescriptionsIfGuardFails()
         {
             const string guardDescription = "Guard failed";
@@ -1031,10 +1031,10 @@ namespace Stateless.Tests
 
             Assert.False(result);
             Assert.True(unmetGuards?.Count == 1);
-            Assert.Contains(guardDescription, unmetGuards);
+            Assert.That(unmetGuards, Contains.Item(guardDescription));
         }
 
-        [Fact]
+        [Test]
         public void CanFire_GetNullUnmetGuardDescriptionsIfInvalidTrigger()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -1044,7 +1044,7 @@ namespace Stateless.Tests
             Assert.Null(unmetGuards);
         }
 
-        [Fact]
+        [Test]
         public void CanFire_GetEmptyUnmetGuardDescriptionsIfValidTrigger()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -1055,7 +1055,7 @@ namespace Stateless.Tests
             Assert.True(unmetGuards?.Count == 0);
         }
 
-        [Fact]
+        [Test]
         public void CanFire_GetEmptyUnmetGuardDescriptionsIfGuardPasses()
         {
             var sm = new StateMachine<State, Trigger>(State.A);

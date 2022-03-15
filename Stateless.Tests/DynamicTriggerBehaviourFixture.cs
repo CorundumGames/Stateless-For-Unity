@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Xunit;
+using NUnit.Framework;
 
 namespace Stateless.Tests
 {
     public class DynamicTriggerBehaviour
     {
-        [Fact]
+        [Test]
         public void DestinationStateIsDynamic()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -14,10 +14,10 @@ namespace Stateless.Tests
 
             sm.Fire(Trigger.X);
 
-            Assert.Equal(State.B, sm.State);
+            Assert.AreEqual(State.B, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void DestinationStateIsCalculatedBasedOnTriggerParameters()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -27,10 +27,10 @@ namespace Stateless.Tests
 
             sm.Fire(trigger, 1);
 
-            Assert.Equal(State.B, sm.State);
+            Assert.AreEqual(State.B, sm.State);
         }
 
-        [Fact]
+        [Test]
         public void Sdfsf()
         {
             var sm = new StateMachine<State, Trigger>(State.A);

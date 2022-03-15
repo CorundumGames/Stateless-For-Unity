@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
+using NUnit.Framework;
 
 namespace Stateless.Tests
 {
 
     public class StateRepresentationFixture
     {
-        [Fact]
+        [Test]
         public void UponEntering_EnteringActionsExecuted()
         {
             var stateRepresentation = CreateRepresentation(State.B);
@@ -17,10 +17,10 @@ namespace Stateless.Tests
                 actualTransition = null;
             stateRepresentation.AddEntryAction((t, a) => actualTransition = t, Reflection.InvocationInfo.Create(null, "entryActionDescription"));
             stateRepresentation.Enter(transition);
-            Assert.Equal(transition, actualTransition);
+            Assert.AreEqual(transition, actualTransition);
         }
 
-        [Fact]
+        [Test]
         public void UponLeaving_EnteringActionsNotExecuted()
         {
             var stateRepresentation = CreateRepresentation(State.B);
@@ -32,7 +32,7 @@ namespace Stateless.Tests
             Assert.Null(actualTransition);
         }
 
-        [Fact]
+        [Test]
         public void UponLeaving_LeavingActionsExecuted()
         {
             var stateRepresentation = CreateRepresentation(State.A);
@@ -41,10 +41,10 @@ namespace Stateless.Tests
                 actualTransition = null;
             stateRepresentation.AddExitAction(t => actualTransition = t, Reflection.InvocationInfo.Create(null, "entryActionDescription"));
             stateRepresentation.Exit(transition);
-            Assert.Equal(transition, actualTransition);
+            Assert.AreEqual(transition, actualTransition);
         }
 
-        [Fact]
+        [Test]
         public void UponEntering_LeavingActionsNotExecuted()
         {
             var stateRepresentation = CreateRepresentation(State.A);
@@ -56,21 +56,21 @@ namespace Stateless.Tests
             Assert.Null(actualTransition);
         }
 
-        [Fact]
+        [Test]
         public void IncludesUnderlyingState()
         {
             var stateRepresentation = CreateRepresentation(State.B);
             Assert.True(stateRepresentation.Includes(State.B));
         }
 
-        [Fact]
+        [Test]
         public void DoesNotIncludeUnrelatedState()
         {
             var stateRepresentation = CreateRepresentation(State.B);
             Assert.False(stateRepresentation.Includes(State.C));
         }
 
-        [Fact]
+        [Test]
         public void IncludesSubstate()
         {
             var stateRepresentation = CreateRepresentation(State.B);
@@ -78,7 +78,7 @@ namespace Stateless.Tests
             Assert.True(stateRepresentation.Includes(State.C));
         }
 
-        [Fact]
+        [Test]
         public void DoesNotIncludeSuperstate()
         {
             var stateRepresentation = CreateRepresentation(State.B);
@@ -86,21 +86,21 @@ namespace Stateless.Tests
             Assert.False(stateRepresentation.Includes(State.C));
         }
 
-        [Fact]
+        [Test]
         public void IsIncludedInUnderlyingState()
         {
             var stateRepresentation = CreateRepresentation(State.B);
             Assert.True(stateRepresentation.IsIncludedIn(State.B));
         }
 
-        [Fact]
+        [Test]
         public void IsNotIncludedInUnrelatedState()
         {
             var stateRepresentation = CreateRepresentation(State.B);
             Assert.False(stateRepresentation.IsIncludedIn(State.C));
         }
 
-        [Fact]
+        [Test]
         public void IsNotIncludedInSubstate()
         {
             var stateRepresentation = CreateRepresentation(State.B);
@@ -108,7 +108,7 @@ namespace Stateless.Tests
             Assert.False(stateRepresentation.IsIncludedIn(State.C));
         }
 
-        [Fact]
+        [Test]
         public void IsIncludedInSuperstate()
         {
             var stateRepresentation = CreateRepresentation(State.B);
@@ -116,7 +116,7 @@ namespace Stateless.Tests
             Assert.True(stateRepresentation.IsIncludedIn(State.C));
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitioningFromSubToSuperstate_SubstateEntryActionsExecuted()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -128,7 +128,7 @@ namespace Stateless.Tests
             Assert.True(executed);
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitioningFromSubToSuperstate_SubstateExitActionsExecuted()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -140,7 +140,7 @@ namespace Stateless.Tests
             Assert.True(executed);
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitioningToSuperFromSubstate_SuperEntryActionsNotExecuted()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -152,7 +152,7 @@ namespace Stateless.Tests
             Assert.False(executed);
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitioningFromSuperToSubstate_SuperExitActionsNotExecuted()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -164,7 +164,7 @@ namespace Stateless.Tests
             Assert.False(executed);
         }
 
-        [Fact]
+        [Test]
         public void WhenEnteringSubstate_SuperEntryActionsExecuted()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -176,7 +176,7 @@ namespace Stateless.Tests
             Assert.True(executed);
         }
 
-        [Fact]
+        [Test]
         public void WhenLeavingSubstate_SuperExitActionsExecuted()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -188,7 +188,7 @@ namespace Stateless.Tests
             Assert.True(executed);
         }
 
-        [Fact]
+        [Test]
         public void EntryActionsExecuteInOrder()
         {
             var actual = new List<int>();
@@ -199,12 +199,12 @@ namespace Stateless.Tests
 
             rep.Enter(new StateMachine<State, Trigger>.Transition(State.A, State.B, Trigger.X));
 
-            Assert.Equal(2, actual.Count);
-            Assert.Equal(0, actual[0]);
-            Assert.Equal(1, actual[1]);
+            Assert.AreEqual(2, actual.Count);
+            Assert.AreEqual(0, actual[0]);
+            Assert.AreEqual(1, actual[1]);
         }
 
-        [Fact]
+        [Test]
         public void ExitActionsExecuteInOrder()
         {
             var actual = new List<int>();
@@ -215,19 +215,19 @@ namespace Stateless.Tests
 
             rep.Exit(new StateMachine<State, Trigger>.Transition(State.B, State.C, Trigger.X));
 
-            Assert.Equal(2, actual.Count);
-            Assert.Equal(0, actual[0]);
-            Assert.Equal(1, actual[1]);
+            Assert.AreEqual(2, actual.Count);
+            Assert.AreEqual(0, actual[0]);
+            Assert.AreEqual(1, actual[1]);
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitionExists_TriggerCannotBeFired()
         {
             var rep = CreateRepresentation(State.B);
             Assert.False(rep.CanHandle(Trigger.X));
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitionDoesNotExist_TriggerCanBeFired()
         {
             var rep = CreateRepresentation(State.B);
@@ -235,7 +235,7 @@ namespace Stateless.Tests
             Assert.True(rep.CanHandle(Trigger.X));
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitionExistsInSupersate_TriggerCanBeFired()
         {
             var rep = CreateRepresentation(State.B);
@@ -246,7 +246,7 @@ namespace Stateless.Tests
             Assert.True(sub.CanHandle(Trigger.X));
         }
 
-        [Fact]
+        [Test]
         public void WhenEnteringSubstate_SuperstateEntryActionsExecuteBeforeSubstate()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -259,7 +259,7 @@ namespace Stateless.Tests
             Assert.True(superOrder < subOrder);
         }
 
-        [Fact]
+        [Test]
         public void WhenExitingSubstate_SubstateEntryActionsExecuteBeforeSuperstate()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -272,7 +272,7 @@ namespace Stateless.Tests
             Assert.True(subOrder < superOrder);
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitionUnmetGuardConditions_TriggerCannotBeFired()
         {
             var rep = CreateRepresentation(State.B);
@@ -289,7 +289,7 @@ namespace Stateless.Tests
             Assert.False(rep.CanHandle(Trigger.X));
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitioGuardConditionsMet_TriggerCanBeFired()
         {
             var rep = CreateRepresentation(State.B);
@@ -306,7 +306,7 @@ namespace Stateless.Tests
             Assert.True(rep.CanHandle(Trigger.X));
         }
 
-        [Fact]
+        [Test]
         public void WhenTransitionExistAndSuperstateUnmetGuardConditions_FireNotPossible()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -326,7 +326,7 @@ namespace Stateless.Tests
             Assert.False(super.CanHandle(Trigger.X));
             
         }
-        [Fact]
+        [Test]
         public void WhenTransitionExistSuperstateMetGuardConditions_CanBeFired()
         {
             CreateSuperSubstatePair(out StateMachine<State, Trigger>.StateRepresentation super, out StateMachine<State, Trigger>.StateRepresentation sub);
@@ -363,7 +363,7 @@ namespace Stateless.Tests
         }
 
         // Issue #398 - Set guard description if substate transition fails
-        [Fact]
+        [Test]
         public void SetGuardDescriptionWhenSubstateGuardFails()
         {
             const string expectedGuardDescription = "Guard failed";
@@ -376,14 +376,14 @@ namespace Stateless.Tests
 
             fsm.Fire(Trigger.X);
 
-            Assert.Equal(fsm.State, State.B);
+            Assert.AreEqual(fsm.State, State.B);
             Assert.True(guardDescriptions != null);
-            Assert.Equal(guardDescriptions.Count, 1);
-            Assert.Equal(guardDescriptions.First(), expectedGuardDescription);
+            Assert.AreEqual(guardDescriptions.Count, 1);
+            Assert.AreEqual(guardDescriptions.First(), expectedGuardDescription);
         }
 
         // Issue #422 - Add all guard descriptions to result if multiple guards fail for same trigger
-        [Fact]
+        [Test]
         public void AddAllGuardDescriptionsWhenMultipleGuardsFailForSameTrigger()
         {
             ICollection<string> expectedGuardDescriptions = new List<string> { "PermitReentryIf guard failed", "PermitIf guard failed" };
@@ -398,9 +398,9 @@ namespace Stateless.Tests
 
             fsm.Fire(Trigger.X);
 
-            Assert.Equal(fsm.State, State.A);
+            Assert.AreEqual(fsm.State, State.A);
             Assert.True(guardDescriptions != null);
-            Assert.Equal(2, guardDescriptions.Count);
+            Assert.AreEqual(2, guardDescriptions.Count);
             foreach(var description in guardDescriptions)
             {
                 Assert.True(expectedGuardDescriptions.Contains(description));

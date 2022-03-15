@@ -1,10 +1,10 @@
-﻿using Xunit;
-using Stateless.Reflection;
-using Xunit.Sdk;
+﻿using Stateless.Reflection;
 using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace Stateless.Tests
 {
@@ -50,7 +50,7 @@ namespace Stateless.Tests
 
         }
 
-        Task OnActivateAsync()
+        UniTask OnActivateAsync()
         {
             return TaskResult.Done;
         }
@@ -59,17 +59,17 @@ namespace Stateless.Tests
         {
         }
 
-        Task OnEntryTransAsync(StateMachine<State, Trigger>.Transition trans)
+        UniTask OnEntryTransAsync(StateMachine<State, Trigger>.Transition trans)
         {
             return TaskResult.Done;
         }
 
-        Task OnEntryAsync()
+        UniTask OnEntryAsync()
         {
             return TaskResult.Done;
         }
 
-        Task OnDeactivateAsync()
+        UniTask OnDeactivateAsync()
         {
             return TaskResult.Done;
         }
@@ -82,12 +82,12 @@ namespace Stateless.Tests
         {
         }
 
-        Task OnExitAsync()
+        UniTask OnExitAsync()
         {
             return TaskResult.Done;
         }
 
-        Task OnExitTransAsync(StateMachine<State, Trigger>.Transition trans)
+        UniTask OnExitTransAsync(StateMachine<State, Trigger>.Transition trans)
         {
             return TaskResult.Done;
         }
@@ -97,7 +97,7 @@ namespace Stateless.Tests
             return true;
         }
 
-        [Fact]
+        [Test]
         public void SimpleTransition_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -107,33 +107,33 @@ namespace Stateless.Tests
 
             StateMachineInfo inf = sm.GetInfo();
 
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 2);
+            Assert.AreEqual(typeof(Trigger), inf.TriggerType);
+            Assert.AreEqual(2, inf.States.Count());
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
-            Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.That(binding.UnderlyingState, Is.InstanceOf<State>());
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.Zero(binding.Substates.Count());
+            Assert.Null(binding.Superstate);
+            Assert.Zero(binding.EntryActions.Count());
+            Assert.Zero(binding.ExitActions.Count());
             //
-            Assert.Equal(1, binding.FixedTransitions.Count());
+            Assert.AreEqual(1, binding.FixedTransitions.Count());
             foreach (FixedTransitionInfo trans in binding.FixedTransitions)
             {
-                Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
+                Assert.That(trans.Trigger.UnderlyingTrigger, Is.InstanceOf<Trigger>());
+                Assert.AreEqual(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
                 //
-                Assert.True(trans.DestinationState.UnderlyingState is State);
-                Assert.Equal(State.B, (State)trans.DestinationState.UnderlyingState);
-                Assert.Equal(0, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.That(trans.DestinationState.UnderlyingState, Is.InstanceOf<State>());
+                Assert.AreEqual(State.B, (State)trans.DestinationState.UnderlyingState);
+                Assert.Zero(trans.GuardConditionsMethodDescriptions.Count());
             }
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count());
+            Assert.Zero(binding.IgnoredTriggers.Count());
+            Assert.Zero(binding.DynamicTransitions.Count());
         }
 
-        [Fact]
+        [Test]
         public void TwoSimpleTransitions_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -145,19 +145,19 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 3);
+            Assert.AreEqual(inf.TriggerType, typeof(Trigger));
+            Assert.AreEqual(inf.States.Count(), 3);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState); // Binding state value mismatch
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState); // Binding state value mismatch
             //
-            Assert.Equal(0, binding.Substates.Count()); //  Binding substate count mismatch"
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count()); //  Binding entry actions count mismatch
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.Substates.Count()); //  Binding substate count mismatch"
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(0, binding.EntryActions.Count()); //  Binding entry actions count mismatch
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(2, binding.FixedTransitions.Count()); // Transition count mismatch
+            Assert.AreEqual(2, binding.FixedTransitions.Count()); // Transition count mismatch
             //
             bool haveXB = false;
             bool haveYC = false;
@@ -166,31 +166,31 @@ namespace Stateless.Tests
                 Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
                 //
                 Assert.True(trans.DestinationState.UnderlyingState is State);
-                Assert.Equal(0, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual(0, trans.GuardConditionsMethodDescriptions.Count());
                 //
                 // Can't make assumptions about which trigger/destination comes first in the list
                 if ((Trigger)trans.Trigger.UnderlyingTrigger == Trigger.X)
                 {
-                    Assert.Equal(State.B, (State)trans.DestinationState.UnderlyingState);
+                    Assert.AreEqual(State.B, (State)trans.DestinationState.UnderlyingState);
                     Assert.False(haveXB);
                     haveXB = true;
                 }
                 else if ((Trigger)trans.Trigger.UnderlyingTrigger == Trigger.Y)
                 {
-                    Assert.Equal(State.C, (State)trans.DestinationState.UnderlyingState);
+                    Assert.AreEqual(State.C, (State)trans.DestinationState.UnderlyingState);
                     Assert.False(haveYC);
                     haveYC = true;
                 }
                 else
-                    throw new XunitException("Failed.");
+                    throw new NUnitException("Failed.");
             }
             Assert.True(haveXB && haveYC);
             //
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count());
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count());
         }
 
-        [Fact]
+        [Test]
         public void WhenDiscriminatedByAnonymousGuard_Binding()
         {
             bool anonymousGuard() => true;
@@ -203,34 +203,34 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 2);
+            Assert.AreEqual(inf.TriggerType, typeof(Trigger));
+            Assert.AreEqual(inf.States.Count(), 2);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(1, binding.FixedTransitions.Count());
+            Assert.AreEqual(1, binding.FixedTransitions.Count());
             foreach (FixedTransitionInfo trans in binding.FixedTransitions)
             {
                 Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
+                Assert.AreEqual(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
                 //
                 Assert.True(trans.DestinationState.UnderlyingState is State);
-                Assert.Equal(State.B, (State)trans.DestinationState.UnderlyingState);
+                Assert.AreEqual(State.B, (State)trans.DestinationState.UnderlyingState);
                 //
-                Assert.NotEqual(0, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.NotZero(trans.GuardConditionsMethodDescriptions.Count());
             }
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count());
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count());
         }
 
-        [Fact]
+        [Test]
         public void WhenDiscriminatedByAnonymousGuardWithDescription_Binding()
         {
             bool anonymousGuard() => true;
@@ -243,35 +243,35 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 2);
+            Assert.AreEqual(inf.TriggerType, typeof(Trigger));
+            Assert.AreEqual(inf.States.Count(), 2);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(1, binding.FixedTransitions.Count());
+            Assert.AreEqual(1, binding.FixedTransitions.Count());
             foreach (FixedTransitionInfo trans in binding.FixedTransitions)
             {
                 Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
+                Assert.AreEqual(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
                 //
                 Assert.True(trans.DestinationState.UnderlyingState is State);
-                Assert.Equal(State.B, (State)trans.DestinationState.UnderlyingState);
+                Assert.AreEqual(State.B, (State)trans.DestinationState.UnderlyingState);
                 //
-                Assert.Equal(1, trans.GuardConditionsMethodDescriptions.Count());
-                Assert.Equal("description", trans.GuardConditionsMethodDescriptions.First().Description);
+                Assert.AreEqual(1, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual("description", trans.GuardConditionsMethodDescriptions.First().Description);
             }
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count());
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count());
         }
 
-        [Fact]
+        [Test]
         public void WhenDiscriminatedByNamedDelegate_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -282,35 +282,35 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 2);
+            Assert.AreEqual(inf.TriggerType, typeof(Trigger));
+            Assert.AreEqual(inf.States.Count(), 2);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(1, binding.FixedTransitions.Count());
+            Assert.AreEqual(1, binding.FixedTransitions.Count());
             foreach (FixedTransitionInfo trans in binding.FixedTransitions)
             {
                 Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
+                Assert.AreEqual(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
                 //
                 Assert.True(trans.DestinationState.UnderlyingState is State);
-                Assert.Equal(State.B, (State)trans.DestinationState.UnderlyingState);
+                Assert.AreEqual(State.B, (State)trans.DestinationState.UnderlyingState);
                 //
-                Assert.Equal(1, trans.GuardConditionsMethodDescriptions.Count());
-                Assert.Equal("IsTrue", trans.GuardConditionsMethodDescriptions.First().Description);
+                Assert.AreEqual(1, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual("IsTrue", trans.GuardConditionsMethodDescriptions.First().Description);
             }
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count());
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count());
         }
 
-        [Fact]
+        [Test]
         public void WhenDiscriminatedByNamedDelegateWithDescription_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -321,35 +321,35 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 2);
+            Assert.AreEqual(inf.TriggerType, typeof(Trigger));
+            Assert.AreEqual(inf.States.Count(), 2);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(1, binding.FixedTransitions.Count());
+            Assert.AreEqual(1, binding.FixedTransitions.Count());
             foreach (FixedTransitionInfo trans in binding.FixedTransitions)
             {
                 Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
+                Assert.AreEqual(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
                 //
                 Assert.True(trans.DestinationState.UnderlyingState is State);
-                Assert.Equal(State.B, (State)trans.DestinationState.UnderlyingState);
+                Assert.AreEqual(State.B, (State)trans.DestinationState.UnderlyingState);
                 //
-                Assert.Equal(1, trans.GuardConditionsMethodDescriptions.Count());
-                Assert.Equal("description", trans.GuardConditionsMethodDescriptions.First().Description);
+                Assert.AreEqual(1, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual("description", trans.GuardConditionsMethodDescriptions.First().Description);
             }
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count());
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count());
         }
 
-        [Fact]
+        [Test]
         public void DestinationStateIsDynamic_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -359,30 +359,30 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 1);
+            Assert.AreEqual(inf.TriggerType, typeof(Trigger));
+            Assert.AreEqual(inf.States.Count(), 1);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(0, binding.FixedTransitions.Count()); // Binding transition count mismatch
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(1, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
+            Assert.AreEqual(0, binding.FixedTransitions.Count()); // Binding transition count mismatch
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(1, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
             foreach (DynamicTransitionInfo trans in binding.DynamicTransitions)
             {
                 Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
-                Assert.Equal(0, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
+                Assert.AreEqual(0, trans.GuardConditionsMethodDescriptions.Count());
             }
         }
 
-        [Fact]
+        [Test]
         public void DestinationStateIsCalculatedBasedOnTriggerParameters_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -393,30 +393,30 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 1);
+            Assert.AreEqual(inf.TriggerType, typeof(Trigger));
+            Assert.AreEqual(inf.States.Count(), 1);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(0, binding.FixedTransitions.Count()); // Binding transition count mismatch"
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(1, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
+            Assert.AreEqual(0, binding.FixedTransitions.Count()); // Binding transition count mismatch"
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(1, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
             foreach (DynamicTransitionInfo trans in binding.DynamicTransitions)
             {
                 Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
-                Assert.Equal(0, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
+                Assert.AreEqual(0, trans.GuardConditionsMethodDescriptions.Count());
             }
         }
 
-        [Fact]
+        [Test]
         public void OnEntryWithAnonymousActionAndDescription_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -427,27 +427,27 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.States.Count(), 1);
+            Assert.AreEqual(inf.States.Count(), 1);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(1, binding.EntryActions.Count());
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(1, binding.EntryActions.Count());
             foreach (ActionInfo entryAction in binding.EntryActions)
             {
-                Assert.Equal("enteredA", entryAction.Method.Description);
+                Assert.AreEqual("enteredA", entryAction.Method.Description);
             }
-            Assert.Equal(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(0, binding.FixedTransitions.Count()); // Binding count mismatch
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
+            Assert.AreEqual(0, binding.FixedTransitions.Count()); // Binding count mismatch
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
         }
 
-        [Fact]
+        [Test]
         public void OnEntryWithNamedDelegateActionAndDescription_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -458,26 +458,26 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.States.Count(), 1);
+            Assert.AreEqual(inf.States.Count(), 1);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
             //
-            Assert.Equal(1, binding.EntryActions.Count());
+            Assert.AreEqual(1, binding.EntryActions.Count());
             foreach (ActionInfo entryAction in binding.EntryActions)
-                Assert.Equal("enteredA", entryAction.Method.Description);
-            Assert.Equal(0, binding.ExitActions.Count());
+                Assert.AreEqual("enteredA", entryAction.Method.Description);
+            Assert.AreEqual(0, binding.ExitActions.Count());
             //
-            Assert.Equal(0, binding.FixedTransitions.Count()); // Binding count mismatch
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
+            Assert.AreEqual(0, binding.FixedTransitions.Count()); // Binding count mismatch
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
         }
 
-        [Fact]
+        [Test]
         public void OnExitWithAnonymousActionAndDescription_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -488,26 +488,26 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.States.Count(), 1);
+            Assert.AreEqual(inf.States.Count(), 1);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
             //
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(1, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(1, binding.ExitActions.Count());
             foreach (InvocationInfo exitAction in binding.ExitActions)
-                Assert.Equal("exitA", exitAction.Description);
+                Assert.AreEqual("exitA", exitAction.Description);
             //
-            Assert.Equal(0, binding.FixedTransitions.Count()); // Binding count mismatch
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
+            Assert.AreEqual(0, binding.FixedTransitions.Count()); // Binding count mismatch
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
         }
 
-        [Fact]
+        [Test]
         public void OnExitWithNamedDelegateActionAndDescription_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -518,26 +518,26 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.States.Count(), 1);
+            Assert.AreEqual(inf.States.Count(), 1);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
             //
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(1, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(1, binding.ExitActions.Count());
             foreach (InvocationInfo entryAction in binding.ExitActions)
-                Assert.Equal("exitA", entryAction.Description);
+                Assert.AreEqual("exitA", entryAction.Description);
             //
-            Assert.Equal(0, binding.FixedTransitions.Count()); // Binding count mismatch
-            Assert.Equal(0, binding.IgnoredTriggers.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
+            Assert.AreEqual(0, binding.FixedTransitions.Count()); // Binding count mismatch
+            Assert.AreEqual(0, binding.IgnoredTriggers.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
         }
 
-        [Fact]
+        [Test]
         public void TransitionWithIgnore_Binding()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -549,59 +549,59 @@ namespace Stateless.Tests
             StateMachineInfo inf = sm.GetInfo();
 
             Assert.True(inf.StateType == typeof(State));
-            Assert.Equal(inf.TriggerType, typeof(Trigger));
-            Assert.Equal(inf.States.Count(), 2);
+            Assert.AreEqual(inf.TriggerType, typeof(Trigger));
+            Assert.AreEqual(inf.States.Count(), 2);
             var binding = inf.States.Single(s => (State)s.UnderlyingState == State.A);
 
             Assert.True(binding.UnderlyingState is State);
-            Assert.Equal(State.A, (State)binding.UnderlyingState);
+            Assert.AreEqual(State.A, (State)binding.UnderlyingState);
             //
-            Assert.Equal(1, binding.FixedTransitions.Count()); // Transition count mismatch"
+            Assert.AreEqual(1, binding.FixedTransitions.Count()); // Transition count mismatch"
             foreach (FixedTransitionInfo trans in binding.FixedTransitions)
             {
                 Assert.True(trans.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
+                Assert.AreEqual(Trigger.X, (Trigger)trans.Trigger.UnderlyingTrigger);
                 //
                 Assert.True(trans.DestinationState.UnderlyingState is State);
-                Assert.Equal(State.B, (State)trans.DestinationState.UnderlyingState);
-                Assert.Equal(0, trans.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual(State.B, (State)trans.DestinationState.UnderlyingState);
+                Assert.AreEqual(0, trans.GuardConditionsMethodDescriptions.Count());
             }
             //
-            Assert.Equal(1, binding.IgnoredTriggers.Count()); //  Ignored triggers count mismatch
+            Assert.AreEqual(1, binding.IgnoredTriggers.Count()); //  Ignored triggers count mismatch
             foreach (IgnoredTransitionInfo ignore in binding.IgnoredTriggers)
             {
                 Assert.True(ignore.Trigger.UnderlyingTrigger is Trigger);
-                Assert.Equal(Trigger.Y, (Trigger)ignore.Trigger.UnderlyingTrigger); // Ignored trigger value mismatch
+                Assert.AreEqual(Trigger.Y, (Trigger)ignore.Trigger.UnderlyingTrigger); // Ignored trigger value mismatch
             }
             //
-            Assert.Equal(0, binding.Substates.Count());
-            Assert.Equal(null, binding.Superstate);
-            Assert.Equal(0, binding.EntryActions.Count());
-            Assert.Equal(0, binding.ExitActions.Count());
-            Assert.Equal(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
+            Assert.AreEqual(0, binding.Substates.Count());
+            Assert.AreEqual(null, binding.Superstate);
+            Assert.AreEqual(0, binding.EntryActions.Count());
+            Assert.AreEqual(0, binding.ExitActions.Count());
+            Assert.AreEqual(0, binding.DynamicTransitions.Count()); // Dynamic transition count mismatch
         }
 
         void VerifyMethodNames(IEnumerable<InvocationInfo> methods, string prefix, string body, State state, InvocationInfo.Timing timing)
         {
-            Assert.Equal(1, methods.Count());
+            Assert.AreEqual(1, methods.Count());
             InvocationInfo method = methods.First();
 
             if (state == State.A)
-                Assert.Equal(prefix + body + ((timing == InvocationInfo.Timing.Asynchronous) ? "Async" : ""), method.Description);
+                Assert.AreEqual(prefix + body + ((timing == InvocationInfo.Timing.Asynchronous) ? "Async" : ""), method.Description);
             else if (state == State.B)
-                Assert.Equal(UserDescription + "B-" + body, method.Description);
+                Assert.AreEqual(UserDescription + "B-" + body, method.Description);
             else if (state == State.C)
-                Assert.Equal(InvocationInfo.DefaultFunctionDescription, method.Description);
+                Assert.AreEqual(InvocationInfo.DefaultFunctionDescription, method.Description);
             else if (state == State.D)
-                Assert.Equal(UserDescription + "D-" + body, method.Description);
+                Assert.AreEqual(UserDescription + "D-" + body, method.Description);
 
-            Assert.Equal(timing == InvocationInfo.Timing.Asynchronous, method.IsAsync);
+            Assert.AreEqual(timing == InvocationInfo.Timing.Asynchronous, method.IsAsync);
         }
 
         void VerifyMethodNameses(IEnumerable<InvocationInfo> methods, string prefix, string body, State state,
             InvocationInfo.Timing timing, HashSet<string> suffixes)
         {
-            Assert.Equal(suffixes.Count, methods.Count());
+            Assert.AreEqual(suffixes.Count, methods.Count());
 
             foreach (InvocationInfo method in methods)
             {
@@ -632,11 +632,11 @@ namespace Stateless.Tests
                     Debug.WriteLine("No match for \"" + method.Description + "\"");
                 Assert.True(matches);
                 //
-                Assert.Equal(timing == InvocationInfo.Timing.Asynchronous, method.IsAsync);
+                Assert.AreEqual(timing == InvocationInfo.Timing.Asynchronous, method.IsAsync);
             }
         }
 
-        [Fact]
+        [Test]
         public void ReflectionMethodNames()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -750,7 +750,7 @@ namespace Stateless.Tests
              */
         }
 
-        [Fact]
+        [Test]
         public void ReflectionMethodNamesAsync()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -826,7 +826,7 @@ namespace Stateless.Tests
             return State.D;
         }
 
-        [Fact]
+        [Test]
         public void TransitionGuardNames()
         {
             var sm = new StateMachine<State, Trigger>(State.A);
@@ -844,9 +844,9 @@ namespace Stateless.Tests
 
             foreach (StateInfo stateInfo in inf.States)
             {
-                Assert.Equal(1, stateInfo.Transitions.Count());
+                Assert.AreEqual(1, stateInfo.Transitions.Count());
                 TransitionInfo transInfo = stateInfo.Transitions.First();
-                Assert.Equal(1, transInfo.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual(1, transInfo.GuardConditionsMethodDescriptions.Count());
                 VerifyMethodNames(transInfo.GuardConditionsMethodDescriptions, "", "Permit", (State)stateInfo.UnderlyingState, InvocationInfo.Timing.Synchronous);
             }
 
@@ -868,9 +868,9 @@ namespace Stateless.Tests
 
             foreach (StateInfo stateInfo in inf.States)
             {
-                Assert.Equal(1, stateInfo.Transitions.Count());
+                Assert.AreEqual(1, stateInfo.Transitions.Count());
                 TransitionInfo transInfo = stateInfo.Transitions.First();
-                Assert.Equal(1, transInfo.GuardConditionsMethodDescriptions.Count());
+                Assert.AreEqual(1, transInfo.GuardConditionsMethodDescriptions.Count());
                 VerifyMethodNames(transInfo.GuardConditionsMethodDescriptions, "", "Permit", (State)stateInfo.UnderlyingState, InvocationInfo.Timing.Synchronous);
             }
 

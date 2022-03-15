@@ -1,24 +1,24 @@
-﻿using Xunit;
+﻿using NUnit.Framework;
 
 namespace Stateless.Tests
 {
     public class TransitionFixture
     {
-        [Fact]
+        [Test]
         public void IdentityTransitionIsNotChange()
         {
             StateMachine<int, int>.Transition t = new StateMachine<int, int>.Transition(1, 1, 0);
             Assert.True(t.IsReentry);
         }
 
-        [Fact]
+        [Test]
         public void TransitioningTransitionIsChange()
         {
             StateMachine<int, int>.Transition t = new StateMachine<int, int>.Transition(1, 2, 0);
             Assert.False(t.IsReentry);
         }
 
-        [Fact]
+        [Test]
         public void TestInternalIf()
         {
             // Verifies that only one internal action is executed
