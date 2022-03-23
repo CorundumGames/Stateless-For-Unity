@@ -1,6 +1,6 @@
-﻿using System;
-using Stateless;
+﻿using Stateless;
 using Stateless.Graph;
+using UnityEngine;
 
 namespace BugTrackerExample
 {
@@ -90,7 +90,7 @@ namespace BugTrackerExample
 
         private void SendEmailToAssignee(string message)
         {
-            Console.WriteLine("{0}, RE {1}: {2}", _assignee, _title, message);
+            Debug.LogFormat("{0}, RE {1}: {2}", _assignee, _title, message);
         }
 
         public string ToDotGraph()
