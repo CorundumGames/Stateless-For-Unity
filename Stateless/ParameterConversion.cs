@@ -17,7 +17,7 @@ namespace Stateless
 
             var arg = args[index];
 
-            if (arg != null && !argType.IsAssignableFrom(arg.GetType()))
+            if (arg != null && !argType.IsInstanceOfType(arg))
                 throw new ArgumentException(
                     string.Format(ParameterConversionResources.WrongArgType, index, arg.GetType(), argType));
 
