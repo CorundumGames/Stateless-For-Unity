@@ -8,8 +8,8 @@ namespace Stateless
     {
         class OnTransitionedEvent
         {
-            event Action<Transition> _onTransitioned;
-            readonly List<Func<Transition, UniTask>> _onTransitionedAsync = new List<Func<Transition, UniTask>>();
+            private event Action<Transition> _onTransitioned;
+            private readonly List<Func<Transition, UniTask>> _onTransitionedAsync = new List<Func<Transition, UniTask>>();
 
             public void Invoke(Transition transition)
             {
