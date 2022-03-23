@@ -1774,7 +1774,7 @@ namespace Stateless
             /// <returns>A stateConfiguration object</returns>
             public StateConfiguration InitialTransition(TState targetState)
             {
-                if (_representation.HasInitialTransition) throw new InvalidOperationException($"This state has already been configured with an inital transition ({_representation.InitialTransitionTarget}).");
+                if (_representation.HasInitialTransition) throw new InvalidOperationException($"This state has already been configured with an initial transition ({_representation.InitialTransitionTarget}).");
                 if (targetState.Equals(State)) throw new ArgumentException("Setting the current state as the target destination state is not allowed.", nameof(targetState));
 
                 _representation.SetInitialTransition(targetState);
