@@ -74,6 +74,6 @@ namespace Stateless.Reflection
         /// </summary>
         public bool IsAsync => (_timing == Timing.Asynchronous);
 
-        private static readonly char[] DescriptionChars = new char[] { '<', '>', '`' };
+        private static readonly char[] DescriptionChars = { '<', '>', '`' };
     }
 }
