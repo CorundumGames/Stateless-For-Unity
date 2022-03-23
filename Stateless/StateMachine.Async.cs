@@ -265,7 +265,7 @@ namespace Stateless
             // Enter the new state
             await representation.EnterAsync(transition, args);
 
-            if (FiringMode.Immediate.Equals(_firingMode) && !State.Equals(transition.Destination))
+            if (FiringMode.Immediate == _firingMode && !State.Equals(transition.Destination))
             {
                 // This can happen if triggers are fired in OnEntry
                 // Must update current representation with updated State
