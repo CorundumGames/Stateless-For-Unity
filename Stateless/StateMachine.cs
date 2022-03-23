@@ -610,7 +610,7 @@ namespace Stateless
             _triggerConfiguration.Add(trigger.Trigger, trigger);
         }
 
-        void DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection<string> unmetGuardConditions)
+        private static void DefaultUnhandledTriggerAction(TState state, TTrigger trigger, ICollection<string> unmetGuardConditions)
         {
             if (unmetGuardConditions?.Any() ?? false)
                 throw new InvalidOperationException(
