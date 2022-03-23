@@ -102,26 +102,14 @@ namespace Stateless
         /// </summary>
         public TState State
         {
-            get
-            {
-                return _stateAccessor();
-            }
-            private set
-            {
-                _stateMutator(value);
-            }
+            get => _stateAccessor();
+            private set => _stateMutator(value);
         }
 
         /// <summary>
         /// The currently-permissible trigger values.
         /// </summary>
-        public IEnumerable<TTrigger> PermittedTriggers
-        {
-            get
-            {
-                return GetPermittedTriggers();
-            }
-        }
+        public IEnumerable<TTrigger> PermittedTriggers => GetPermittedTriggers();
 
         /// <summary>
         /// The currently-permissible trigger values.
@@ -131,13 +119,7 @@ namespace Stateless
             return CurrentRepresentation.GetPermittedTriggers(args);
         }
 
-        StateRepresentation CurrentRepresentation
-        {
-            get
-            {
-                return GetRepresentation(State);
-            }
-        }
+        StateRepresentation CurrentRepresentation => GetRepresentation(State);
 
         /// <summary>
         /// Provides an info object which exposes the states, transitions, and actions of this machine.
