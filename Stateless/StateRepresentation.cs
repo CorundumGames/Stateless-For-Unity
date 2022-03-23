@@ -142,8 +142,7 @@ namespace Stateless
 
             public void Activate()
             {
-                if (_superstate != null)
-                    _superstate.Activate();
+                _superstate?.Activate();
 
                 ExecuteActivationActions();
             }
@@ -152,8 +151,7 @@ namespace Stateless
             {
                 ExecuteDeactivationActions();
 
-                if (_superstate != null)
-                    _superstate.Deactivate();
+                _superstate?.Deactivate();
             }
 
             void ExecuteActivationActions()
