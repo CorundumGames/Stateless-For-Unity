@@ -256,7 +256,7 @@ namespace Stateless
                 State = representation.UnderlyingState;
             }
 
-           await _onTransitionCompletedEvent.InvokeAsync(new Transition(transition.Source, State, transition.Trigger, transition.Parameters));
+            await _onTransitionCompletedEvent.InvokeAsync(new Transition(transition.Source, State, transition.Trigger, transition.Parameters));
         }
 
 
