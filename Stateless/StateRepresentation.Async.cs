@@ -84,7 +84,7 @@ namespace Stateless
                 }
                 else if (!Includes(transition.Source))
                 {
-                    if (_superstate != null && !(transition is InitialTransition))
+                    if (_superstate != null && transition is not InitialTransition)
                         await _superstate.EnterAsync(transition, entryArgs);
 
                     await ExecuteEntryActionsAsync(transition, entryArgs);
