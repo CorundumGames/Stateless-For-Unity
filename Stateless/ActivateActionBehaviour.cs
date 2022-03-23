@@ -7,7 +7,7 @@ namespace Stateless
     {
         internal abstract class ActivateActionBehaviour
         {
-            readonly TState _state;
+            private readonly TState _state;
 
             protected ActivateActionBehaviour(TState state, Reflection.InvocationInfo actionDescription)
             {

@@ -7,7 +7,7 @@ namespace Stateless.Reflection
     /// </summary>
     public class InvocationInfo
     {
-        readonly string _description;                     // _description can be null if user didn't specify a description
+        private readonly string _description; // _description can be null if user didn't specify a description
 
         /// <summary>
         /// Is the method synchronous or asynchronous?
