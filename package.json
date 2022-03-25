@@ -2,7 +2,36 @@
   "name": "games.corundum.stateless-for-unity",
   "displayName": "Stateless For Unity",
   "version": "5.11.1",
+  "unity": "2021.1",
   "dependencies": {
     "com.cysharp.unitask": "2.2.5"
+  },
+  "description": "A Unity port of Stateless that uses UniTask instead of standard TAP classes.",
+  "keywords": [
+    "state machine",
+    "fsm",
+    "automata",
+    "finite state machine",
+    "state",
+    "UniTask"
+  ],
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Jesse Talavera-Greenberg",
+    "email": "director@corundum.games",
+    "url": "https://corundum.games"
+  },
+  "repository": "https://github.com/CorundumGames/Stateless-For-Unity",
+  "homepage": "https://github.com/CorundumGames/Stateless-For-Unity",
+  "documentationUrl": "https://github.com/CorundumGames/Stateless-For-Unity#readme",
+  "devDependencies": {
+    "semantic-release": "^19.0.2",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/npm": "^9.0.1",
+    "@semantic-release/github": "^8.0.2",
+    "semantic-release-dotnet": "^1.0.0",
+    "minimist": ">=1.2.6"
   }
 }
