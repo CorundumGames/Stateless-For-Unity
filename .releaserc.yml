@@ -1,0 +1,30 @@
+﻿{
+  tagFormat: "${version}",
+  branches: "main",
+  plugins: [
+    [ "@semantic-release/commit-analyzer", {
+      preset: "angular"
+    } ],
+
+    # Used to generate the text of the release notes
+    [ "@semantic-release/release-notes-generator" ],
+
+    # Used to generate a changelog file
+    [ "@semantic-release/changelog", {
+      changelogTitle: "Changelog"
+    } ],
+
+    # Used to update package.json
+    [ "@semantic-release/npm", {
+      npmPublish: false # I don't release this library on npm
+    } ],
+
+    [ "@semantic-release/git", {
+      assets: [
+          "package.json",
+          "CHANGELOG.md"
+      ],
+      message: "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+    } ]
+  ]
+}
