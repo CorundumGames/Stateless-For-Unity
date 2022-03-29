@@ -1,0 +1,99 @@
+﻿name: Test and Publish
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      GIT_TERMINAL_PROMPT: 0
+      COMMIT_USER: github-actions[bot]
+      COMMIT_EMAIL: github-actions[bot]@users.noreply.github.com
+      REPO_NAME: Stateless-For-Unity
+      DOCFX_VERSION: v2.59.0
+      DOCFX_DIR: docfx
+      DOCFX_ZIP: docfx.zip
+      DOC_DIR: ~Documentation
+    steps:
+      - name: Check Out
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Check out the entire repo
+          path: "Stateless-For-Unity" # See https://github.com/nektos/act#module_not_found
+
+      - name: Install Mono
+        if: env.ACT # Because the act image doesn't include Mono, but GitHub Actions does
+        run: |
+          apt-get install --yes gnupg ca-certificates
+          apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+          echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list
+          apt-get update --yes --quiet
+          apt-get install --yes --quiet mono-devel
+
+      - name: Download DocFX
+        uses: robinraju/release-downloader@v1.3
+        with:
+          repository: dotnet/docfx
+          tag: ${{ env.DOCFX_VERSION }}
+          tarBall: false
+          zipBall: false
+          fileName: ${{ env.DOCFX_ZIP }}
+          out-file-path: ${{ env.DOCFX_DIR }}
+
+      - name: Extract DocFX
+        working-directory: ${{ env.DOCFX_DIR }}
+        run: |
+          unzip -qqo "$DOCFX_ZIP"
+          rm --force "$DOCFX_ZIP"
+          chmod +x ./docfx.exe ./*.dll
+
+      - name: Validate DocFX
+        run: mono ${{ env.DOCFX_DIR }}/docfx.exe --version
+
+      # TODO: Run the tests when this PR is ready https://github.com/game-ci/unity-test-runner/pull/164
+
+      - name: Semantic Release
+        id: release
+        uses: cycjimmy/semantic-release-action@v3
+        with:
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+          working_directory: ${{ env.REPO_NAME }}
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare Docs
+        if: steps.release.outputs.new_release_published == 'true'
+        working-directory: ${{ env.REPO_NAME }}
+        run: cp --force README.md ./$DOC_DIR/index.md
+
+      - name: Generate Docs
+        if: steps.release.outputs.new_release_published == 'true'
+        run: |
+          mono "$DOCFX_EXE" metadata "$DOCFX_JSON"
+          mono "$DOCFX_EXE" build "$DOCFX_JSON"
+        env:
+          DOCFX_EXE: ${{ env.DOCFX_DIR }}/docfx.exe
+          DOCFX_JSON: ./${{ env.REPO_NAME }}/${{ env.DOC_DIR }}/docfx.json
+
+      - name: Deploy Docs
+        if: steps.release.outputs.new_release_published == 'true'
+        working-directory: ${{ env.REPO_NAME }}
+        run: |
+          rm -rf /tmp/_site.zip
+          cd "${{ env.DOC_DIR }}/_site"
+          zip --recurse-paths /tmp/_site.zip .
+          cd -
+          git checkout --force gh-pages
+          git clean -xdf
+          unzip -o "/tmp/_site.zip" -d .
+          git add .
+          git config --global user.name "$COMMIT_USER"
+          git config --global user.email "$COMMIT_EMAIL"
+          git commit --all --message "ci: Deploy gh-pages to match ${GITHUB_SHA:0:8}" # First 8 characters
+          git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}
+          git push --force --set-upstream origin gh-pages
