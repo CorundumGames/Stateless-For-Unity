@@ -114,13 +114,13 @@ references:
   commentId: T:Stateless.Graph.FixedTransition
   fullName: Stateless.Graph.FixedTransition
   nameWithType: FixedTransition
-- uid: Stateless.Graph.FixedTransition.#ctor(Stateless.Graph.State,Stateless.Graph.State,TriggerInfo,System.Collections.Generic.IEnumerable{InvocationInfo})
+- uid: Stateless.Graph.FixedTransition.#ctor(Stateless.Graph.State,Stateless.Graph.State,TriggerInfo,IEnumerable{InvocationInfo})
   name: FixedTransition(State, State, TriggerInfo, IEnumerable<InvocationInfo>)
-  href: api/Stateless.Graph.FixedTransition.html#Stateless_Graph_FixedTransition__ctor_Stateless_Graph_State_Stateless_Graph_State_TriggerInfo_System_Collections_Generic_IEnumerable_InvocationInfo__
-  commentId: M:Stateless.Graph.FixedTransition.#ctor(Stateless.Graph.State,Stateless.Graph.State,TriggerInfo,System.Collections.Generic.IEnumerable{InvocationInfo})
+  href: api/Stateless.Graph.FixedTransition.html#Stateless_Graph_FixedTransition__ctor_Stateless_Graph_State_Stateless_Graph_State_TriggerInfo_IEnumerable_InvocationInfo__
+  commentId: M:Stateless.Graph.FixedTransition.#ctor(Stateless.Graph.State,Stateless.Graph.State,TriggerInfo,IEnumerable{InvocationInfo})
   name.vb: FixedTransition(State, State, TriggerInfo, IEnumerable(Of InvocationInfo))
-  fullName: Stateless.Graph.FixedTransition.FixedTransition(Stateless.Graph.State, Stateless.Graph.State, TriggerInfo, System.Collections.Generic.IEnumerable<InvocationInfo>)
-  fullName.vb: Stateless.Graph.FixedTransition.FixedTransition(Stateless.Graph.State, Stateless.Graph.State, TriggerInfo, System.Collections.Generic.IEnumerable(Of InvocationInfo))
+  fullName: Stateless.Graph.FixedTransition.FixedTransition(Stateless.Graph.State, Stateless.Graph.State, TriggerInfo, IEnumerable<InvocationInfo>)
+  fullName.vb: Stateless.Graph.FixedTransition.FixedTransition(Stateless.Graph.State, Stateless.Graph.State, TriggerInfo, IEnumerable(Of InvocationInfo))
   nameWithType: FixedTransition.FixedTransition(State, State, TriggerInfo, IEnumerable<InvocationInfo>)
   nameWithType.vb: FixedTransition.FixedTransition(State, State, TriggerInfo, IEnumerable(Of InvocationInfo))
 - uid: Stateless.Graph.FixedTransition.#ctor*
@@ -162,13 +162,13 @@ references:
   commentId: T:Stateless.Graph.GraphStyleBase
   fullName: Stateless.Graph.GraphStyleBase
   nameWithType: GraphStyleBase
-- uid: Stateless.Graph.GraphStyleBase.FormatAllTransitions(System.Collections.Generic.List{Stateless.Graph.Transition})
+- uid: Stateless.Graph.GraphStyleBase.FormatAllTransitions(List{Stateless.Graph.Transition})
   name: FormatAllTransitions(List<Transition>)
-  href: api/Stateless.Graph.GraphStyleBase.html#Stateless_Graph_GraphStyleBase_FormatAllTransitions_System_Collections_Generic_List_Stateless_Graph_Transition__
-  commentId: M:Stateless.Graph.GraphStyleBase.FormatAllTransitions(System.Collections.Generic.List{Stateless.Graph.Transition})
+  href: api/Stateless.Graph.GraphStyleBase.html#Stateless_Graph_GraphStyleBase_FormatAllTransitions_List_Stateless_Graph_Transition__
+  commentId: M:Stateless.Graph.GraphStyleBase.FormatAllTransitions(List{Stateless.Graph.Transition})
   name.vb: FormatAllTransitions(List(Of Transition))
-  fullName: Stateless.Graph.GraphStyleBase.FormatAllTransitions(System.Collections.Generic.List<Stateless.Graph.Transition>)
-  fullName.vb: Stateless.Graph.GraphStyleBase.FormatAllTransitions(System.Collections.Generic.List(Of Stateless.Graph.Transition))
+  fullName: Stateless.Graph.GraphStyleBase.FormatAllTransitions(List<Stateless.Graph.Transition>)
+  fullName.vb: Stateless.Graph.GraphStyleBase.FormatAllTransitions(List(Of Stateless.Graph.Transition))
   nameWithType: GraphStyleBase.FormatAllTransitions(List<Transition>)
   nameWithType.vb: GraphStyleBase.FormatAllTransitions(List(Of Transition))
 - uid: Stateless.Graph.GraphStyleBase.FormatAllTransitions*
@@ -217,13 +217,13 @@ references:
   isSpec: "True"
   fullName: Stateless.Graph.GraphStyleBase.FormatOneState
   nameWithType: GraphStyleBase.FormatOneState
-- uid: Stateless.Graph.GraphStyleBase.FormatOneTransition(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.Collections.Generic.IEnumerable{System.String})
+- uid: Stateless.Graph.GraphStyleBase.FormatOneTransition(System.String,System.String,IEnumerable{System.String},System.String,IEnumerable{System.String})
   name: FormatOneTransition(String, String, IEnumerable<String>, String, IEnumerable<String>)
-  href: api/Stateless.Graph.GraphStyleBase.html#Stateless_Graph_GraphStyleBase_FormatOneTransition_System_String_System_String_System_Collections_Generic_IEnumerable_System_String__System_String_System_Collections_Generic_IEnumerable_System_String__
-  commentId: M:Stateless.Graph.GraphStyleBase.FormatOneTransition(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.Collections.Generic.IEnumerable{System.String})
+  href: api/Stateless.Graph.GraphStyleBase.html#Stateless_Graph_GraphStyleBase_FormatOneTransition_System_String_System_String_IEnumerable_System_String__System_String_IEnumerable_System_String__
+  commentId: M:Stateless.Graph.GraphStyleBase.FormatOneTransition(System.String,System.String,IEnumerable{System.String},System.String,IEnumerable{System.String})
   name.vb: FormatOneTransition(String, String, IEnumerable(Of String), String, IEnumerable(Of String))
-  fullName: Stateless.Graph.GraphStyleBase.FormatOneTransition(System.String, System.String, System.Collections.Generic.IEnumerable<System.String>, System.String, System.Collections.Generic.IEnumerable<System.String>)
-  fullName.vb: Stateless.Graph.GraphStyleBase.FormatOneTransition(System.String, System.String, System.Collections.Generic.IEnumerable(Of System.String), System.String, System.Collections.Generic.IEnumerable(Of System.String))
+  fullName: Stateless.Graph.GraphStyleBase.FormatOneTransition(System.String, System.String, IEnumerable<System.String>, System.String, IEnumerable<System.String>)
+  fullName.vb: Stateless.Graph.GraphStyleBase.FormatOneTransition(System.String, System.String, IEnumerable(Of System.String), System.String, IEnumerable(Of System.String))
   nameWithType: GraphStyleBase.FormatOneTransition(String, String, IEnumerable<String>, String, IEnumerable<String>)
   nameWithType.vb: GraphStyleBase.FormatOneTransition(String, String, IEnumerable(Of String), String, IEnumerable(Of String))
 - uid: Stateless.Graph.GraphStyleBase.FormatOneTransition*
@@ -439,13 +439,13 @@ references:
   commentId: T:Stateless.Graph.StayTransition
   fullName: Stateless.Graph.StayTransition
   nameWithType: StayTransition
-- uid: Stateless.Graph.StayTransition.#ctor(Stateless.Graph.State,TriggerInfo,System.Collections.Generic.IEnumerable{InvocationInfo},System.Boolean)
+- uid: Stateless.Graph.StayTransition.#ctor(Stateless.Graph.State,TriggerInfo,IEnumerable{InvocationInfo},System.Boolean)
   name: StayTransition(State, TriggerInfo, IEnumerable<InvocationInfo>, Boolean)
-  href: api/Stateless.Graph.StayTransition.html#Stateless_Graph_StayTransition__ctor_Stateless_Graph_State_TriggerInfo_System_Collections_Generic_IEnumerable_InvocationInfo__System_Boolean_
-  commentId: M:Stateless.Graph.StayTransition.#ctor(Stateless.Graph.State,TriggerInfo,System.Collections.Generic.IEnumerable{InvocationInfo},System.Boolean)
+  href: api/Stateless.Graph.StayTransition.html#Stateless_Graph_StayTransition__ctor_Stateless_Graph_State_TriggerInfo_IEnumerable_InvocationInfo__System_Boolean_
+  commentId: M:Stateless.Graph.StayTransition.#ctor(Stateless.Graph.State,TriggerInfo,IEnumerable{InvocationInfo},System.Boolean)
   name.vb: StayTransition(State, TriggerInfo, IEnumerable(Of InvocationInfo), Boolean)
-  fullName: Stateless.Graph.StayTransition.StayTransition(Stateless.Graph.State, TriggerInfo, System.Collections.Generic.IEnumerable<InvocationInfo>, System.Boolean)
-  fullName.vb: Stateless.Graph.StayTransition.StayTransition(Stateless.Graph.State, TriggerInfo, System.Collections.Generic.IEnumerable(Of InvocationInfo), System.Boolean)
+  fullName: Stateless.Graph.StayTransition.StayTransition(Stateless.Graph.State, TriggerInfo, IEnumerable<InvocationInfo>, System.Boolean)
+  fullName.vb: Stateless.Graph.StayTransition.StayTransition(Stateless.Graph.State, TriggerInfo, IEnumerable(Of InvocationInfo), System.Boolean)
   nameWithType: StayTransition.StayTransition(State, TriggerInfo, IEnumerable<InvocationInfo>, Boolean)
   nameWithType.vb: StayTransition.StayTransition(State, TriggerInfo, IEnumerable(Of InvocationInfo), Boolean)
 - uid: Stateless.Graph.StayTransition.#ctor*
@@ -628,13 +628,13 @@ references:
   isSpec: "True"
   fullName: Stateless.Graph.UmlDotGraphStyle.FormatOneState
   nameWithType: UmlDotGraphStyle.FormatOneState
-- uid: Stateless.Graph.UmlDotGraphStyle.FormatOneTransition(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.Collections.Generic.IEnumerable{System.String})
+- uid: Stateless.Graph.UmlDotGraphStyle.FormatOneTransition(System.String,System.String,IEnumerable{System.String},System.String,IEnumerable{System.String})
   name: FormatOneTransition(String, String, IEnumerable<String>, String, IEnumerable<String>)
-  href: api/Stateless.Graph.UmlDotGraphStyle.html#Stateless_Graph_UmlDotGraphStyle_FormatOneTransition_System_String_System_String_System_Collections_Generic_IEnumerable_System_String__System_String_System_Collections_Generic_IEnumerable_System_String__
-  commentId: M:Stateless.Graph.UmlDotGraphStyle.FormatOneTransition(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.Collections.Generic.IEnumerable{System.String})
+  href: api/Stateless.Graph.UmlDotGraphStyle.html#Stateless_Graph_UmlDotGraphStyle_FormatOneTransition_System_String_System_String_IEnumerable_System_String__System_String_IEnumerable_System_String__
+  commentId: M:Stateless.Graph.UmlDotGraphStyle.FormatOneTransition(System.String,System.String,IEnumerable{System.String},System.String,IEnumerable{System.String})
   name.vb: FormatOneTransition(String, String, IEnumerable(Of String), String, IEnumerable(Of String))
-  fullName: Stateless.Graph.UmlDotGraphStyle.FormatOneTransition(System.String, System.String, System.Collections.Generic.IEnumerable<System.String>, System.String, System.Collections.Generic.IEnumerable<System.String>)
-  fullName.vb: Stateless.Graph.UmlDotGraphStyle.FormatOneTransition(System.String, System.String, System.Collections.Generic.IEnumerable(Of System.String), System.String, System.Collections.Generic.IEnumerable(Of System.String))
+  fullName: Stateless.Graph.UmlDotGraphStyle.FormatOneTransition(System.String, System.String, IEnumerable<System.String>, System.String, IEnumerable<System.String>)
+  fullName.vb: Stateless.Graph.UmlDotGraphStyle.FormatOneTransition(System.String, System.String, IEnumerable(Of System.String), System.String, IEnumerable(Of System.String))
   nameWithType: UmlDotGraphStyle.FormatOneTransition(String, String, IEnumerable<String>, String, IEnumerable<String>)
   nameWithType.vb: UmlDotGraphStyle.FormatOneTransition(String, String, IEnumerable(Of String), String, IEnumerable(Of String))
 - uid: Stateless.Graph.UmlDotGraphStyle.FormatOneTransition*
@@ -794,13 +794,13 @@ references:
   isSpec: "True"
   fullName: Stateless.Reflection.DynamicTransitionInfo.Create
   nameWithType: DynamicTransitionInfo.Create
-- uid: Stateless.Reflection.DynamicTransitionInfo.Create``1(``0,System.Collections.Generic.IEnumerable{Stateless.Reflection.InvocationInfo},Stateless.Reflection.InvocationInfo,Stateless.Reflection.DynamicStateInfos)
+- uid: Stateless.Reflection.DynamicTransitionInfo.Create``1(``0,IEnumerable{Stateless.Reflection.InvocationInfo},Stateless.Reflection.InvocationInfo,Stateless.Reflection.DynamicStateInfos)
   name: Create<TTrigger>(TTrigger, IEnumerable<InvocationInfo>, InvocationInfo, DynamicStateInfos)
-  href: api/Stateless.Reflection.DynamicTransitionInfo.html#Stateless_Reflection_DynamicTransitionInfo_Create__1___0_System_Collections_Generic_IEnumerable_Stateless_Reflection_InvocationInfo__Stateless_Reflection_InvocationInfo_Stateless_Reflection_DynamicStateInfos_
-  commentId: M:Stateless.Reflection.DynamicTransitionInfo.Create``1(``0,System.Collections.Generic.IEnumerable{Stateless.Reflection.InvocationInfo},Stateless.Reflection.InvocationInfo,Stateless.Reflection.DynamicStateInfos)
+  href: api/Stateless.Reflection.DynamicTransitionInfo.html#Stateless_Reflection_DynamicTransitionInfo_Create__1___0_IEnumerable_Stateless_Reflection_InvocationInfo__Stateless_Reflection_InvocationInfo_Stateless_Reflection_DynamicStateInfos_
+  commentId: M:Stateless.Reflection.DynamicTransitionInfo.Create``1(``0,IEnumerable{Stateless.Reflection.InvocationInfo},Stateless.Reflection.InvocationInfo,Stateless.Reflection.DynamicStateInfos)
   name.vb: Create(Of TTrigger)(TTrigger, IEnumerable(Of InvocationInfo), InvocationInfo, DynamicStateInfos)
-  fullName: Stateless.Reflection.DynamicTransitionInfo.Create<TTrigger>(TTrigger, System.Collections.Generic.IEnumerable<Stateless.Reflection.InvocationInfo>, Stateless.Reflection.InvocationInfo, Stateless.Reflection.DynamicStateInfos)
-  fullName.vb: Stateless.Reflection.DynamicTransitionInfo.Create(Of TTrigger)(TTrigger, System.Collections.Generic.IEnumerable(Of Stateless.Reflection.InvocationInfo), Stateless.Reflection.InvocationInfo, Stateless.Reflection.DynamicStateInfos)
+  fullName: Stateless.Reflection.DynamicTransitionInfo.Create<TTrigger>(TTrigger, IEnumerable<Stateless.Reflection.InvocationInfo>, Stateless.Reflection.InvocationInfo, Stateless.Reflection.DynamicStateInfos)
+  fullName.vb: Stateless.Reflection.DynamicTransitionInfo.Create(Of TTrigger)(TTrigger, IEnumerable(Of Stateless.Reflection.InvocationInfo), Stateless.Reflection.InvocationInfo, Stateless.Reflection.DynamicStateInfos)
   nameWithType: DynamicTransitionInfo.Create<TTrigger>(TTrigger, IEnumerable<InvocationInfo>, InvocationInfo, DynamicStateInfos)
   nameWithType.vb: DynamicTransitionInfo.Create(Of TTrigger)(TTrigger, IEnumerable(Of InvocationInfo), InvocationInfo, DynamicStateInfos)
 - uid: Stateless.Reflection.DynamicTransitionInfo.DestinationStateSelectorDescription
@@ -1297,13 +1297,13 @@ references:
   fullName.vb: Stateless.StateMachine(Of TState, TTrigger).CanFire(TTrigger)
   nameWithType: StateMachine<TState, TTrigger>.CanFire(TTrigger)
   nameWithType.vb: StateMachine(Of TState, TTrigger).CanFire(TTrigger)
-- uid: Stateless.StateMachine`2.CanFire(`1,System.Collections.Generic.ICollection{System.String}@)
+- uid: Stateless.StateMachine`2.CanFire(`1,ICollection{System.String}@)
   name: CanFire(TTrigger, out ICollection<String>)
-  href: api/Stateless.StateMachine-2.html#Stateless_StateMachine_2_CanFire__1_System_Collections_Generic_ICollection_System_String___
-  commentId: M:Stateless.StateMachine`2.CanFire(`1,System.Collections.Generic.ICollection{System.String}@)
+  href: api/Stateless.StateMachine-2.html#Stateless_StateMachine_2_CanFire__1_ICollection_System_String___
+  commentId: M:Stateless.StateMachine`2.CanFire(`1,ICollection{System.String}@)
   name.vb: CanFire(TTrigger, ByRef ICollection(Of String))
-  fullName: Stateless.StateMachine<TState, TTrigger>.CanFire(TTrigger, out System.Collections.Generic.ICollection<System.String>)
-  fullName.vb: Stateless.StateMachine(Of TState, TTrigger).CanFire(TTrigger, ByRef System.Collections.Generic.ICollection(Of System.String))
+  fullName: Stateless.StateMachine<TState, TTrigger>.CanFire(TTrigger, out ICollection<System.String>)
+  fullName.vb: Stateless.StateMachine(Of TState, TTrigger).CanFire(TTrigger, ByRef ICollection(Of System.String))
   nameWithType: StateMachine<TState, TTrigger>.CanFire(TTrigger, out ICollection<String>)
   nameWithType.vb: StateMachine(Of TState, TTrigger).CanFire(TTrigger, ByRef ICollection(Of String))
 - uid: Stateless.StateMachine`2.CanFire*
@@ -1517,13 +1517,13 @@ references:
   fullName.vb: Stateless.StateMachine(Of TState, TTrigger).OnTransitioned
   nameWithType: StateMachine<TState, TTrigger>.OnTransitioned
   nameWithType.vb: StateMachine(Of TState, TTrigger).OnTransitioned
-- uid: Stateless.StateMachine`2.OnUnhandledTrigger(System.Action{`0,`1,System.Collections.Generic.ICollection{System.String}})
+- uid: Stateless.StateMachine`2.OnUnhandledTrigger(System.Action{`0,`1,ICollection{System.String}})
   name: OnUnhandledTrigger(Action<TState, TTrigger, ICollection<String>>)
-  href: api/Stateless.StateMachine-2.html#Stateless_StateMachine_2_OnUnhandledTrigger_System_Action__0__1_System_Collections_Generic_ICollection_System_String___
-  commentId: M:Stateless.StateMachine`2.OnUnhandledTrigger(System.Action{`0,`1,System.Collections.Generic.ICollection{System.String}})
+  href: api/Stateless.StateMachine-2.html#Stateless_StateMachine_2_OnUnhandledTrigger_System_Action__0__1_ICollection_System_String___
+  commentId: M:Stateless.StateMachine`2.OnUnhandledTrigger(System.Action{`0,`1,ICollection{System.String}})
   name.vb: OnUnhandledTrigger(Action(Of TState, TTrigger, ICollection(Of String)))
-  fullName: Stateless.StateMachine<TState, TTrigger>.OnUnhandledTrigger(System.Action<TState, TTrigger, System.Collections.Generic.ICollection<System.String>>)
-  fullName.vb: Stateless.StateMachine(Of TState, TTrigger).OnUnhandledTrigger(System.Action(Of TState, TTrigger, System.Collections.Generic.ICollection(Of System.String)))
+  fullName: Stateless.StateMachine<TState, TTrigger>.OnUnhandledTrigger(System.Action<TState, TTrigger, ICollection<System.String>>)
+  fullName.vb: Stateless.StateMachine(Of TState, TTrigger).OnUnhandledTrigger(System.Action(Of TState, TTrigger, ICollection(Of System.String)))
   nameWithType: StateMachine<TState, TTrigger>.OnUnhandledTrigger(Action<TState, TTrigger, ICollection<String>>)
   nameWithType.vb: StateMachine(Of TState, TTrigger).OnUnhandledTrigger(Action(Of TState, TTrigger, ICollection(Of String)))
 - uid: Stateless.StateMachine`2.OnUnhandledTrigger(System.Action{`0,`1})
