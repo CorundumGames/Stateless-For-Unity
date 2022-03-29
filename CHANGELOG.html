@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Changelog | Stateless For Unity documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Changelog | Stateless For Unity documentation ">
+    <meta name="generator" content="docfx 2.59.0.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="changelog">Changelog</h1>
+
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="http://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>
+and this project adheres to <a href="http://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="5110---20210428">5.11.0 - 2021.04.28</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Added CanFire overload to return unmet guard descriptions [#443]</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Inconsistency in sync/async statemachine execution [#444]</li>
+<li>Added support for spaces in state/trigger names in Graphviz node graphs by wrapping them in escaped quotes #447</li>
+</ul>
+<h2 id="5101">5.10.1</h2>
+<p>Re-releasing 5.2.0 as v5.10.1.
+The version number was accidentally set to 5.10 when creating the 5.2 release.
+Version 5.10.0 is now listed as the newest, since it has the highest version number.
+5.2.0 and 5.10.0 are identical.</p>
+<h2 id="520">5.2.0</h2>
+<h3 id="added-1">Added</h3>
+<ul>
+<li>Added support for net50</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Only run tests under net50</li>
+<li>Non-code change: Switch to using Github Actions</li>
+</ul>
+<h3 id="fixed-1">Fixed</h3>
+<ul>
+<li>Fixed the bug &quot;IgnoreIf Guard description is raised when PermitReentryIf Guard Fails&quot;. <a href="https://github.com/dotnet-state-machine/stateless/issues/422">#422</a></li>
+</ul>
+<h2 id="518">5.1.8</h2>
+<h3 id="fixed-2">Fixed</h3>
+<ul>
+<li>Fixed bug &quot;When adding .PermitDynamicIf, call .PermitTriggers throw NullReferenceException&quot; <a href="https://github.com/dotnet-state-machine/stateless/issues/416">#416</a></li>
+</ul>
+<h2 id="517---20210110">5.1.7 - 2021.01.10</h2>
+<h3 id="fixed-3">Fixed</h3>
+<ul>
+<li>Fixed nullReferenceException when getting permitted triggers on a dynamic transition. <a href="https://github.com/dotnet-state-machine/stateless/issues/413">#413</a></li>
+</ul>
+<h2 id="517---20210110-1">5.1.7 - 2021.01.10</h2>
+<h3 id="fixed-4">Fixed</h3>
+<ul>
+<li>Fixed OnTransitionCompletedEvent, it now has the correct Destination state when there is an initial transition. <a href="https://github.com/dotnet-state-machine/stateless/issues/413">#413</a></li>
+</ul>
+<h2 id="516---20201121">5.1.6 - 2020.11.21</h2>
+<h3 id="fixed-5">Fixed</h3>
+<ul>
+<li>Added support for new OnTransitionCompletedEvent, which is run after all OnExit / OnEntry methods have run <a href="https://github.com/dotnet-state-machine/stateless/issues/394">#394</a></li>
+</ul>
+<h2 id="515---20201116">5.1.5 - 2020.11.16</h2>
+<h3 id="changed-1">Changed</h3>
+<ul>
+<li>Fixed spelling errors</li>
+<li>Fixed analyser warnings (mostly null checks)</li>
+</ul>
+<h3 id="fixed-6">Fixed</h3>
+<ul>
+<li>Added CLSCompliant attribute, which went missing in November 2019 <a href="https://github.com/dotnet-state-machine/stateless/issues/401">#401</a></li>
+</ul>
+<h2 id="514---20201107">5.1.4 - 2020.11.07</h2>
+<h3 id="fixed-7">Fixed</h3>
+<ul>
+<li>Fixed Unmet guard collection not set by OnUnhandledTrigger if transition guard of substate fails <a href="https://github.com/dotnet-state-machine/stateless/issues/398">#398</a> (Thanks to the awesome DeepakParamkusam)</li>
+</ul>
+<h2 id="513---20200812">5.1.3 - 2020.08.12</h2>
+<h3 id="fixed-8">Fixed</h3>
+<ul>
+<li>Fixed ambiguos guard function call when trigger is a state <a href="https://github.com/dotnet-state-machine/stateless/issues/380">#380</a></li>
+</ul>
+<h2 id="512---20200427">5.1.2 - 2020.04.27</h2>
+<h3 id="fixed-9">Fixed</h3>
+<ul>
+<li>Fixed wrong onTransitionEvent ordering in Async firing [#372]</li>
+</ul>
+<h2 id="511---20200403">[5.1.1] - 2020.04.03</h2>
+<h3 id="changed-2">Changed</h3>
+<ul>
+<li>Inverted if (_firingMode.Equals(FiringMode.Immediate) into if (FiringMode.Immediate.Equals(_firingMode) to avoid VerificationException  when including assembly AllowPartiallyTrustedCallers <a href="https://github.com/dotnet-state-machine/stateless/pull/365">#365</a>.</li>
+</ul>
+<h2 id="510---20200324">[5.1.0] - 2020.03.24</h2>
+<h3 id="added-2">Added</h3>
+<ul>
+<li>Added missing possible destination states to all PermitDynamic and PermitDynamicIf, see issue <a href="https://github.com/dotnet-state-machine/stateless/issues/305">#305</a>.</li>
+</ul>
+<h3 id="fixed-10">Fixed</h3>
+<ul>
+<li>Fixed trigger execution order issue if there are uncaught exceptions. Ref issue <a href="https://github.com/dotnet-state-machine/stateless/issues/267">#267</a></li>
+<li>Fixed issue #272 and #275. Triggers with no parameters threw exceptions when checking if they could be fired, or retrieved with GetPermittedTriggers.</li>
+</ul>
+<h2 id="501---20200313">[5.0.1] - 2020.03.13</h2>
+<h3 id="fixed-11">Fixed</h3>
+<ul>
+<li>Added missing initial transition, see PR #286.</li>
+</ul>
+<h2 id="500---20200228">[5.0.0] - 2020.02.28</h2>
+<h3 id="changed-3">Changed</h3>
+<ul>
+<li>Activate and deactivate actions only runs on manual call to Activate / Deactivate. This breaks the v4.4 implementation, where activate/deactivate actions are run on every state transition.</li>
+</ul>
+<h2 id="440---20200207">[4.4.0] - 2020.02.07</h2>
+<h3 id="changed-4">Changed</h3>
+<ul>
+<li>PR #348 Added trigger parameters to OnTransitioned event</li>
+</ul>
+<h3 id="fixed-12">Fixed</h3>
+<ul>
+<li>#342 StateMutator is called multiple times with the same state</li>
+<li>#345 Wrong behavior with FiringMode.Immediate in version 4.3.0</li>
+<li>#339 OnEntry behavour different: Unit test broken when updated to 4.3.0 from 4.2.1</li>
+<li>#292 Nested InitialTransitions calls superstate onEntry twice</li>
+</ul>
+<h2 id="430---20191111">[4.3.0] - 2019.11.11</h2>
+<h3 id="changed-5">Changed</h3>
+<ul>
+<li>Netstandard2.0 support</li>
+</ul>
+<h2 id="420---20180601"><a href="https://github.com/dotnet-state-machine/stateless/commit/8933fe58a3d2ab63bdf47f523df0b9639cd65c97">4.2.0</a> - 2018.06.01</h2>
+<h3 id="added-3">Added</h3>
+<ul>
+<li>PR #254 Add initial transitions</li>
+</ul>
+<h3 id="changed-6">Changed</h3>
+<ul>
+<li>Simplified examples a bit and added comments</li>
+</ul>
+<h3 id="fixed-13">Fixed</h3>
+<ul>
+<li>#261 Reentrant trigger in substate causes exit action to be executed twice</li>
+<li>#263 NullReferenceException bug introduced in commit c13e181b</li>
+</ul>
+<h2 id="410---2018-05-18"><a href="https://github.com/dotnet-state-machine/stateless/compare/bb742e8d40ceaacb219695875dfe38670ac77e28...daef9cb2897e18f25e85dd27fb80e549369bdfac">4.1.0</a> - 2018-05-18</h2>
+<h3 id="added-4">Added</h3>
+<ul>
+<li>#246 Queuing should not be the default behavior</li>
+</ul>
+<h3 id="fixed-14">Fixed</h3>
+<ul>
+<li>#191 Shouldn't Reentry fire OnEntry from substate?</li>
+<li>#228 guard function called twice?</li>
+<li>#214 Transition object holds parent state as source state instead of child</li>
+<li>#249 Latest prerelease v4.0.1-dev-00294 bug (Internal transition handler not executing)</li>
+</ul>
+<h2 id="400---2017-09-30"><a href="https://github.com/dotnet-state-machine/stateless/compare/23624d88e684d9984e5b5fdbc3d4aba601bdd1a4...bb742e8d40ceaacb219695875dfe38670ac77e28">4.0.0</a> - 2017-09-30</h2>
+<h3 id="added-5">Added</h3>
+<ul>
+<li>#169 HTML format DOT graph output</li>
+<li>#132 Conditional InternalTransition</li>
+<li>#130 Support InternalTransition for all TriggerWithParams</li>
+</ul>
+<h3 id="changed-7">Changed</h3>
+<ul>
+<li>#178 Replace calls to Enforce.ArgumentNotNull with in-place null checks, and other changes suggested by CodeCracker</li>
+<li>#168 Modified the output of OnUnmute to display the correct message</li>
+<li>#164 Reducing confusion, and fixing invalid cast in Reflection.</li>
+<li>#158 Create new ActionInfo class, start insinuating it</li>
+<li>#156 TriggerInfo.Value -&gt; UnderlyingTrigger</li>
+<li>#149 Moved StateType and TriggerType into StateMachineInfo, removed TriggerInfo</li>
+<li>#147 Extracting common abstract base class for transition info</li>
+<li>#142 Further reflection API refinement</li>
+<li>#141 Update to RTM dotnet tooling/VS2017</li>
+<li>#137 Replace magic string usages with nameof()</li>
+<li>#125 Adding check for cyclic configuration</li>
+<li>#123 Update for the current .NET Core version</li>
+</ul>
+<h3 id="deprecated">Deprecated</h3>
+<h3 id="removed">Removed</h3>
+<h3 id="fixed-15">Fixed</h3>
+<ul>
+<li>#175 Fix Multiple internal transition actions executed if defined in state hierarchy, and Renamed DynamicTransitionInfo.Destination to DestinationDescription</li>
+<li>#144 Fix unbounded recursion/fully initialize sub/super-states</li>
+<li>#140 Adding recursive trigger processing to InternalFireAsync</li>
+</ul>
+<h2 id="310---2016-12-15"><a href="https://github.com/dotnet-state-machine/stateless/compare/6aa544c6a5e22b93fbe206513d79e15a3e2ef172...23624d88e684d9984e5b5fdbc3d4aba601bdd1a4">3.1.0</a> - 2016-12-15</h2>
+<h3 id="added-6">Added</h3>
+<h3 id="changed-8">Changed</h3>
+<h3 id="deprecated-1">Deprecated</h3>
+<h3 id="removed-1">Removed</h3>
+<h3 id="fixed-16">Fixed</h3>
+<h2 id="301---2016-11-23"><a href="https://github.com/dotnet-state-machine/stateless/compare/6c44d2ae69f67606b5d979b2f0e353adccb1913c...6aa544c6a5e22b93fbe206513d79e15a3e2ef172">3.0.1</a> - 2016-11-23</h2>
+<h3 id="added-7">Added</h3>
+<h3 id="changed-9">Changed</h3>
+<h3 id="deprecated-2">Deprecated</h3>
+<h3 id="removed-2">Removed</h3>
+<h3 id="fixed-17">Fixed</h3>
+<h2 id="300---2016-11-03"><a href="https://github.com/dotnet-state-machine/stateless/compare/4d4cc84bad583eaf8f983edc351179cef40bd093...6c44d2ae69f67606b5d979b2f0e353adccb1913c">3.0.0</a> - 2016-11-03</h2>
+<h3 id="added-8">Added</h3>
+<h3 id="changed-10">Changed</h3>
+<h3 id="deprecated-3">Deprecated</h3>
+<h3 id="removed-3">Removed</h3>
+<h3 id="fixed-18">Fixed</h3>
+<h2 id="release-template---version-and-date-goes-here">Release template - version and date goes here</h2>
+<h3 id="added-9">Added</h3>
+<h3 id="changed-11">Changed</h3>
+<h3 id="deprecated-4">Deprecated</h3>
+<h3 id="removed-4">Removed</h3>
+<h3 id="fixed-19">Fixed</h3>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/CorundumGames/Stateless-For-Unity/blob/main/CHANGELOG.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Stateless For Unity documentation
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

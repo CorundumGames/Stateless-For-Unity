@@ -1,0 +1,1416 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class StateMachine&lt;TState, TTrigger&gt;
+   | Stateless For Unity documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class StateMachine&lt;TState, TTrigger&gt;
+   | Stateless For Unity documentation ">
+    <meta name="generator" content="docfx 2.59.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Stateless.StateMachine`2">
+  
+  
+  <h1 id="Stateless_StateMachine_2" data-uid="Stateless.StateMachine`2" class="text-break">Class StateMachine&lt;TState, TTrigger&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Models behaviour as transitions between a finite set of states.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">StateMachine&lt;TState, TTrigger&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Stateless.html">Stateless</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Stateless_StateMachine_2_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class StateMachine&lt;TState, TTrigger&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TState</span></td>
+        <td><p>The type used to represent the states.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TTrigger</span></td>
+        <td><p>The type used to represent the triggers that cause state transitions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="Stateless_StateMachine_2__ctor_" data-uid="Stateless.StateMachine`2.#ctor*"></a>
+  <h4 id="Stateless_StateMachine_2__ctor__0_" data-uid="Stateless.StateMachine`2.#ctor(`0)">StateMachine(TState)</h4>
+  <div class="markdown level1 summary"><p>Construct a state machine.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine(TState initialState)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TState</span></td>
+        <td><span class="parametername">initialState</span></td>
+        <td><p>The initial state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2__ctor_" data-uid="Stateless.StateMachine`2.#ctor*"></a>
+  <h4 id="Stateless_StateMachine_2__ctor__0_Stateless_FiringMode_" data-uid="Stateless.StateMachine`2.#ctor(`0,Stateless.FiringMode)">StateMachine(TState, FiringMode)</h4>
+  <div class="markdown level1 summary"><p>Construct a state machine.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine(TState initialState, FiringMode firingMode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TState</span></td>
+        <td><span class="parametername">initialState</span></td>
+        <td><p>The initial state.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Stateless.FiringMode.html">FiringMode</a></td>
+        <td><span class="parametername">firingMode</span></td>
+        <td><p>Optional specification of fireing mode.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2__ctor_" data-uid="Stateless.StateMachine`2.#ctor*"></a>
+  <h4 id="Stateless_StateMachine_2__ctor_System_Func__0__System_Action__0__" data-uid="Stateless.StateMachine`2.#ctor(System.Func{`0},System.Action{`0})">StateMachine(Func&lt;TState&gt;, Action&lt;TState&gt;)</h4>
+  <div class="markdown level1 summary"><p>Construct a state machine with external state storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine(Func&lt;TState&gt; stateAccessor, Action&lt;TState&gt; stateMutator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TState&gt;</td>
+        <td><span class="parametername">stateAccessor</span></td>
+        <td><p>A function that will be called to read the current state value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;TState&gt;</td>
+        <td><span class="parametername">stateMutator</span></td>
+        <td><p>An action that will be called to write new state values.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2__ctor_" data-uid="Stateless.StateMachine`2.#ctor*"></a>
+  <h4 id="Stateless_StateMachine_2__ctor_System_Func__0__System_Action__0__Stateless_FiringMode_" data-uid="Stateless.StateMachine`2.#ctor(System.Func{`0},System.Action{`0},Stateless.FiringMode)">StateMachine(Func&lt;TState&gt;, Action&lt;TState&gt;, FiringMode)</h4>
+  <div class="markdown level1 summary"><p>Construct a state machine with external state storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine(Func&lt;TState&gt; stateAccessor, Action&lt;TState&gt; stateMutator, FiringMode firingMode)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TState&gt;</td>
+        <td><span class="parametername">stateAccessor</span></td>
+        <td><p>A function that will be called to read the current state value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;TState&gt;</td>
+        <td><span class="parametername">stateMutator</span></td>
+        <td><p>An action that will be called to write new state values.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Stateless.FiringMode.html">FiringMode</a></td>
+        <td><span class="parametername">firingMode</span></td>
+        <td><p>Optional specification of fireing mode.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Stateless_StateMachine_2_PermittedTriggers_" data-uid="Stateless.StateMachine`2.PermittedTriggers*"></a>
+  <h4 id="Stateless_StateMachine_2_PermittedTriggers" data-uid="Stateless.StateMachine`2.PermittedTriggers">PermittedTriggers</h4>
+  <div class="markdown level1 summary"><p>The currently-permissible trigger values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;TTrigger&gt; PermittedTriggers { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TTrigger&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_State_" data-uid="Stateless.StateMachine`2.State*"></a>
+  <h4 id="Stateless_StateMachine_2_State" data-uid="Stateless.StateMachine`2.State">State</h4>
+  <div class="markdown level1 summary"><p>The current state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TState State { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TState</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Stateless_StateMachine_2_Activate_" data-uid="Stateless.StateMachine`2.Activate*"></a>
+  <h4 id="Stateless_StateMachine_2_Activate" data-uid="Stateless.StateMachine`2.Activate">Activate()</h4>
+  <div class="markdown level1 summary"><p>Activates current state. Actions associated with activating the current state
+will be invoked. The activation is idempotent and subsequent activation of the same current state
+will not lead to re-execution of activation callbacks.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Activate()</code></pre>
+  </div>
+  
+  
+  <a id="Stateless_StateMachine_2_CanFire_" data-uid="Stateless.StateMachine`2.CanFire*"></a>
+  <h4 id="Stateless_StateMachine_2_CanFire__1_" data-uid="Stateless.StateMachine`2.CanFire(`1)">CanFire(TTrigger)</h4>
+  <div class="markdown level1 summary"><p>Returns true if <code data-dev-comment-type="paramref" class="paramref">trigger</code> can be fired
+in the current state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CanFire(TTrigger trigger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTrigger</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>Trigger to test.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>True if the trigger can be fired, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_CanFire_" data-uid="Stateless.StateMachine`2.CanFire*"></a>
+  <h4 id="Stateless_StateMachine_2_CanFire__1_System_Collections_Generic_ICollection_System_String___" data-uid="Stateless.StateMachine`2.CanFire(`1,System.Collections.Generic.ICollection{System.String}@)">CanFire(TTrigger, out ICollection&lt;String&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns true if <code data-dev-comment-type="paramref" class="paramref">trigger</code> can be fired
+in the current state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CanFire(TTrigger trigger, out ICollection&lt;string&gt; unmetGuards)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTrigger</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>Trigger to test.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td><span class="parametername">unmetGuards</span></td>
+        <td><p>Guard descriptions of unmet guards. If given trigger is not configured for current state, this will be null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>True if the trigger can be fired, false otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_Configure_" data-uid="Stateless.StateMachine`2.Configure*"></a>
+  <h4 id="Stateless_StateMachine_2_Configure__0_" data-uid="Stateless.StateMachine`2.Configure(`0)">Configure(TState)</h4>
+  <div class="markdown level1 summary"><p>Begin configuration of the entry/exit actions and allowed transitions
+when the state machine is in a particular state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine&lt;TState, TTrigger&gt;.StateConfiguration Configure(TState state)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TState</span></td>
+        <td><span class="parametername">state</span></td>
+        <td><p>The state to configure.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.StateConfiguration.html">StateMachine.StateConfiguration</a>&lt;&gt;</td>
+        <td><p>A configuration object through which the state can be configured.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_Deactivate_" data-uid="Stateless.StateMachine`2.Deactivate*"></a>
+  <h4 id="Stateless_StateMachine_2_Deactivate" data-uid="Stateless.StateMachine`2.Deactivate">Deactivate()</h4>
+  <div class="markdown level1 summary"><p>Deactivates current state. Actions associated with deactivating the current state
+will be invoked. The deactivation is idempotent and subsequent deactivation of the same current state
+will not lead to re-execution of deactivation callbacks.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Deactivate()</code></pre>
+  </div>
+  
+  
+  <a id="Stateless_StateMachine_2_Fire_" data-uid="Stateless.StateMachine`2.Fire*"></a>
+  <h4 id="Stateless_StateMachine_2_Fire__1_" data-uid="Stateless.StateMachine`2.Fire(`1)">Fire(TTrigger)</h4>
+  <div class="markdown level1 summary"><p>Transition from the current state via the specified trigger.
+The target state is determined by the configuration of the current state.
+Actions associated with leaving the current state and entering the new one
+will be invoked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fire(TTrigger trigger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTrigger</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The trigger to fire.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The current state does
+not allow the trigger to be fired.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_Fire_" data-uid="Stateless.StateMachine`2.Fire*"></a>
+  <h4 id="Stateless_StateMachine_2_Fire_Stateless_StateMachine__0__1__TriggerWithParameters_System_Object___" data-uid="Stateless.StateMachine`2.Fire(Stateless.StateMachine{`0,`1}.TriggerWithParameters,System.Object[])">Fire(StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters, Object[])</h4>
+  <div class="markdown level1 summary"><p>Transition from the current state via the specified trigger.
+The target state is determined by the configuration of the current state.
+Actions associated with leaving the current state and entering the new one
+will be invoked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fire(StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters trigger, params object[] args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.TriggerWithParameters.html">StateMachine.TriggerWithParameters</a>&lt;&gt;</td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The trigger to fire.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>[]</td>
+        <td><span class="parametername">args</span></td>
+        <td><p>A variable-length parameters list containing arguments.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The current state does
+not allow the trigger to be fired.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_Fire_" data-uid="Stateless.StateMachine`2.Fire*"></a>
+  <h4 id="Stateless_StateMachine_2_Fire__1_Stateless_StateMachine__0__1__TriggerWithParameters___0____0_" data-uid="Stateless.StateMachine`2.Fire``1(Stateless.StateMachine{`0,`1}.TriggerWithParameters{``0},``0)">Fire&lt;TArg0&gt;(StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0&gt;, TArg0)</h4>
+  <div class="markdown level1 summary"><p>Transition from the current state via the specified trigger.
+The target state is determined by the configuration of the current state.
+Actions associated with leaving the current state and entering the new one
+will be invoked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fire&lt;TArg0&gt;(StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0&gt; trigger, TArg0 arg0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.TriggerWithParameters-1.html">StateMachine.TriggerWithParameters</a>&lt;TArg0&gt;</td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The trigger to fire.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TArg0</span></td>
+        <td><span class="parametername">arg0</span></td>
+        <td><p>The first argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TArg0</span></td>
+        <td><p>Type of the first trigger argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The current state does
+not allow the trigger to be fired.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_Fire_" data-uid="Stateless.StateMachine`2.Fire*"></a>
+  <h4 id="Stateless_StateMachine_2_Fire__2_Stateless_StateMachine__0__1__TriggerWithParameters___0___1____0___1_" data-uid="Stateless.StateMachine`2.Fire``2(Stateless.StateMachine{`0,`1}.TriggerWithParameters{``0,``1},``0,``1)">Fire&lt;TArg0, TArg1&gt;(StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0, TArg1&gt;, TArg0, TArg1)</h4>
+  <div class="markdown level1 summary"><p>Transition from the current state via the specified trigger.
+The target state is determined by the configuration of the current state.
+Actions associated with leaving the current state and entering the new one
+will be invoked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fire&lt;TArg0, TArg1&gt;(StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0, TArg1&gt; trigger, TArg0 arg0, TArg1 arg1)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.TriggerWithParameters-2.html">StateMachine.TriggerWithParameters</a>&lt;TArg0, TArg1&gt;</td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The trigger to fire.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TArg0</span></td>
+        <td><span class="parametername">arg0</span></td>
+        <td><p>The first argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TArg1</span></td>
+        <td><span class="parametername">arg1</span></td>
+        <td><p>The second argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TArg0</span></td>
+        <td><p>Type of the first trigger argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TArg1</span></td>
+        <td><p>Type of the second trigger argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The current state does
+not allow the trigger to be fired.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_Fire_" data-uid="Stateless.StateMachine`2.Fire*"></a>
+  <h4 id="Stateless_StateMachine_2_Fire__3_Stateless_StateMachine__0__1__TriggerWithParameters___0___1___2____0___1___2_" data-uid="Stateless.StateMachine`2.Fire``3(Stateless.StateMachine{`0,`1}.TriggerWithParameters{``0,``1,``2},``0,``1,``2)">Fire&lt;TArg0, TArg1, TArg2&gt;(StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0, TArg1, TArg2&gt;, TArg0, TArg1, TArg2)</h4>
+  <div class="markdown level1 summary"><p>Transition from the current state via the specified trigger.
+The target state is determined by the configuration of the current state.
+Actions associated with leaving the current state and entering the new one
+will be invoked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fire&lt;TArg0, TArg1, TArg2&gt;(StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0, TArg1, TArg2&gt; trigger, TArg0 arg0, TArg1 arg1, TArg2 arg2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.TriggerWithParameters-3.html">StateMachine.TriggerWithParameters</a>&lt;TArg0, TArg1, TArg2&gt;</td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The trigger to fire.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TArg0</span></td>
+        <td><span class="parametername">arg0</span></td>
+        <td><p>The first argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TArg1</span></td>
+        <td><span class="parametername">arg1</span></td>
+        <td><p>The second argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">TArg2</span></td>
+        <td><span class="parametername">arg2</span></td>
+        <td><p>The third argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TArg0</span></td>
+        <td><p>Type of the first trigger argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TArg1</span></td>
+        <td><p>Type of the second trigger argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TArg2</span></td>
+        <td><p>Type of the third trigger argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>The current state does
+not allow the trigger to be fired.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_GetInfo_" data-uid="Stateless.StateMachine`2.GetInfo*"></a>
+  <h4 id="Stateless_StateMachine_2_GetInfo" data-uid="Stateless.StateMachine`2.GetInfo">GetInfo()</h4>
+  <div class="markdown level1 summary"><p>Provides an info object which exposes the states, transitions, and actions of this machine.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachineInfo GetInfo()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StateMachineInfo</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_GetPermittedTriggers_" data-uid="Stateless.StateMachine`2.GetPermittedTriggers*"></a>
+  <h4 id="Stateless_StateMachine_2_GetPermittedTriggers_System_Object___" data-uid="Stateless.StateMachine`2.GetPermittedTriggers(System.Object[])">GetPermittedTriggers(Object[])</h4>
+  <div class="markdown level1 summary"><p>The currently-permissible trigger values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;TTrigger&gt; GetPermittedTriggers(params object[] args)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>[]</td>
+        <td><span class="parametername">args</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TTrigger&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_IsInState_" data-uid="Stateless.StateMachine`2.IsInState*"></a>
+  <h4 id="Stateless_StateMachine_2_IsInState__0_" data-uid="Stateless.StateMachine`2.IsInState(`0)">IsInState(TState)</h4>
+  <div class="markdown level1 summary"><p>Determine if the state machine is in the supplied state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInState(TState state)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TState</span></td>
+        <td><span class="parametername">state</span></td>
+        <td><p>The state to test for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>True if the current state is equal to, or a substate of,
+the supplied state.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_OnTransitionCompleted_" data-uid="Stateless.StateMachine`2.OnTransitionCompleted*"></a>
+  <h4 id="Stateless_StateMachine_2_OnTransitionCompleted_System_Action_Stateless_StateMachine__0__1__Transition__" data-uid="Stateless.StateMachine`2.OnTransitionCompleted(System.Action{Stateless.StateMachine{`0,`1}.Transition})">OnTransitionCompleted(Action&lt;StateMachine&lt;TState, TTrigger&gt;.Transition&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a callback that will be invoked every time the statemachine
+transitions from one state into another and all the OnEntryFrom etc methods
+have been invoked</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTransitionCompleted(Action&lt;StateMachine&lt;TState, TTrigger&gt;.Transition&gt; onTransitionAction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Stateless.StateMachine-2.Transition.html">StateMachine.Transition</a>&lt;&gt;&gt;</td>
+        <td><span class="parametername">onTransitionAction</span></td>
+        <td><p>The action to execute, accepting the details
+of the transition.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_OnTransitioned_" data-uid="Stateless.StateMachine`2.OnTransitioned*"></a>
+  <h4 id="Stateless_StateMachine_2_OnTransitioned_System_Action_Stateless_StateMachine__0__1__Transition__" data-uid="Stateless.StateMachine`2.OnTransitioned(System.Action{Stateless.StateMachine{`0,`1}.Transition})">OnTransitioned(Action&lt;StateMachine&lt;TState, TTrigger&gt;.Transition&gt;)</h4>
+  <div class="markdown level1 summary"><p>Registers a callback that will be invoked every time the state machine
+transitions from one state into another.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTransitioned(Action&lt;StateMachine&lt;TState, TTrigger&gt;.Transition&gt; onTransitionAction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Stateless.StateMachine-2.Transition.html">StateMachine.Transition</a>&lt;&gt;&gt;</td>
+        <td><span class="parametername">onTransitionAction</span></td>
+        <td><p>The action to execute, accepting the details
+of the transition.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_OnUnhandledTrigger_" data-uid="Stateless.StateMachine`2.OnUnhandledTrigger*"></a>
+  <h4 id="Stateless_StateMachine_2_OnUnhandledTrigger_System_Action__0__1_System_Collections_Generic_ICollection_System_String___" data-uid="Stateless.StateMachine`2.OnUnhandledTrigger(System.Action{`0,`1,System.Collections.Generic.ICollection{System.String}})">OnUnhandledTrigger(Action&lt;TState, TTrigger, ICollection&lt;String&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Override the default behaviour of throwing an exception when an unhandled trigger
+is fired.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnUnhandledTrigger(Action&lt;TState, TTrigger, ICollection&lt;string&gt;&gt; unhandledTriggerAction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;TState, TTrigger, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;&gt;</td>
+        <td><span class="parametername">unhandledTriggerAction</span></td>
+        <td><p>An action to call when an unhandled trigger is fired.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_OnUnhandledTrigger_" data-uid="Stateless.StateMachine`2.OnUnhandledTrigger*"></a>
+  <h4 id="Stateless_StateMachine_2_OnUnhandledTrigger_System_Action__0__1__" data-uid="Stateless.StateMachine`2.OnUnhandledTrigger(System.Action{`0,`1})">OnUnhandledTrigger(Action&lt;TState, TTrigger&gt;)</h4>
+  <div class="markdown level1 summary"><p>Override the default behaviour of throwing an exception when an unhandled trigger
+is fired.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnUnhandledTrigger(Action&lt;TState, TTrigger&gt; unhandledTriggerAction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;TState, TTrigger&gt;</td>
+        <td><span class="parametername">unhandledTriggerAction</span></td>
+        <td><p>An action to call when an unhandled trigger is fired.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_SetTriggerParameters_" data-uid="Stateless.StateMachine`2.SetTriggerParameters*"></a>
+  <h4 id="Stateless_StateMachine_2_SetTriggerParameters__1_System_Type___" data-uid="Stateless.StateMachine`2.SetTriggerParameters(`1,System.Type[])">SetTriggerParameters(TTrigger, Type[])</h4>
+  <div class="markdown level1 summary"><p>Specify the arguments that must be supplied when a specific trigger is fired.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters SetTriggerParameters(TTrigger trigger, params Type[] argumentTypes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTrigger</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The underlying trigger value.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a>[]</td>
+        <td><span class="parametername">argumentTypes</span></td>
+        <td><p>The argument types expected by the trigger.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.TriggerWithParameters.html">StateMachine.TriggerWithParameters</a>&lt;&gt;</td>
+        <td><p>An object that can be passed to the Fire() method in order to
+fire the parameterised trigger.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_SetTriggerParameters_" data-uid="Stateless.StateMachine`2.SetTriggerParameters*"></a>
+  <h4 id="Stateless_StateMachine_2_SetTriggerParameters__1__1_" data-uid="Stateless.StateMachine`2.SetTriggerParameters``1(`1)">SetTriggerParameters&lt;TArg0&gt;(TTrigger)</h4>
+  <div class="markdown level1 summary"><p>Specify the arguments that must be supplied when a specific trigger is fired.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0&gt; SetTriggerParameters&lt;TArg0&gt;(TTrigger trigger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTrigger</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The underlying trigger value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.TriggerWithParameters-1.html">StateMachine.TriggerWithParameters</a>&lt;TArg0&gt;</td>
+        <td><p>An object that can be passed to the Fire() method in order to
+fire the parameterised trigger.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TArg0</span></td>
+        <td><p>Type of the first trigger argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_SetTriggerParameters_" data-uid="Stateless.StateMachine`2.SetTriggerParameters*"></a>
+  <h4 id="Stateless_StateMachine_2_SetTriggerParameters__2__1_" data-uid="Stateless.StateMachine`2.SetTriggerParameters``2(`1)">SetTriggerParameters&lt;TArg0, TArg1&gt;(TTrigger)</h4>
+  <div class="markdown level1 summary"><p>Specify the arguments that must be supplied when a specific trigger is fired.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0, TArg1&gt; SetTriggerParameters&lt;TArg0, TArg1&gt;(TTrigger trigger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTrigger</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The underlying trigger value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.TriggerWithParameters-2.html">StateMachine.TriggerWithParameters</a>&lt;TArg0, TArg1&gt;</td>
+        <td><p>An object that can be passed to the Fire() method in order to
+fire the parameterised trigger.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TArg0</span></td>
+        <td><p>Type of the first trigger argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TArg1</span></td>
+        <td><p>Type of the second trigger argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_SetTriggerParameters_" data-uid="Stateless.StateMachine`2.SetTriggerParameters*"></a>
+  <h4 id="Stateless_StateMachine_2_SetTriggerParameters__3__1_" data-uid="Stateless.StateMachine`2.SetTriggerParameters``3(`1)">SetTriggerParameters&lt;TArg0, TArg1, TArg2&gt;(TTrigger)</h4>
+  <div class="markdown level1 summary"><p>Specify the arguments that must be supplied when a specific trigger is fired.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateMachine&lt;TState, TTrigger&gt;.TriggerWithParameters&lt;TArg0, TArg1, TArg2&gt; SetTriggerParameters&lt;TArg0, TArg1, TArg2&gt;(TTrigger trigger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TTrigger</span></td>
+        <td><span class="parametername">trigger</span></td>
+        <td><p>The underlying trigger value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Stateless.StateMachine-2.TriggerWithParameters-3.html">StateMachine.TriggerWithParameters</a>&lt;TArg0, TArg1, TArg2&gt;</td>
+        <td><p>An object that can be passed to the Fire() method in order to
+fire the parameterised trigger.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TArg0</span></td>
+        <td><p>Type of the first trigger argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TArg1</span></td>
+        <td><p>Type of the second trigger argument.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TArg2</span></td>
+        <td><p>Type of the third trigger argument.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Stateless_StateMachine_2_ToString_" data-uid="Stateless.StateMachine`2.ToString*"></a>
+  <h4 id="Stateless_StateMachine_2_ToString" data-uid="Stateless.StateMachine`2.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>A human-readable representation of the state machine.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><p>A description of the current state and permitted triggers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a></div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Stateless For Unity documentation
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

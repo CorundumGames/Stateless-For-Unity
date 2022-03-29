@@ -1,0 +1,557 @@
+{
+  "sitemap": {
+    "fileOptions": {
+      "api/*": {
+        "changefreq": "daily"
+      }
+    },
+    "baseUrl": "https://corundum.games/Stateless-For-Unity/",
+    "changefreq": "weekly"
+  },
+  "homepages": [],
+  "source_base_path": "/mnt/c/Users/Jesse/Projects/Stateless-For-Unity/Assets/Stateless-For-Unity/Stateless-For-Unity/~Documentation",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../CHANGELOG.md",
+      "output": {
+        ".html": {
+          "relative_path": "CHANGELOG.html",
+          "hash": "VJJaunliV1D3/pIAZeWuLSXuLA8Y7SX09883rTLAieI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "b966TKINwu6oGI3onTYI4GK/WppMizHvocfabkHEjco="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.FiringMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.FiringMode.html",
+          "hash": "mYRSojexNc2pDWuEOqAThBB+V4rWmkMYfnyAA+aLUuc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.Decision.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.Decision.html",
+          "hash": "8/0I25Bi3NYmaJEZGjdiSHJnmmPNhr1oFnhtNAIshzQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.DynamicTransition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.DynamicTransition.html",
+          "hash": "XRxhuhOnisIs+J5fpK2GMHpva6PY9h0EC3wLMWTGLPA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.FixedTransition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.FixedTransition.html",
+          "hash": "7MinI6C2yuDegQ+uRvZuHhjLKPxu5poDtW0gicHqNII="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.GraphStyleBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.GraphStyleBase.html",
+          "hash": "H/VzWnTbR8hMLvcXUSXEu3wSrRwasvdt5SEyV3Mwkxw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.State.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.State.html",
+          "hash": "mIl3UO+c16EALWHbwz4GP15hKTvukyj4/YnjC/LwnwU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.StateGraph.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.StateGraph.html",
+          "hash": "zKXkK0AIf/opsag/VYQZbeN63FoDqk1CWy3k95NUJ6w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.StayTransition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.StayTransition.html",
+          "hash": "tfq+XCFQCmWxykocI9iRDRxCz2fPS6NcbDE4jbt0KzE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.SuperState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.SuperState.html",
+          "hash": "1+qE4j7aKHq+CWHPmKez3y3fisXB3kNAwMKgSTfPGQE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.Transition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.Transition.html",
+          "hash": "niOI+NjOi59buBs6HK/5naEC5oKZ9RubHoJGF0fKJZk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.UmlDotGraph.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.UmlDotGraph.html",
+          "hash": "xr6ScaudiiMdvOC+vxgvXoWQssbBn+R0fKSiaq7pPYU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.UmlDotGraphStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.UmlDotGraphStyle.html",
+          "hash": "HU8wD3DZnly6x5JRk6vvfFOpifNwJoNLFuvvOJP5eY0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Graph.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Graph.html",
+          "hash": "QNOg4vGR5Dpa4ejQaZtz7KGMf7tSQX7o8BvZ2inhSSw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.ActionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.ActionInfo.html",
+          "hash": "ULjNNeHejP5ufg5T0iAPy3Gb5lcEI6p8UnPR8dFIUU4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.DynamicStateInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.DynamicStateInfo.html",
+          "hash": "xDn000hes9ZrH3VUny2nAZeHPB2OkRleSuJWxJaH+CI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.DynamicStateInfos.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.DynamicStateInfos.html",
+          "hash": "fDQPPwbIqQ9OZjCXKhY9o2vO+Phc3a3S3Me2jtIxw+I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.DynamicTransitionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.DynamicTransitionInfo.html",
+          "hash": "qA3rwWPrWGyNb6ft0G1D657/YBw+GbBNhrvYCg+57sI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.FixedTransitionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.FixedTransitionInfo.html",
+          "hash": "CfSu5rZjpkeISlhsxVImE+qg2+wiAfoDXjcJptDnjNc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.IgnoredTransitionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.IgnoredTransitionInfo.html",
+          "hash": "ZzXxd4m1h1KkfX+3oWcq4tXS76M7Su+4VjApPjaLrZk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.InvocationInfo.Timing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.InvocationInfo.Timing.html",
+          "hash": "eYf0X3cWElSPNAXUuia76HtzrtrO6whVZe3OxED41wo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.InvocationInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.InvocationInfo.html",
+          "hash": "nw2xfL+Ppxpa891+e0R3oBQY1UR88NixhNPKVXcMJPg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.StateInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.StateInfo.html",
+          "hash": "W4O3N6lL3FF0kRx9kxyjEJeCqiOxCVQMUyeFlkbYfaU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.StateMachineInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.StateMachineInfo.html",
+          "hash": "YDOQiPBTWSC+03mT3Lj01MTkDTHaYuI05mGL/aT74mQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.TransitionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.TransitionInfo.html",
+          "hash": "in/dlSgDmIINUSkfufPot+d41WS8BxMc1pProbUZ2Z0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.TriggerInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.TriggerInfo.html",
+          "hash": "buMGeBIiX3eAsbDF5EVOrojirSM+UDH0+iZ60Yec7SE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.Reflection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.Reflection.html",
+          "hash": "bQjUbzCn7XWD9PFwvry1Ke3K+4HQt7SEa4vjlkKc7wE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachine-2.InitialTransition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachine-2.InitialTransition.html",
+          "hash": "uulL5xB1DZcLt+tI/vy0hn/TO9MrPazBe2XAjqK2WXE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachine-2.StateConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachine-2.StateConfiguration.html",
+          "hash": "ndV2bAI2Cmg0soIlxTwQcoPusANYIWYqBnV/V0VBVek="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachine-2.Transition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachine-2.Transition.html",
+          "hash": "fEvE7hsekBmvnaCI47ppXah0afh12Q6Hm0hhXMjdTZE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachine-2.TriggerWithParameters-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachine-2.TriggerWithParameters-1.html",
+          "hash": "k7LVNpdw2/j3hNUg8JYEF4HywBjHUOe+S7Wq3NM0me0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachine-2.TriggerWithParameters-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachine-2.TriggerWithParameters-2.html",
+          "hash": "xEL/DRAeN+1prF57wwyACYuSq5vloSYN8XLp0Y+CCUw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachine-2.TriggerWithParameters-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachine-2.TriggerWithParameters-3.html",
+          "hash": "YvkP8jMdnLPq9jyjLMlTA341IcPLmGO4aIns7fJTznM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachine-2.TriggerWithParameters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachine-2.TriggerWithParameters.html",
+          "hash": "uiGkSRfvi9FL2dXa1XmFjIZZb1XdvGyTm5+CVDk2xXI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachine-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachine-2.html",
+          "hash": "lPYSSEjPjkftoL4IZRi/5I47ySGCB13Jb45vfevq4oY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.StateMachineResources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.StateMachineResources.html",
+          "hash": "8Kge+rY6/7TrPUZ26uDTQcEiKP/qws/6bd8gmiYVe+8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Stateless.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Stateless.html",
+          "hash": "TegXDE9b0/d3l22ZvaMIJdfKaY/NmFdBiflx+FhSzSU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "QTslS+k15HZCVuCGMADJIngqrSuYqC2UqKlyA2bVzcA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "A0vvpFTC/vIKxFx1xQ1QrCKknNug5KFEKK0UCIHr/UM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 2,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 36,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

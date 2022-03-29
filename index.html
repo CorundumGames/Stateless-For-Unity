@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Stateless     | Stateless For Unity documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Stateless     | Stateless For Unity documentation ">
+    <meta name="generator" content="docfx 2.59.0.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="stateless-build-status-nuget-pre-release-join-the-chat-at-httpsgitterimdotnet-state-machinestateless-stack-overflow">Stateless <a href="https://github.com/dotnet-state-machine/stateless/actions/workflows/BuildAndTestOnPullRequests.yml"><img src="https://github.com/dotnet-state-machine/stateless/actions/workflows/BuildAndTestOnPullRequests.yml/badge.svg" alt="Build status"></a> <a href="https://www.nuget.org/packages/stateless"><img src="https://img.shields.io/nuget/vpre/Stateless.svg" alt="NuGet Pre Release"></a> <a href="https://gitter.im/dotnet-state-machine/stateless?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/dotnet-state-machine/stateless.svg" alt="Join the chat at https://gitter.im/dotnet-state-machine/stateless"></a> <a href="http://stackoverflow.com/questions/tagged/stateless-state-machine"><img src="https://img.shields.io/badge/stackoverflow-tag-orange.svg" alt="Stack Overflow"></a></h1>
+
+<p><strong>Create <em>state machines</em> and lightweight <em>state machine-based workflows</em> directly in .NET code:</strong></p>
+<pre><code class="lang-csharp">var phoneCall = new StateMachine&lt;State, Trigger&gt;(State.OffHook);
+
+phoneCall.Configure(State.OffHook)
+    .Permit(Trigger.CallDialled, State.Ringing);
+
+phoneCall.Configure(State.Connected)
+    .OnEntry(t =&gt; StartCallTimer())
+    .OnExit(t =&gt; StopCallTimer())
+    .InternalTransition(Trigger.MuteMicrophone, t =&gt; OnMute())
+    .InternalTransition(Trigger.UnmuteMicrophone, t =&gt; OnUnmute())
+    .InternalTransition&lt;int&gt;(_setVolumeTrigger, (volume, t) =&gt; OnSetVolume(volume))
+    .Permit(Trigger.LeftMessage, State.OffHook)
+    .Permit(Trigger.PlacedOnHold, State.OnHold);
+
+// ...
+
+phoneCall.Fire(Trigger.CallDialled);
+Assert.AreEqual(State.Ringing, phoneCall.State);
+</code></pre>
+<p>This project, as well as the example above, was inspired by <a href="http://simplestatemachine.codeplex.com/">Simple State Machine</a>.</p>
+<h2 id="features">Features</h2>
+<p>Most standard state machine constructs are supported:</p>
+<ul>
+<li>Generic support for states and triggers of any .NET type (numbers, strings, enums, etc.)</li>
+<li>Hierarchical states</li>
+<li>Entry/exit actions for states</li>
+<li>Guard clauses to support conditional transitions</li>
+<li>Introspection</li>
+</ul>
+<p>Some useful extensions are also provided:</p>
+<ul>
+<li>Ability to store state externally (for example, in a property tracked by an ORM)</li>
+<li>Parameterised triggers</li>
+<li>Reentrant states</li>
+<li>Export to DOT graph</li>
+</ul>
+<h3 id="hierarchical-states">Hierarchical States</h3>
+<p>In the example below, the <code>OnHold</code> state is a substate of the <code>Connected</code> state. This means that an <code>OnHold</code> call is still connected.</p>
+<pre><code class="lang-csharp">phoneCall.Configure(State.OnHold)
+    .SubstateOf(State.Connected)
+    .Permit(Trigger.TakenOffHold, State.Connected)
+    .Permit(Trigger.PhoneHurledAgainstWall, State.PhoneDestroyed);
+</code></pre>
+<p>In addition to the <code>StateMachine.State</code> property, which will report the precise current state, an <code>IsInState(State)</code> method is provided. <code>IsInState(State)</code> will take substates into account, so that if the example above was in the <code>OnHold</code> state, <code>IsInState(State.Connected)</code> would also evaluate to <code>true</code>.</p>
+<h3 id="entryexit-actions">Entry/Exit actions</h3>
+<p>In the example, the <code>StartCallTimer()</code> method will be executed when a call is connected. The <code>StopCallTimer()</code> will be executed when call completes (by either hanging up or hurling the phone against the wall.)</p>
+<p>The call can move between the <code>Connected</code> and <code>OnHold</code> states without the <code>StartCallTimer()</code> and <code>StopCallTimer()</code> methods being called repeatedly because the <code>OnHold</code> state is a substate of the <code>Connected</code> state.</p>
+<p>Entry/Exit action handlers can be supplied with a parameter of type <code>Transition</code> that describes the trigger, source and destination states.</p>
+<h3 id="internal-transitions">Internal transitions</h3>
+<p>Sometimes a trigger does needs to be handled, but the state shouldn't change. This is an internal transition. Use <code>InternalTransition</code> for this.</p>
+<h3 id="initial-state-transitions">Initial state transitions</h3>
+<p>A substate can be marked as initial state. When the state machine enters the super state it will also automatically enter the substate. This can be configured like this:</p>
+<pre><code class="lang-csharp">    sm.Configure(State.B)
+        .InitialTransition(State.C);
+
+    sm.Configure(State.C)
+        .SubstateOf(State.B);
+</code></pre>
+<p>Due to Stateless' internal structure, it does not know when it is &quot;started&quot;. This makes it impossible to handle an initial transition in the traditional way. It is possible to work around this limitation by adding a dummy initial state, and then use Activate() to &quot;start&quot; the state machine.</p>
+<pre><code class="lang-csharp">    sm.Configure(InitialState)
+        .OnActivate(() =&gt; sm.Fire(LetsGo)))
+        .Permit(LetsGo, StateA)
+</code></pre>
+<h3 id="external-state-storage">External State Storage</h3>
+<p>Stateless is designed to be embedded in various application models. For example, some ORMs place requirements upon where mapped data may be stored, and UI frameworks often require state to be stored in special &quot;bindable&quot; properties. To this end, the <code>StateMachine</code> constructor can accept function arguments that will be used to read and write the state values:</p>
+<pre><code class="lang-csharp">var stateMachine = new StateMachine&lt;State, Trigger&gt;(
+    () =&gt; myState.Value,
+    s =&gt; myState.Value = s);
+</code></pre>
+<p>In this example the state machine will use the <code>myState</code> object for state storage.</p>
+<p>Another example can be found in the JsonExample solution, located in the example folder.</p>
+<h3 id="activation--deactivation">Activation / Deactivation</h3>
+<p>It might be necessary to perform some code before storing the object state, and likewise when restoring the object state. Use <code>Deactivate</code> and <code>Activate</code> for this. Activation should only be called once before normal operation starts, and once before state storage.</p>
+<h3 id="introspection">Introspection</h3>
+<p>The state machine can provide a list of the triggers that can be successfully fired within the current state via the <code>StateMachine.PermittedTriggers</code> property. Use <code>StateMachine.GetInfo()</code> to retreive information about the state configuration.</p>
+<h3 id="guard-clauses">Guard Clauses</h3>
+<p>The state machine will choose between multiple transitions based on guard clauses, e.g.:</p>
+<pre><code class="lang-csharp">phoneCall.Configure(State.OffHook)
+    .PermitIf(Trigger.CallDialled, State.Ringing, () =&gt; IsValidNumber)
+    .PermitIf(Trigger.CallDialled, State.Beeping, () =&gt; !IsValidNumber);
+</code></pre>
+<p>Guard clauses within a state must be mutually exclusive (multiple guard clauses cannot be valid at the same time.) Substates can override transitions by respecifying them, however substates cannot disallow transitions that are allowed by the superstate.</p>
+<p>The guard clauses will be evaluated whenever a trigger is fired. Guards should therefor be made side effect free.</p>
+<h3 id="parameterised-triggers">Parameterised Triggers</h3>
+<p>Strongly-typed parameters can be assigned to triggers:</p>
+<pre><code class="lang-csharp">var assignTrigger = stateMachine.SetTriggerParameters&lt;string&gt;(Trigger.Assign);
+
+stateMachine.Configure(State.Assigned)
+    .OnEntryFrom(assignTrigger, email =&gt; OnAssigned(email));
+
+stateMachine.Fire(assignTrigger, &quot;joe@example.com&quot;);
+</code></pre>
+<p>Trigger parameters can be used to dynamically select the destination state using the <code>PermitDynamic()</code> configuration method.</p>
+<h3 id="ignored-transitions-and-reentrant-states">Ignored Transitions and Reentrant States</h3>
+<p>Firing a trigger that does not have an allowed transition associated with it will cause an exception to be thrown.</p>
+<p>To ignore triggers within certain states, use the <code>Ignore(TTrigger)</code> directive:</p>
+<pre><code class="lang-csharp">phoneCall.Configure(State.Connected)
+    .Ignore(Trigger.CallDialled);
+</code></pre>
+<p>Alternatively, a state can be marked reentrant so its entry and exit actions will fire even when transitioning from/to itself:</p>
+<pre><code class="lang-csharp">stateMachine.Configure(State.Assigned)
+    .PermitReentry(Trigger.Assigned)
+    .OnEntry(() =&gt; SendEmailToAssignee());
+</code></pre>
+<p>By default, triggers must be ignored explicitly. To override Stateless's default behaviour of throwing an exception when an unhandled trigger is fired, configure the state machine using the <code>OnUnhandledTrigger</code> method:</p>
+<pre><code class="lang-csharp">stateMachine.OnUnhandledTrigger((state, trigger) =&gt; { });
+</code></pre>
+<h3 id="state-change-notifications-events">State change notifications (events)</h3>
+<p>Stateless supports 3 types of state machine events:</p>
+<ul>
+<li>Internal state transition</li>
+<li>State transition</li>
+<li>State machine transition completed</li>
+</ul>
+<h4 id="internal-state-transition">Internal state transition</h4>
+<pre><code class="lang-csharp">stateMachine.OnInternalTransitioned((state, trigger) =&gt; { });
+</code></pre>
+<p>This event will be invoked every time the state machine handles an internal state transition.</p>
+<h4 id="state-transition">State transition</h4>
+<pre><code class="lang-csharp">stateMachine.OnTransitioned((state, trigger) =&gt; { });
+</code></pre>
+<p>This event will be invoked every time the state machine changes state.</p>
+<h4 id="state-machine-transition-completed">State machine transition completed</h4>
+<pre><code class="lang-csharp">stateMachine.OnTransitionCompleted((state, trigger) =&gt; { });
+</code></pre>
+<p>This event will be invoked at the very end of the trigger handling, after the last  entry action have been executed.</p>
+<h3 id="export-to-dot-graph">Export to DOT graph</h3>
+<p>It can be useful to visualize state machines on runtime. With this approach the code is the authoritative source and state diagrams are by-products which are always up to date.</p>
+<pre><code class="lang-csharp">phoneCall.Configure(State.OffHook)
+    .PermitIf(Trigger.CallDialled, State.Ringing, IsValidNumber);
+    
+string graph = UmlDotGraph.Format(phoneCall.GetInfo());
+</code></pre>
+<p>The <code>UmlDotGraph.Format()</code> method returns a string representation of the state machine in the <a href="https://en.wikipedia.org/wiki/DOT_(graph_description_language)">DOT graph language</a>, e.g.:</p>
+<pre><code class="lang-dot">digraph {
+  OffHook -&gt; Ringing [label=&quot;CallDialled [IsValidNumber]&quot;];
+}
+</code></pre>
+<p>This can then be rendered by tools that support the DOT graph language, such as the <a href="http://www.graphviz.org/doc/info/command.html">dot command line tool</a> from <a href="http://www.graphviz.org">graphviz.org</a> or <a href="https://github.com/mdaines/viz.js">viz.js</a>. See <a href="http://www.webgraphviz.com">http://www.webgraphviz.com</a> for instant gratification.
+Command line example: <code>dot -T pdf -o phoneCall.pdf phoneCall.dot</code> to generate a PDF file.</p>
+<h3 id="async-triggers">Async triggers</h3>
+<p>On platforms that provide <code>Task&lt;T&gt;</code>, the <code>StateMachine</code> supports <code>async</code> entry/exit actions and so-on:</p>
+<pre><code class="lang-csharp">stateMachine.Configure(State.Assigned)
+    .OnEntryAsync(async () =&gt; await SendEmailToAssignee());
+</code></pre>
+<p>Asynchronous handlers must be registered using the <code>*Async()</code> methods in these cases.</p>
+<p>To fire a trigger that invokes asynchronous actions, the <code>FireAsync()</code> method must be used:</p>
+<pre><code class="lang-csharp">await stateMachine.FireAsync(Trigger.Assigned);
+</code></pre>
+<p><strong>Note:</strong> while <code>StateMachine</code> may be used <em>asynchronously</em>, it remains single-threaded and may not be used <em>concurrently</em> by multiple threads.</p>
+<h2 id="building">Building</h2>
+<p>Stateless runs on .NET 4.0+ and practically all modern .NET platforms by targeting .NET Standard 1.0 and .NET Standard2.0. Visual Studio 2017 or later is required to build the solution.</p>
+<h2 id="project-goals">Project Goals</h2>
+<p>This page is an almost-complete description of Stateless, and its explicit aim is to remain minimal.</p>
+<p>Please use the issue tracker or the if you'd like to report problems or discuss features.</p>
+<p>(<em>Why the name? Stateless implements the set of rules regarding state transitions, but, at least when the delegate version of the constructor is used, doesn't maintain any internal state itself.</em>)</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/CorundumGames/Stateless-For-Unity/blob/main/~Documentation/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Stateless For Unity documentation
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>
