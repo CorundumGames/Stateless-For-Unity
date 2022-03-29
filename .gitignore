@@ -12,3 +12,4 @@ TestResult.xml
 *.orig
 
 .secrets
+docfx.console.*

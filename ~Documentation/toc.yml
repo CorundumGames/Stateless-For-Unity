@@ -1,0 +1,10 @@
+- name: About
+  href: /
+- name: Scripting API
+  href: api/Stateless.html
+- name: Release Notes
+  href: CHANGELOG.html
+- name: Repository
+  href: https://github.com/CorundumGames/Stateless-For-Unity
+- name: Original Stateless
+  href: https://github.com/dotnet-state-machine/stateless
