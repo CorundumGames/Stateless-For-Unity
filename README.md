@@ -46,7 +46,7 @@ Some useful extensions are also provided:
  * Reentrant states
  * Export to DOT graph
 
-## Using in Unity
+### Unity Support
 
 Install the package `games.corundum.stateless-for-unity` from OpenUPM through the instructions described [here](https://openupm.com/packages/games.corundum.stateless-for-unity/#modal-manualinstallation).
 If you also install [`com.cysharp.unitask`](https://openupm.com/packages/com.cysharp.unitask),
