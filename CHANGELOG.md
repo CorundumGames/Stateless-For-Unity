@@ -1,5 +1,13 @@
 Changelog
 
+## [5.11.2](https://github.com/CorundumGames/Stateless-For-Unity/compare/5.11.1...5.11.2) (2022-04-02)
+
+
+### Bug Fixes
+
+* Mark UniTask as an optional dependency ([6510532](https://github.com/CorundumGames/Stateless-For-Unity/commit/65105325da4af5bb98bbdb2c1636794d15dc199e))
+* Rename two directories ([9a4e7e6](https://github.com/CorundumGames/Stateless-For-Unity/commit/9a4e7e627b61e3d48e6f5227bce67a929e2701cf))
+
 ## [5.11.1](https://github.com/CorundumGames/Stateless-For-Unity/compare/5.11.0...5.11.1) (2022-04-02)
 
 

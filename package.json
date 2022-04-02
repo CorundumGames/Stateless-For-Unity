@@ -1,7 +1,7 @@
 {
   "name": "games.corundum.stateless-for-unity",
   "displayName": "Stateless For Unity",
-  "version": "5.11.1",
+  "version": "5.11.2",
   "unity": "2021.1",
   "optionalDependencies": {
     "com.cysharp.unitask": "2.2.5"
