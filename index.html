@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Stateless     | Stateless For Unity documentation </title>
+    <title>Stateless For Unity | Stateless For Unity documentation </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Stateless     | Stateless For Unity documentation ">
+    <meta name="title" content="Stateless For Unity | Stateless For Unity documentation ">
     <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="favicon.ico">
@@ -70,8 +70,11 @@
         <div class="article row grid">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="stateless-build-status-nuget-pre-release-join-the-chat-at-httpsgitterimdotnet-state-machinestateless-stack-overflow">Stateless <a href="https://github.com/dotnet-state-machine/stateless/actions/workflows/BuildAndTestOnPullRequests.yml"><img src="https://github.com/dotnet-state-machine/stateless/actions/workflows/BuildAndTestOnPullRequests.yml/badge.svg" alt="Build status"></a> <a href="https://www.nuget.org/packages/stateless"><img src="https://img.shields.io/nuget/vpre/Stateless.svg" alt="NuGet Pre Release"></a> <a href="https://gitter.im/dotnet-state-machine/stateless?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/dotnet-state-machine/stateless.svg" alt="Join the chat at https://gitter.im/dotnet-state-machine/stateless"></a> <a href="http://stackoverflow.com/questions/tagged/stateless-state-machine"><img src="https://img.shields.io/badge/stackoverflow-tag-orange.svg" alt="Stack Overflow"></a></h1>
+<h1 id="stateless-for-unity">Stateless For Unity</h1>
 
+<p><a href="https://github.com/CorundumGames/Stateless-For-Unity/actions"><img src="https://img.shields.io/github/workflow/status/CorundumGames/Stateless-For-Unity/Test%20and%20Publish/main?logo=github&amp;style=for-the-badge" alt="GitHub Workflow Status (branch)"></a>
+<a href="https://openupm.com/packages/games.corundum.stateless-for-unity"><img src="https://img.shields.io/npm/v/games.corundum.stateless-for-unity?label=openupm&amp;registry_uri=https://package.openupm.com&amp;style=for-the-badge" alt="openupm"></a>
+<a href="http://stackoverflow.com/questions/tagged/stateless-state-machine"><img src="https://img.shields.io/badge/stackoverflow-tag-orange.svg?logo=stackoverflow&amp;style=for-the-badge" alt="Stack Overflow"></a></p>
 <p><strong>Create <em>state machines</em> and lightweight <em>state machine-based workflows</em> directly in .NET code:</strong></p>
 <pre><code class="lang-csharp">var phoneCall = new StateMachine&lt;State, Trigger&gt;(State.OffHook);
 
@@ -92,7 +95,7 @@ phoneCall.Configure(State.Connected)
 phoneCall.Fire(Trigger.CallDialled);
 Assert.AreEqual(State.Ringing, phoneCall.State);
 </code></pre>
-<p>This project, as well as the example above, was inspired by <a href="http://simplestatemachine.codeplex.com/">Simple State Machine</a>.</p>
+<p>This Unity-centric fork is not affiliated with the original <a href="https://github.com/dotnet-state-machine/stateless">Stateless</a> or with Unity.</p>
 <h2 id="features">Features</h2>
 <p>Most standard state machine constructs are supported:</p>
 <ul>
@@ -109,6 +112,15 @@ Assert.AreEqual(State.Ringing, phoneCall.State);
 <li>Reentrant states</li>
 <li>Export to DOT graph</li>
 </ul>
+<h2 id="using-in-unity">Using in Unity</h2>
+<p>Install the package <code>games.corundum.stateless-for-unity</code> from OpenUPM through the instructions described <a href="https://openupm.com/packages/games.corundum.stateless-for-unity/#modal-manualinstallation">here</a>.
+If you also install <a href="https://openupm.com/packages/com.cysharp.unitask"><code>com.cysharp.unitask</code></a>,
+all <a href="#async-triggers"><code>async</code></a> APIs described below will be enabled.</p>
+<p>This port of Stateless is largely the same as the original Stateless, including the API.
+You can even continue to use <a href="#export-to-dot-graph">DOT graph output</a> if you need it.
+The primary difference is the use of <a href="https://github.com/Cysharp/UniTask"><code>UniTask</code></a> instead of <a href="https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap">standard TAP classes</a>
+(e.g. <a href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task"><code>Task</code></a>).
+Standard <code>Task</code>s will still work in Unity, but UniTask is more optimized for the player loop.</p>
 <h3 id="hierarchical-states">Hierarchical States</h3>
 <p>In the example below, the <code>OnHold</code> state is a substate of the <code>Connected</code> state. This means that an <code>OnHold</code> call is still connected.</p>
 <pre><code class="lang-csharp">phoneCall.Configure(State.OnHold)
@@ -214,7 +226,7 @@ string graph = UmlDotGraph.Format(phoneCall.GetInfo());
 <p>This can then be rendered by tools that support the DOT graph language, such as the <a href="http://www.graphviz.org/doc/info/command.html">dot command line tool</a> from <a href="http://www.graphviz.org">graphviz.org</a> or <a href="https://github.com/mdaines/viz.js">viz.js</a>. See <a href="http://www.webgraphviz.com">http://www.webgraphviz.com</a> for instant gratification.
 Command line example: <code>dot -T pdf -o phoneCall.pdf phoneCall.dot</code> to generate a PDF file.</p>
 <h3 id="async-triggers">Async triggers</h3>
-<p>On platforms that provide <code>Task&lt;T&gt;</code>, the <code>StateMachine</code> supports <code>async</code> entry/exit actions and so-on:</p>
+<p>If <a href="https://github.com/Cysharp/UniTask">UniTask</a> is installed, the <code>StateMachine</code> supports <code>async</code> entry/exit actions and so-on:</p>
 <pre><code class="lang-csharp">stateMachine.Configure(State.Assigned)
     .OnEntryAsync(async () =&gt; await SendEmailToAssignee());
 </code></pre>
@@ -222,9 +234,8 @@ Command line example: <code>dot -T pdf -o phoneCall.pdf phoneCall.dot</code> to 
 <p>To fire a trigger that invokes asynchronous actions, the <code>FireAsync()</code> method must be used:</p>
 <pre><code class="lang-csharp">await stateMachine.FireAsync(Trigger.Assigned);
 </code></pre>
-<p><strong>Note:</strong> while <code>StateMachine</code> may be used <em>asynchronously</em>, it remains single-threaded and may not be used <em>concurrently</em> by multiple threads.</p>
-<h2 id="building">Building</h2>
-<p>Stateless runs on .NET 4.0+ and practically all modern .NET platforms by targeting .NET Standard 1.0 and .NET Standard2.0. Visual Studio 2017 or later is required to build the solution.</p>
+<p><strong>Note:</strong> while <code>StateMachine</code> may be used <em>asynchronously</em>, it remains single-threaded and may not be used <em>concurrently</em> by multiple threads.
+Bring your own synchronization.</p>
 <h2 id="project-goals">Project Goals</h2>
 <p>This page is an almost-complete description of Stateless, and its explicit aim is to remain minimal.</p>
 <p>Please use the issue tracker or the if you'd like to report problems or discuss features.</p>
