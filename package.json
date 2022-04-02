@@ -31,7 +31,6 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/github": "^8.0.2",
-    "semantic-release-dotnet": "^1.0.0",
     "minimist": ">=1.2.6"
   }
 }
