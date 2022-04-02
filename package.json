@@ -23,7 +23,7 @@
   },
   "repository": "https://github.com/CorundumGames/Stateless-For-Unity",
   "homepage": "https://github.com/CorundumGames/Stateless-For-Unity",
-  "documentationUrl": "https://github.com/CorundumGames/Stateless-For-Unity#readme",
+  "documentationUrl": "https://corundumgames.github.io/Stateless-For-Unity",
   "devDependencies": {
     "semantic-release": "^19.0.2",
     "@semantic-release/changelog": "^6.0.1",
