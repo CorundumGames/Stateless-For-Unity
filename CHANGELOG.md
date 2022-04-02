@@ -1,3 +1,14 @@
+Changelog
+
+## [5.11.1](https://github.com/CorundumGames/Stateless-For-Unity/compare/5.11.0...5.11.1) (2022-04-02)
+
+
+### Bug Fixes
+
+* Disable dry_run in the semantic release step ([aca76fc](https://github.com/CorundumGames/Stateless-For-Unity/commit/aca76fc3a007e7a2525e611360644e5c021b49db))
+* Throw InvalidOperationException instead of ArgumentNullException ([b148816](https://github.com/CorundumGames/Stateless-For-Unity/commit/b148816c71341b5356c24dbf353f5dc0c1603711))
+* Update usage information in README.md ([69d39fa](https://github.com/CorundumGames/Stateless-For-Unity/commit/69d39faa4c582df41d567077e70194c257e5823c))
+
 # Changelog
 All notable changes to this project will be documented in this file.
 
