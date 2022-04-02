@@ -62,7 +62,6 @@ jobs:
             @semantic-release/changelog
             @semantic-release/git
           working_directory: ${{ env.REPO_NAME }}
-          dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
