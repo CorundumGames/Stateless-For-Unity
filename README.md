@@ -1,4 +1,8 @@
-# Stateless [![Build status](https://github.com/dotnet-state-machine/stateless/actions/workflows/BuildAndTestOnPullRequests.yml/badge.svg)](https://github.com/dotnet-state-machine/stateless/actions/workflows/BuildAndTestOnPullRequests.yml) [![NuGet Pre Release](https://img.shields.io/nuget/vpre/Stateless.svg)](https://www.nuget.org/packages/stateless) [![Join the chat at https://gitter.im/dotnet-state-machine/stateless](https://badges.gitter.im/dotnet-state-machine/stateless.svg)](https://gitter.im/dotnet-state-machine/stateless?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stack Overflow](https://img.shields.io/badge/stackoverflow-tag-orange.svg)](http://stackoverflow.com/questions/tagged/stateless-state-machine)
+# Stateless For Unity
+
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/CorundumGames/Stateless-For-Unity/Test%20and%20Publish/main?logo=github&style=for-the-badge)](https://github.com/CorundumGames/Stateless-For-Unity/actions)
+[![openupm](https://img.shields.io/npm/v/games.corundum.stateless-for-unity?label=openupm&registry_uri=https://package.openupm.com&style=for-the-badge)](https://openupm.com/packages/games.corundum.stateless-for-unity)
+[![Stack Overflow](https://img.shields.io/badge/stackoverflow-tag-orange.svg?logo=stackoverflow&style=for-the-badge)](http://stackoverflow.com/questions/tagged/stateless-state-machine)
 
 **Create *state machines* and lightweight *state machine-based workflows* directly in .NET code:**
 
@@ -23,7 +27,7 @@ phoneCall.Fire(Trigger.CallDialled);
 Assert.AreEqual(State.Ringing, phoneCall.State);
 ```
 
-This project, as well as the example above, was inspired by [Simple State Machine](http://simplestatemachine.codeplex.com/).
+This Unity-centric fork is not affiliated with the original [Stateless](https://github.com/dotnet-state-machine/stateless) or with Unity.
 
 ## Features
 
@@ -41,6 +45,18 @@ Some useful extensions are also provided:
  * Parameterised triggers
  * Reentrant states
  * Export to DOT graph
+
+## Using in Unity
+
+Install the package `games.corundum.stateless-for-unity` from OpenUPM through the instructions described [here](https://openupm.com/packages/games.corundum.stateless-for-unity/#modal-manualinstallation).
+If you also install [`com.cysharp.unitask`](https://openupm.com/packages/com.cysharp.unitask),
+all [`async`](#async-triggers) APIs described below will be enabled.
+
+This port of Stateless is largely the same as the original Stateless, including the API.
+You can even continue to use [DOT graph output](#export-to-dot-graph) if you need it.
+The primary difference is the use of [`UniTask`](https://github.com/Cysharp/UniTask) instead of [standard TAP classes](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap)
+(e.g. [`Task`](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task)).
+Standard `Task`s will still work in Unity, but UniTask is more optimized for the player loop.
 
 ### Hierarchical States
 
@@ -216,7 +232,7 @@ Command line example: `dot -T pdf -o phoneCall.pdf phoneCall.dot` to generate a 
 
 ### Async triggers
 
-On platforms that provide `Task<T>`, the `StateMachine` supports `async` entry/exit actions and so-on:
+If [UniTask](https://github.com/Cysharp/UniTask) is installed, the `StateMachine` supports `async` entry/exit actions and so-on:
 
 ```csharp
 stateMachine.Configure(State.Assigned)
@@ -232,11 +248,7 @@ await stateMachine.FireAsync(Trigger.Assigned);
 ```
 
 **Note:** while `StateMachine` may be used _asynchronously_, it remains single-threaded and may not be used _concurrently_ by multiple threads.
-
-## Building
-
-Stateless runs on .NET 4.0+ and practically all modern .NET platforms by targeting .NET Standard 1.0 and .NET Standard2.0. Visual Studio 2017 or later is required to build the solution.
-
+Bring your own synchronization.
 
 ## Project Goals
 
