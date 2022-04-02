@@ -15,7 +15,7 @@ jobs:
       DOCFX_VERSION: v2.59.0
       DOCFX_DIR: docfx
       DOCFX_ZIP: docfx.zip
-      DOC_DIR: ~Documentation
+      DOC_DIR: Documentation~
     steps:
       - name: Check Out
         uses: actions/checkout@v3
