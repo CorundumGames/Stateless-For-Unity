@@ -3,7 +3,7 @@
   "displayName": "Stateless For Unity",
   "version": "5.11.1",
   "unity": "2021.1",
-  "dependencies": {
+  "optionalDependencies": {
     "com.cysharp.unitask": "2.2.5"
   },
   "description": "A Unity port of Stateless that uses UniTask instead of standard TAP classes.",
