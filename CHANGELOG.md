@@ -1,5 +1,12 @@
 Changelog
 
+## [5.11.3](https://github.com/CorundumGames/Stateless-For-Unity/compare/5.11.2...5.11.3) (2022-08-26)
+
+
+### Bug Fixes
+
+* Fix [#1](https://github.com/CorundumGames/Stateless-For-Unity/issues/1) ([e7d4b20](https://github.com/CorundumGames/Stateless-For-Unity/commit/e7d4b20ce1e555a9e00e434efeda4c1337168405))
+
 ## [5.11.2](https://github.com/CorundumGames/Stateless-For-Unity/compare/5.11.1...5.11.2) (2022-04-02)
 
 
