@@ -15,13 +15,19 @@
     ],
     "autoReferenced": false,
     "defineConstraints": [
-        "UNITY_INCLUDE_TESTS || UNITY_EDITOR"
+        "UNITY_INCLUDE_TESTS || UNITY_EDITOR",
+        "TEST_FRAMEWORK_INSTALLED"
     ],
     "versionDefines": [
         {
             "name": "com.cysharp.unitask",
             "expression": "0.0.0",
             "define": "TASKS"
+        },
+        {
+            "name": "com.unity.test-framework",
+            "expression": "0.0.0",
+            "define": "TEST_FRAMEWORK_INSTALLED"
         }
     ],
     "noEngineReferences": false
