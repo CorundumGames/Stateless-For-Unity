@@ -31,6 +31,7 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/npm": "^9.0.1",
     "@semantic-release/github": "^8.0.2",
-    "minimist": ">=1.2.6"
+    "minimist": ">=1.2.6",
+    "com.unity.test-framework": "1.1.31"
   }
 }
