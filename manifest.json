@@ -9,7 +9,7 @@
     "changefreq": "weekly"
   },
   "homepages": [],
-  "source_base_path": "/home/runner/work/Stateless-For-Unity/Stateless-For-Unity/Stateless-For-Unity/~Documentation",
+  "source_base_path": "/home/runner/work/Stateless-For-Unity/Stateless-For-Unity/Stateless-For-Unity/Documentation~",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -27,7 +27,7 @@
       "output": {
         ".html": {
           "relative_path": "CHANGELOG.html",
-          "hash": "a4stj6RgB/i73SY1Fu0CmQ0WmQJQmPi4+jeW3hKRaUc="
+          "hash": "P2mjYa8vzKRgBH48nUJi2plG6yP4y2s9GthmeI/hs8E="
         }
       },
       "is_incremental": false,
@@ -39,7 +39,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "0gWwhTxNI+qWQd3OWKIA4fY8i3qewrvujnFbJqvE2XI="
+          "hash": "entpO68NaBirF8n7n2f6ol3wRAtkzJ6i4uDY1wNxMO8="
         }
       },
       "is_incremental": false,
@@ -87,7 +87,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Graph.FixedTransition.html",
-          "hash": "2TLFE09ujzaF6Z1/o37c09xaoy/WDDAfpJGF9dX+7y8="
+          "hash": "7MinI6C2yuDegQ+uRvZuHhjLKPxu5poDtW0gicHqNII="
         }
       },
       "is_incremental": false,
@@ -99,7 +99,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Graph.GraphStyleBase.html",
-          "hash": "M/7ZdUpVEpMdb71CE5uEphsXfMphPtgm5zOYeiyd5ko="
+          "hash": "H/VzWnTbR8hMLvcXUSXEu3wSrRwasvdt5SEyV3Mwkxw="
         }
       },
       "is_incremental": false,
@@ -111,7 +111,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Graph.State.html",
-          "hash": "w9baOlI1hMNjF2PsFlJezbA9ipoKOp1WJZAhMgmhKUQ="
+          "hash": "mIl3UO+c16EALWHbwz4GP15hKTvukyj4/YnjC/LwnwU="
         }
       },
       "is_incremental": false,
@@ -123,7 +123,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Graph.StateGraph.html",
-          "hash": "xfFjvw7jUTfcm94yo8zoOS43ThhTQ6kz1/pFfVZIzvg="
+          "hash": "zKXkK0AIf/opsag/VYQZbeN63FoDqk1CWy3k95NUJ6w="
         }
       },
       "is_incremental": false,
@@ -135,7 +135,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Graph.StayTransition.html",
-          "hash": "/uax3I34TUm/Dx0Ks1AtgnS23hjYUbRNVndfPDAwyYs="
+          "hash": "tfq+XCFQCmWxykocI9iRDRxCz2fPS6NcbDE4jbt0KzE="
         }
       },
       "is_incremental": false,
@@ -147,7 +147,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Graph.SuperState.html",
-          "hash": "iPFulLTwP+LM62RFesfZw8z6ChYksdKMTjLIECu1lyA="
+          "hash": "1+qE4j7aKHq+CWHPmKez3y3fisXB3kNAwMKgSTfPGQE="
         }
       },
       "is_incremental": false,
@@ -159,7 +159,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Graph.Transition.html",
-          "hash": "ahRnJnCIbJZ5rNkFLMHousMDa89o1YnvArVN3PZwxgM="
+          "hash": "niOI+NjOi59buBs6HK/5naEC5oKZ9RubHoJGF0fKJZk="
         }
       },
       "is_incremental": false,
@@ -183,7 +183,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Graph.UmlDotGraphStyle.html",
-          "hash": "kT/vs5mRt8vQ+ypk7QiNepvPGqzfkKwcYOIojSu1jWc="
+          "hash": "HU8wD3DZnly6x5JRk6vvfFOpifNwJoNLFuvvOJP5eY0="
         }
       },
       "is_incremental": false,
@@ -231,7 +231,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Reflection.DynamicStateInfos.html",
-          "hash": "lAdB/B3WaHW3meE9/r73BFyY5cMWyikguXrCi6g9yAk="
+          "hash": "fDQPPwbIqQ9OZjCXKhY9o2vO+Phc3a3S3Me2jtIxw+I="
         }
       },
       "is_incremental": false,
@@ -243,7 +243,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Reflection.DynamicTransitionInfo.html",
-          "hash": "EDYXM8Bz4RaRW3S7/ZB9h6dfLH28s+lUYG2jtOAQsV4="
+          "hash": "qA3rwWPrWGyNb6ft0G1D657/YBw+GbBNhrvYCg+57sI="
         }
       },
       "is_incremental": false,
@@ -303,7 +303,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Reflection.StateInfo.html",
-          "hash": "FPVvgaZ5EKj+FwS6u6jTwc+BmCtYZ5YIvYy4iupKlqQ="
+          "hash": "W4O3N6lL3FF0kRx9kxyjEJeCqiOxCVQMUyeFlkbYfaU="
         }
       },
       "is_incremental": false,
@@ -315,7 +315,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Reflection.StateMachineInfo.html",
-          "hash": "qvUfrp0ZygCqG8BMWGNHxWJdwDq38XuMX3t6ZQJg2Nc="
+          "hash": "YDOQiPBTWSC+03mT3Lj01MTkDTHaYuI05mGL/aT74mQ="
         }
       },
       "is_incremental": false,
@@ -327,7 +327,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.Reflection.TransitionInfo.html",
-          "hash": "WvZaXCFGGDaoIQX9Z+77/ApLqgSF3y9/n+3mr/iGUqA="
+          "hash": "in/dlSgDmIINUSkfufPot+d41WS8BxMc1pProbUZ2Z0="
         }
       },
       "is_incremental": false,
@@ -447,7 +447,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Stateless.StateMachine-2.html",
-          "hash": "AFOjllYTC/AVc9M0RidnFejhDOSFOyn6bay8SoEHiQM="
+          "hash": "lPYSSEjPjkftoL4IZRi/5I47ySGCB13Jb45vfevq4oY="
         }
       },
       "is_incremental": false,
